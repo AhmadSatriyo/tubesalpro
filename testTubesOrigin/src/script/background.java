@@ -30,8 +30,8 @@ public class background {
                 int lebar = labelTujuan.getWidth();
                 int tinggi = labelTujuan.getHeight();
                 
-                if (lebar <= 0) lebar = 800; 
-                if (tinggi <= 0) tinggi = 600;
+                if (lebar <= 0) lebar = 1920; 
+                if (tinggi <= 0) tinggi = 1080;
                 
                 Image imgResize = iconMentah.getImage().getScaledInstance(lebar, tinggi, Image.SCALE_SMOOTH);
                 return new ImageIcon(imgResize);
