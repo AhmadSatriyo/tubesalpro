@@ -1,37 +1,11 @@
 # tubesalpro
 
-Oke, sekarang anggap aku dosen pembimbing / senior project lead-mu ya.
-Pertama-tama: jangan panik dulu. Project kalian sebenarnya *cukup realistis* untuk dibuat di Java GUI, ASAL kalian tidak langsung loncat ke coding.
-
-Kesalahan terbesar mahasiswa waktu bikin project game itu:
-“langsung buka NetBeans/IntelliJ lalu coding random.”
-
-Padahal yang benar:
-
 1. rancang sistem dulu
 2. bagi tugas
 3. tentukan scope
 4. baru coding sedikit demi sedikit
 
-Dan jujur, dari guidebook yang kamu tunjukkan, project ini sebenarnya sudah cukup bagus dan terstruktur. Kalian tinggal mengubah dokumen itu menjadi:
-
-* desain program
-* aset game
-* sistem Java
-
-Aku bantu susun dari nol ya.
-
----
-
-# 1. Pahami Dulu Sebenarnya Kalian Sedang Membuat Apa
-
-Kalian sebenarnya membuat:
-
-> GAME VISUAL NOVEL + DETEKTIF + LOGIKA
-
-Artinya game kalian bukan game open world atau 3D.
-
-Yang kalian buat hanyalah:
+bikin:
 
 * beberapa halaman GUI
 * sistem perpindahan scene
@@ -40,38 +14,11 @@ Yang kalian buat hanyalah:
 * timer
 * pengecekan ending
 
-Jadi inti project ini sebenarnya:
-
-## “manajemen data + GUI”
-
-Bukan gameplay berat.
-
-Ini penting supaya kalian tidak overthinking.
-
----
-
-# 2. HAL PERTAMA YANG HARUS KALIAN LAKUKAN
-
-JANGAN CODING DULU.
-
 Buat:
 
 # “Blueprint Project”
 
-Kalian bertiga duduk lalu tentukan:
-
 ## A. Scope awal (WAJIB)
-
-Jangan langsung buat:
-
-* 3 tema
-* 20 lokasi
-* 50 karakter
-
-Nanti mati sendiri.
-
-Untuk versi pertama:
-cukup:
 
 # MVP (Minimum Viable Product)
 
@@ -88,15 +35,7 @@ cukup:
 Misalnya:
 Tema Kampus.
 
-Ini SUDAH CUKUP untuk tugas besar.
-
-Kalau selesai cepat baru tambah tema lain.
-
----
-
 # 3. BAGI TUGAS KE TIM
-
-Karena kalian 3 orang, idealnya:
 
 # ANGGOTA 1 — GUI & Frontend
 
@@ -142,11 +81,9 @@ Yang dipelajari:
 
 ---
 
-# KAMU — GAME DESIGN + INTEGRATOR
+# GAME DESIGN + INTEGRATOR
 
-Karena kamu terlihat paling peduli sama struktur project.
-
-Tugasmu:
+Tugas:
 
 * menyusun alur game
 * menulis cerita
@@ -156,23 +93,9 @@ Tugasmu:
 * testing
 * presentasi
 
-Kamu jadi:
-
-# “project manager”
-
-Ini penting banget dalam project kelompok.
-
 ---
 
-# 4. HAL YANG HARUS KALIAN SIAPKAN
-
-Ini bagian paling penting.
-
-Project game = bukan cuma coding.
-
-Kalian perlu:
-
----
+# 4. HAL YANG HARUS DISIAPKAN
 
 # A. CERITA
 
@@ -364,9 +287,6 @@ src/
 │   ├── music/
 │   └── fonts/
 ```
-
-Kalau struktur rapi,
-project bakal jauh lebih mudah.
 
 ---
 
