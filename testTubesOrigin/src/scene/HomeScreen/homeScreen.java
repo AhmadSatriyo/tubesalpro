@@ -24,9 +24,13 @@ public class homeScreen extends javax.swing.JFrame {
         // TINGGAL PANGGIL SEPERTI INI:
         // Panggil object dari main, lalu suruh method ambilGambar mengurusi backgroundLabel ini
         ImageIcon icon = Main.bgTangga.ambilGambar(background);
+        ImageIcon detektif = Main.guwe.ambilGambar(chara);
         
         background.setIcon(icon);
         background.setText("");
+        
+        chara.setIcon(detektif);
+        chara.setText("");
         
         
         
