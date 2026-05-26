@@ -1,0 +1,615 @@
+Mantap. Ini langkah yang BENAR.
+Jangan langsung banyak tema.
+Bikin SATU tema sampai selesai dulu, baru nanti gampang dicopy untuk tema lain.
+
+Aku akan bantu bikin:
+
+* tema
+* cerita utama
+* karakter
+* hubungan karakter
+* clue
+* lokasi
+* alur kejadian
+* pembunuh
+* motif
+* data yang nanti bisa langsung dipakai coding
+
+Dan aku sengaja buat:
+
+## sederhana TAPI terasa seperti game sungguhan.
+
+---
+
+# TEMA TEST PERTAMA
+
+# “Kampus Penelitian”
+
+Genre:
+Misteri Detektif
+
+Nuansa:
+
+* malam hari
+* hujan
+* kampus sepi
+* suasana laboratorium
+* rahasia penelitian
+
+---
+
+# CERITA UTAMA
+
+Di Universitas Arcadia, seorang profesor terkenal bernama:
+
+# Professor Adrian Webb
+
+ditemukan tewas di laboratorium kampus pada pukul 22.30 malam.
+
+Sebelum meninggal, Professor Webb sedang mengerjakan:
+
+## proyek penelitian rahasia.
+
+Beberapa mahasiswa dan staf terakhir terlihat berada di area kampus malam itu.
+
+Pemain berperan sebagai:
+
+# detektif tamu kampus
+
+yang ditugaskan mencari pembunuh sebelum kasus ditutup.
+
+---
+
+# KORBAN
+
+## Professor Adrian Webb
+
+Data:
+
+* umur: 52
+* profesi: profesor penelitian AI
+* sifat: tegas, perfeksionis
+* punya banyak konflik dengan staf dan mahasiswa
+
+Penyebab kematian:
+
+* keracunan zat kimia di laboratorium
+
+---
+
+# PEMBUNUH (UNTUK TEST)
+
+# Marcus Hale
+
+Tapi:
+
+## pemain TIDAK BOLEH tahu.
+
+Ini hanya data internal game.
+
+---
+
+# MOTIF PEMBUNUH
+
+Marcus ketahuan mencuri data penelitian Professor Webb.
+
+Professor Webb mengancam:
+
+* melaporkan Marcus
+* mengeluarkannya dari universitas
+
+Marcus panik.
+
+Saat bertengkar di laboratorium,
+Marcus mencampur zat kimia beracun ke kopi Professor Webb.
+
+---
+
+# KARAKTER
+
+Untuk versi awal:
+
+## cukup 4 karakter.
+
+---
+
+# 1. Marcus Hale
+
+## Role:
+
+Tersangka
+
+## Sifat:
+
+Selalu Bohong
+
+## Umur:
+
+22
+
+## Deskripsi:
+
+Mahasiswa asisten laboratorium.
+
+## Kepribadian:
+
+* gugup
+* defensif
+* mudah marah
+
+## Hubungan dengan korban:
+
+Asisten penelitian Professor Webb.
+
+## Fakta penting:
+
+Mencuri data penelitian.
+
+## Alibi:
+
+“Aku ada di asrama sepanjang malam.”
+
+## Status:
+
+PEMBUNUH
+
+---
+
+# 2. Evelyn Carter
+
+## Role:
+
+Saksi
+
+## Sifat:
+
+Selalu Jujur
+
+## Umur:
+
+21
+
+## Deskripsi:
+
+Mahasiswa perpustakaan.
+
+## Kepribadian:
+
+* tenang
+* observatif
+* cerdas
+
+## Hubungan dengan korban:
+
+Sering membantu riset dokumen.
+
+## Fakta penting:
+
+Melihat seseorang masuk lab malam hari.
+
+## Alibi:
+
+Sedang belajar di perpustakaan.
+
+---
+
+# 3. Dr. Lena Morris
+
+## Role:
+
+Tersangka
+
+## Sifat:
+
+Kadang Jujur
+
+## Umur:
+
+34
+
+## Deskripsi:
+
+Dosen peneliti.
+
+## Kepribadian:
+
+* dingin
+* profesional
+* misterius
+
+## Hubungan dengan korban:
+
+Rekan penelitian Professor Webb.
+
+## Fakta penting:
+
+Sering bertengkar soal hak penelitian.
+
+## Alibi:
+
+Sedang mengoreksi laporan di ruang dosen.
+
+---
+
+# 4. Ryan Brooks
+
+## Role:
+
+Tersangka
+
+## Sifat:
+
+Kadang Jujur
+
+## Umur:
+
+23
+
+## Deskripsi:
+
+Mahasiswa tingkat akhir.
+
+## Kepribadian:
+
+* santai
+* banyak bicara
+* suka gosip
+
+## Hubungan dengan korban:
+
+Pernah gagal skripsi karena Professor Webb.
+
+## Fakta penting:
+
+Punya dendam pribadi.
+
+## Alibi:
+
+Mengaku di kantin malam itu.
+
+---
+
+# SISTEM KEJUJURAN
+
+Ini penting banget untuk coding nanti.
+
+---
+
+# MARCUS
+
+Selalu bohong.
+
+Artinya:
+SEMUA clue dialog dari Marcus = salah.
+
+---
+
+# EVELYN
+
+Selalu jujur.
+
+SEMUA clue dialog = benar.
+
+---
+
+# LENA
+
+Kadang benar kadang salah.
+
+---
+
+# RYAN
+
+Kadang benar kadang salah.
+
+---
+
+# LOKASI
+
+Untuk versi test:
+
+## cukup 4 lokasi.
+
+---
+
+# 1. Laboratorium
+
+Nuansa:
+
+* lampu redup
+* alat penelitian
+* tempat korban ditemukan
+
+Clue:
+
+* gelas kopi korban
+* sidik jari
+* zat kimia tumpah
+
+---
+
+# 2. Perpustakaan
+
+Nuansa:
+
+* sunyi
+* hujan terdengar dari luar
+
+Clue:
+
+* catatan penelitian robek
+* Evelyn melihat seseorang menuju lab
+
+---
+
+# 3. Kantin
+
+Nuansa:
+
+* hampir tutup
+* hanya sedikit lampu menyala
+
+Clue:
+
+* Ryan terlihat gelisah
+* struk kopi malam hari
+
+---
+
+# 4. Asrama
+
+Nuansa:
+
+* lorong gelap
+* kamar Marcus berantakan
+
+Clue:
+
+* flashdisk penelitian
+* laptop terbuka
+
+---
+
+# CONTOH CLUE
+
+Ini nanti bisa langsung jadi object Java.
+
+---
+
+# CLUE BENAR
+
+## Dari Evelyn
+
+“Marcus terlihat memasuki laboratorium sekitar jam 10 malam.”
+
+Status:
+BENAR
+
+---
+
+## Dari Laboratorium
+
+“Terdapat sidik jari Marcus pada gelas kopi korban.”
+
+Status:
+BENAR
+
+---
+
+## Dari Asrama
+
+“Flashdisk berisi data penelitian ditemukan di kamar Marcus.”
+
+Status:
+BENAR
+
+---
+
+# CLUE PALSU
+
+## Dari Marcus
+
+“Aku tidur di asrama sejak jam 8 malam.”
+
+Status:
+SALAH
+
+---
+
+## Dari Marcus
+
+“Professor Webb tidak punya musuh.”
+
+Status:
+SALAH
+
+---
+
+# CLUE SEMI BENAR
+
+## Dari Dr. Lena
+
+“Aku mendengar keributan dari laboratorium.”
+
+Bisa:
+
+* benar
+* atau salah
+
+tergantung random.
+
+---
+
+# ALUR GAME TEST
+
+Ini penting buat coding flow.
+
+---
+
+# 1. HOME SCREEN
+
+Tombol:
+
+* Start
+* Exit
+
+---
+
+# 2. INTRO SCREEN
+
+Menampilkan:
+
+* cerita pembuka
+* korban
+* daftar tersangka
+
+---
+
+# 3. LOBBY
+
+Pemain memilih lokasi:
+
+* lab
+* perpustakaan
+* kantin
+* asrama
+
+---
+
+# 4. INVESTIGASI
+
+Di tiap lokasi:
+
+* menemukan clue
+* berbicara dengan karakter
+
+---
+
+# 5. TUDUHAN
+
+Pemain memilih:
+
+* Marcus
+* Lena
+* Ryan
+
+---
+
+# 6. ENDING
+
+Jika benar:
+TRUE ENDING
+
+Jika salah:
+BAD ENDING
+
+Jika waktu habis:
+OUT OF TIME
+
+---
+
+# DATA YANG HARUS KALIAN SIMPAN DI JAVA
+
+Nanti minimal ada:
+
+---
+
+# Character
+
+Berisi:
+
+* nama
+* role
+* sifat
+* alibi
+* deskripsi
+* murderer true/false
+
+---
+
+# Clue
+
+Berisi:
+
+* teks clue
+* lokasi
+* benar/salah
+* sumber clue
+
+---
+
+# Location
+
+Berisi:
+
+* nama lokasi
+* background image
+* daftar clue
+
+---
+
+# GameState
+
+Berisi:
+
+* waktu
+* clue ditemukan
+* siapa tertuduh
+* ending
+
+---
+
+# Saran TERPENTING
+
+Untuk TEST pertama:
+
+# JANGAN RANDOM DULU.
+
+Bikin:
+
+## Marcus SELALU jadi pembunuh.
+
+Kenapa?
+
+Karena:
+
+* debugging jauh lebih mudah
+* alur lebih mudah dibuat
+* clue lebih konsisten
+
+Kalau game sudah jalan,
+BARU tambahkan:
+
+* random pembunuh
+* random clue
+* random sifat
+
+---
+
+# Prioritas Coding Sekarang
+
+## Minggu pertama:
+
+buat game sederhana seperti ini:
+
+Home → Intro → Lobby → Investigasi → Tuduhan → Ending
+
+SELESAI.
+
+Jangan tambah fitur lain dulu.
+
+---
+
+Kalau mau, langkah berikutnya aku bisa bantu:
+
+* membuat desain class OOP lengkap
+* class Character.java
+* class Clue.java
+* class diagram UML
+* struktur ArrayList
+* contoh isi data Java
+* flow GUI Java Swing
+* urutan coding paling aman
+* pembagian tugas detail per anggota
+* roadmap development mingguan
+* desain tampilan GUI sederhana untuk kalian ikuti.
