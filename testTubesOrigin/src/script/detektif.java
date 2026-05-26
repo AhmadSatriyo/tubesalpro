@@ -8,6 +8,6 @@ package script;
  *
  * @author ryo
  */
-public class location {
+public class detektif {
     
 }

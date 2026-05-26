@@ -1,20 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package main;
 
-/**
- *
- * @author ryo
- */
-public class main {
+import script.background;
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
+public class Main {
     
+    
+    public static background bgTangga = new background("/assets/background/tangga.jpg", "Latar Tangga");
+    
+    public static void main(String[] args) {
+        
+        new scene.HomeScreen.homeScreen().setVisible(true);
+    }
 }
