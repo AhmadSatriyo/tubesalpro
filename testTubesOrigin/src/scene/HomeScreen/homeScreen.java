@@ -5,6 +5,9 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import javax.swing.ImageIcon;
+import main.Main;
+
 
 public class homeScreen extends javax.swing.JFrame {
 
@@ -14,42 +17,56 @@ public class homeScreen extends javax.swing.JFrame {
     public homeScreen() {
         initComponents();
         
-        try {
-    
-        java.net.URL urlTangga = getClass().getResource("/assets/background/tangga.jpg");
-        java.net.URL urlMutsukiHappy = getClass().getResource("/assets/character/mutsuki_happy.png");
-        java.net.URL urlTextBox = getClass().getResource("/assets/ui/dialog.png");
-    
-        if (urlTangga != null && urlMutsukiHappy != null ) {
-        ImageIcon iconTangga = new ImageIcon(urlTangga);
-        ImageIcon iconMutsukiHappy = new ImageIcon(urlMutsukiHappy);
-        ImageIcon iconTextBox = new ImageIcon(urlTextBox);
         
-        Image imgMentah = iconTangga.getImage();
-        Image imgResize = imgMentah.getScaledInstance(background.getWidth(), background.getHeight(), Image.SCALE_SMOOTH);
-        Image imgMentah2 = iconMutsukiHappy.getImage();
-        Image imgResize2 = imgMentah2.getScaledInstance(chara.getWidth(), chara.getHeight(), Image.SCALE_SMOOTH);
-        Image imgMentah3 = iconTextBox.getImage();
-        Image imgResize3 = imgMentah3.getScaledInstance(box.getWidth(), box.getHeight(), Image.SCALE_SMOOTH);
+        this.getContentPane().setLayout(null);
+        background.setBounds(0, 0, 800, 600);
         
-        background.setIcon(new ImageIcon(imgResize));
+        // TINGGAL PANGGIL SEPERTI INI:
+        // Panggil object dari main, lalu suruh method ambilGambar mengurusi backgroundLabel ini
+        ImageIcon icon = Main.bgTangga.ambilGambar(background);
+        
+        background.setIcon(icon);
         background.setText("");
         
-        chara.setIcon(new ImageIcon(imgResize2));
-        chara.setText("");
         
-        box.setIcon(new ImageIcon(imgResize3));
-        box.setText("Selamat siang, sensei");
         
-        box.setHorizontalTextPosition(JLabel.CENTER); // Posisi teks di tengah secara horizontal
-        box.setVerticalTextPosition(JLabel.CENTER);   // Posisi teks di tengah secara vertical (di atas gambar)
         
-    } else {
-        System.err.println("Gagal memuat gambar! File tangga.jpg tidak ditemukan di package.");
-    }
-} catch (Exception e) {
-    e.printStackTrace();
-}
+//        try {
+//    
+//        java.net.URL urlTangga = getClass().getResource("/assets/background/tangga.jpg");
+//        java.net.URL urlMutsukiHappy = getClass().getResource("/assets/character/mutsuki_happy.png");
+//        java.net.URL urlTextBox = getClass().getResource("/assets/ui/dialog.png");
+//    
+//        if (urlTangga != null && urlMutsukiHappy != null ) {
+//        ImageIcon iconTangga = new ImageIcon(urlTangga);
+//        ImageIcon iconMutsukiHappy = new ImageIcon(urlMutsukiHappy);
+//        ImageIcon iconTextBox = new ImageIcon(urlTextBox);
+//        
+//        Image imgMentah = iconTangga.getImage();
+//        Image imgResize = imgMentah.getScaledInstance(background.getWidth(), background.getHeight(), Image.SCALE_SMOOTH);
+//        Image imgMentah2 = iconMutsukiHappy.getImage();
+//        Image imgResize2 = imgMentah2.getScaledInstance(chara.getWidth(), chara.getHeight(), Image.SCALE_SMOOTH);
+//        Image imgMentah3 = iconTextBox.getImage();
+//        Image imgResize3 = imgMentah3.getScaledInstance(box.getWidth(), box.getHeight(), Image.SCALE_SMOOTH);
+//        
+//        background.setIcon(new ImageIcon(imgResize));
+//        background.setText("");
+//        
+//        chara.setIcon(new ImageIcon(imgResize2));
+//        chara.setText("");
+//        
+//        box.setIcon(new ImageIcon(imgResize3));
+//        box.setText("Selamat siang, sensei");
+//        
+//        box.setHorizontalTextPosition(JLabel.CENTER); // Posisi teks di tengah secara horizontal
+//        box.setVerticalTextPosition(JLabel.CENTER);   // Posisi teks di tengah secara vertical (di atas gambar)
+//        
+//    } else {
+//        System.err.println("Gagal memuat gambar! File tangga.jpg tidak ditemukan di package.");
+//    }
+//} catch (Exception e) {
+//    e.printStackTrace();
+//}
     }
 
     /**
