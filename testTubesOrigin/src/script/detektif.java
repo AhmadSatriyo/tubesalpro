@@ -1,13 +1,22 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package script;
 
-/**
- *
- * @author ryo
- */
-public class detektif {
+public class detektif extends character {
+    
+    private String namaPlayer;
+    
+    public detektif(String path, String nama, String namaPlayer) {
+        
+        super(path, nama);
+        this.namaPlayer = namaPlayer;
+    }
+    
+    public String getNamaPlayer() {
+        return namaPlayer;
+    }
+    
+    public void setNamaPlayer(String namaPlayer) {
+        this.namaPlayer = namaPlayer;
+    }
     
 }

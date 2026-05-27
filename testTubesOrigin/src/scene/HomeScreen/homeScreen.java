@@ -19,14 +19,17 @@ public class homeScreen extends javax.swing.JFrame {
         
         
         this.getContentPane().setLayout(null);
-        background.setBounds(0, 0, 800, 600);
         
         // TINGGAL PANGGIL SEPERTI INI:
         // Panggil object dari main, lalu suruh method ambilGambar mengurusi backgroundLabel ini
         ImageIcon icon = Main.bgTangga.ambilGambar(background);
+        ImageIcon detektif = Main.guwe.ambilGambar(chara);
         
         background.setIcon(icon);
         background.setText("");
+        
+        chara.setIcon(detektif);
+        chara.setText("");
         
         
         
@@ -88,7 +91,7 @@ public class homeScreen extends javax.swing.JFrame {
         box.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         box.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(box, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 660, 1650, 360));
-        getContentPane().add(chara, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, 560, 830));
+        getContentPane().add(chara, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, 380, 770));
         getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1887, 1080));
 
         pack();
