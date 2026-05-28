@@ -1,0 +1,224 @@
+# workflow
+*1. git clone https://github.com/AhmadSatriyo/tubesalpro
+*2. git cd tubesalpro -> untuk pindah atau ngecek folder tubesalpro
+*3. git fetch origin -> cek apakah pekerjaan kita udah paling terbaru
+*4. git pull origin prototype (atau bisa main) -> untuk mengunduh perubahan yang telah dilakukan di kodingan/file
+*5. git checkout -b "nama branch? -> untuk bikin tempat kerja atau page baru
+*6. kerjain kodingan/ubah-ubah
+*7. git add . -> untuk nge-fix in perubahan yang mau dikirim ke database github
+*8. git commit -m "pesan berisi perubahan yang telah dilakukan, misal nambahin kodingan karakter"
+*9. git push origin namaBranch -> untuk mengirim perubahan ke database github (website ini), saran bisa ke prototype atau ke branch milik sendiri
+
+# 1. Inisialisasi Git
+
+Dilakukan sekali di folder project.
+
+```bash
+git init
+```
+
+Artinya:
+mengubah folder project jadi repository git.
+
+---
+
+# 2. Cek Status File
+
+```bash
+git status
+```
+
+Melihat:
+
+* file baru
+* file berubah
+* file belum di-commit
+
+---
+
+# 3. Add Semua File
+
+```bash
+git add .
+```
+
+Artinya:
+memasukkan semua file ke staging area.
+
+---
+
+# 4. Commit
+
+```bash
+git commit -m "Initial project setup"
+```
+
+Artinya:
+menyimpan snapshot project.
+
+---
+
+# 5. Hubungkan ke GitHub
+
+```bash
+git remote add origin https://github.com/USERNAME/REPOSITORY.git
+```
+
+Contoh:
+
+```bash
+git remote add origin https://github.com/korosuke/the-dying-crown.git
+```
+
+---
+
+# 6. Push ke GitHub
+
+```bash
+git push -u origin main
+```
+
+Kalau branch kalian masih `master`:
+
+```bash
+git push -u origin master
+```
+
+---
+
+# FLOW PALING UMUM
+
+Biasanya tiap habis kerja:
+
+```bash
+git add .
+git commit -m "Added dialogue system"
+git push
+```
+
+SELESAI.
+
+---
+
+# 7. Clone Repository
+
+Kalau anggota tim mau download project:
+
+```bash
+git clone https://github.com/USERNAME/REPOSITORY.git
+```
+
+---
+
+# 8. Pull Update Terbaru
+
+Sebelum coding:
+WAJIB.
+
+```bash
+git pull
+```
+
+Supaya project sinkron.
+
+---
+
+# 9. Buat Branch Baru
+
+Kalau mau fitur terpisah.
+
+```bash
+git checkout -b dialogue-system
+```
+
+---
+
+# 10. Pindah Branch
+
+```bash
+git checkout main
+```
+
+atau:
+
+```bash
+git checkout dialogue-system
+```
+
+---
+
+# 11. Merge Branch
+
+Gabungkan fitur ke main.
+
+```bash
+git merge dialogue-system
+```
+
+---
+
+# 12. Git Ignore
+
+WAJIB buat Java project.
+
+Bikin file:
+
+```text
+.gitignore
+```
+
+Isi:
+
+```gitignore
+/build/
+/dist/
+/nbproject/private/
+/*.class
+```
+
+---
+
+# FLOW TEAM YANG AKU SARANKAN
+
+## Leader
+
+# FLOW KERJA
+
+## Sebelum kerja
+
+```bash
+git pull
+```
+
+---
+
+## Setelah coding
+
+```bash
+git add .
+git commit -m "Finished clue system"
+git push
+```
+
+---
+
+# KALAU BARU PERTAMA KALI PUSH DAN ERROR
+
+Biasanya:
+
+```bash
+git branch -M main
+git push -u origin main
+```
+
+---
+
+# COMMAND YANG PALING SERING DIPAKAI
+
+```bash
+git status
+git add .
+git commit -m "message"
+git push
+git pull
+```
