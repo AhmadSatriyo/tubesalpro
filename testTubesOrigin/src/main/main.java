@@ -3,8 +3,6 @@ package main;
 import script.background;
 import script.detektif;
 import script.character;
-import scene.HomeScreen.homeScreen;
-import script.posisi;
 
 public class Main {
     
