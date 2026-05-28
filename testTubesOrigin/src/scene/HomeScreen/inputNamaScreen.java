@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 import main.Main;
 
 
-public class homeScreen extends javax.swing.JFrame {
+public class inputNamaScreen extends javax.swing.JFrame {
     
     private posisi teksTittle;
     private posisi textFieldNama;
@@ -16,10 +16,10 @@ public class homeScreen extends javax.swing.JFrame {
     private posisi btnQuit;
     private posisi btnSetting;
 
-    public homeScreen() {
+    public inputNamaScreen() {
         
         initComponents();
-        setExtendedState(homeScreen.MAXIMIZED_BOTH);
+        setExtendedState(inputNamaScreen.MAXIMIZED_BOTH);
         this.getContentPane().setLayout(null);
         
         textFieldNama = new posisi(boxNama);
@@ -72,6 +72,8 @@ public class homeScreen extends javax.swing.JFrame {
     private void initComponents() {
 
         panelUtama = new javax.swing.JPanel();
+        panelUtama2 = new javax.swing.JPanel();
+        panelHomeScreen = new javax.swing.JPanel();
         buttonQuit = new javax.swing.JButton();
         buttonStart = new javax.swing.JButton();
         buttonSetting = new javax.swing.JButton();
@@ -80,11 +82,12 @@ public class homeScreen extends javax.swing.JFrame {
         labelTittle = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        panelInputNamaScreen = new javax.swing.JPanel();
+        panelSettingScreen = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 204, 204));
         setName("frameAwal"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(1920, 1080));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -96,6 +99,10 @@ public class homeScreen extends javax.swing.JFrame {
         panelUtama.setPreferredSize(new java.awt.Dimension(1920, 1080));
         panelUtama.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        panelUtama2.setLayout(new java.awt.CardLayout());
+
+        panelHomeScreen.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         buttonQuit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         buttonQuit.setText("Quit");
         buttonQuit.addActionListener(new java.awt.event.ActionListener() {
@@ -103,7 +110,7 @@ public class homeScreen extends javax.swing.JFrame {
                 buttonQuitActionPerformed(evt);
             }
         });
-        panelUtama.add(buttonQuit, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 320, 140, 70));
+        panelHomeScreen.add(buttonQuit, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 320, 140, 70));
 
         buttonStart.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         buttonStart.setText("Start");
@@ -112,7 +119,7 @@ public class homeScreen extends javax.swing.JFrame {
                 buttonStartActionPerformed(evt);
             }
         });
-        panelUtama.add(buttonStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 220, 140, 70));
+        panelHomeScreen.add(buttonStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 220, 140, 70));
 
         buttonSetting.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         buttonSetting.setText("Setting");
@@ -121,7 +128,7 @@ public class homeScreen extends javax.swing.JFrame {
                 buttonSettingActionPerformed(evt);
             }
         });
-        panelUtama.add(buttonSetting, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 340, 140, 70));
+        panelHomeScreen.add(buttonSetting, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 340, 140, 70));
 
         boxNama.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         boxNama.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -131,21 +138,27 @@ public class homeScreen extends javax.swing.JFrame {
                 boxNamaActionPerformed(evt);
             }
         });
-        panelUtama.add(boxNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 550, 480, 80));
-        panelUtama.add(textBoxBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 500, 560, 170));
+        panelHomeScreen.add(boxNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 550, 480, 80));
+        panelHomeScreen.add(textBoxBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 500, 560, 170));
 
         labelTittle.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         labelTittle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelTittle.setText("ini tittle");
-        panelUtama.add(labelTittle, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 270, -1, -1));
+        panelHomeScreen.add(labelTittle, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 270, -1, -1));
 
         background.setBackground(new java.awt.Color(255, 255, 255));
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/background/tangga.jpg"))); // NOI18N
-        panelUtama.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
+        panelHomeScreen.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton2.setText("Start");
-        panelUtama.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 267, 140, 70));
+        panelHomeScreen.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 267, 140, 70));
+
+        panelUtama2.add(panelHomeScreen, "card2");
+        panelUtama2.add(panelInputNamaScreen, "card3");
+        panelUtama2.add(panelSettingScreen, "card4");
+
+        panelUtama.add(panelUtama2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
 
         getContentPane().add(panelUtama, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
 
@@ -211,19 +224,20 @@ public class homeScreen extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(homeScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(inputNamaScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(homeScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(inputNamaScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(homeScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(inputNamaScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(homeScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(inputNamaScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new homeScreen().setVisible(true);
+            new inputNamaScreen().setVisible(true);
         });
     }
 
@@ -235,7 +249,11 @@ public class homeScreen extends javax.swing.JFrame {
     private javax.swing.JButton buttonStart;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel labelTittle;
+    private javax.swing.JPanel panelHomeScreen;
+    private javax.swing.JPanel panelInputNamaScreen;
+    private javax.swing.JPanel panelSettingScreen;
     private javax.swing.JPanel panelUtama;
+    private javax.swing.JPanel panelUtama2;
     private javax.swing.JLabel textBoxBackground;
     // End of variables declaration//GEN-END:variables
 }
