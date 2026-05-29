@@ -4,7 +4,7 @@ import script.background;
 import script.detektif;
 import script.character;
 
-public class Main {
+public class  main {
     
     
     public static background bgTangga = new background("/assets/background/tangga.jpg", "Latar Tangga");
