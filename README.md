@@ -1,5 +1,43 @@
 # tubesalpro
 
+branch:
+1. main -> untuk yang udah bener-bener fix
+2. prototype -> tempat merge sebelum ke main
+3. mahesWorks -> punya mahesa
+4. satriyo -> punya satriyo
+5. zahra -> punya zahra
+
+jadi push ke breanch masing-masing, cek sama tesing dulu, baru merge ke prototype, terus baru ke main
+
+To-Do:
+1. bikin readme yang proper beserta syntax GitHub (done)
+2. bikin penjelasan masing-masing package dan class (not yet)
+3. bikin plan sederhana cara kerja/alur game dengan ngehubungin tiap class (Zahra for the flowchart and im going to somehow connect it to the code)
+4. bikin plan tampilan ui (mahesa dan aku)
+5. bkin plan asset, music, dll (all)
+6. bikin pembagian tugas pakai sprint (not yet)
+
+flowchart of how its going to look like
+semua tombol yang perlu input (kayak pemilihan tema gaboleh bisa dipencet sebelum user milih)
+
+area homeScren / pre-game
+1. homeScreen
+   start -> continue next scene (not yet -> Satriyo)
+   setting -> settingScene -> music, save?, resetProgress?, checkCharacter?
+   quit -> showoptiondialog untuk konfirm mau keluar
+2. inputNamaScreen -> habis klik start, lanjut ke sini, user input nama ke textBoxField dan disimpan ke global untuk dipakai di sepanjang game
+   start -> masuk pemilihan tema
+   quit/retutrn -> balik  ke homeScreen
+3. themeScreen -> user bakal milih salah satu tema dengan cara klik sekali. opsional tambahin fitur cancel piliahn
+   return -> balik ke inputNamaSccreen
+
+gameIntro
+1. intro sederhana pakai black screen dengan diberi teks menceritakan secara singkat mengenai kasus yang akan dihadapi
+2. buku atau kertas berisi tersangka dan sifat
+
+gameFR
+
+
 bikin:
 
 * beberapa halaman GUI
