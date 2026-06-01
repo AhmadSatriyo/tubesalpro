@@ -1,39 +1,37 @@
 
 package scene.HomeScreen;
 
-import scene.ThemeScreen.Main;
 import script.posisi;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import main.Main;
+import main.Global;
 
 
-public class inputNamaScreen extends javax.swing.JFrame {
+public class namaScreen extends javax.swing.JFrame {
     
     private posisi teksTittle;
     private posisi textFieldNama;
     private posisi backgroundTFNama;
     private posisi btnStart;
     private posisi btnQuit;
-    private posisi btnSetting;
+    private posisi textMasukkanNama;
 
-    public inputNamaScreen() {
+    public namaScreen() {
+        
+        this.setUndecorated(true);
         
         initComponents();
-        setExtendedState(inputNamaScreen.MAXIMIZED_BOTH);
+        setExtendedState(namaScreen.MAXIMIZED_BOTH);
         this.getContentPane().setLayout(null);
         
         textFieldNama = new posisi(boxNama);
         backgroundTFNama = new posisi(textBoxBackground);
 
-        ImageIcon homeScreenBackground = Main.homeScreenBackground.ambilGambar(background);
+        ImageIcon homeScreenBackground = Global.homeScreenBackground.ambilGambar(background);
         background.setIcon(homeScreenBackground);
         
-        ImageIcon boxPict = Main.textBoxBackground.ambilGambar(textBoxBackground);
+        ImageIcon boxPict = Global.textBoxBackground.ambilGambar(textBoxBackground);
         textBoxBackground.setIcon(boxPict);
-        
-        textBoxBackground.setVisible(false);
-        boxNama.setVisible(false);
         
         boxNama.setOpaque(false);
         boxNama.setBorder(javax.swing.BorderFactory.createEmptyBorder());
@@ -42,9 +40,27 @@ public class inputNamaScreen extends javax.swing.JFrame {
         teksTittle = new posisi(labelTittle);
         btnStart = new posisi(buttonStart);
         btnQuit = new posisi(buttonQuit);
-        btnSetting = new posisi(buttonSetting);
+        textMasukkanNama = new posisi(labelMasukkanNama);
         
         aturPosisiKomponen();
+    }
+    
+    private void cekDanKirimNama() {
+        
+        if(!boxNama.getText().equals("")) {
+            // 1. Ambil input nama user
+    Global.masukanNamaPlayer(boxNama.getText());
+    
+    // 2. TIMPA DAN GENERATE ULANG ISI ARRAY DENGAN NAMA BARU (WAJIB ADA!)
+    Global.initCeritaGame(); 
+    
+    // 3. Pindah scene berikutnya
+    script.Transisi.pindahScene(this, new scene.ThemeScreen.theme());
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Mohon isi nama terlebih dahulu", "Tic-Tac-Toe", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
     }
     
     private void aturPosisiKomponen() {
@@ -52,19 +68,16 @@ public class inputNamaScreen extends javax.swing.JFrame {
         labelTittle.setLocation(0, 100);
         teksTittle.tengahHorizontal(this);
         
-        buttonStart.setLocation(0, 500);
-        btnStart.tengahHorizontal(this);
+        btnStart.posisi(640, 670); 
+        btnQuit.posisi(900, 670);
         
-        buttonSetting.setLocation(0, 570);
-        btnSetting.tengahHorizontal(this);
+        textMasukkanNama.posisi(0, 480);
+        textMasukkanNama.tengahHorizontal(this);
         
-        buttonQuit.setLocation(0, 640);
-        btnQuit.tengahHorizontal(this);
-        
-        boxNama.setLocation(0, 540);
+        boxNama.setLocation(0, 520);
         textFieldNama.tengahHorizontal(this);
         
-        textBoxBackground.setLocation(0, 500);
+        textBoxBackground.setLocation(0, 400);
         backgroundTFNama.tengahHorizontal(this);
     }
     
@@ -73,18 +86,13 @@ public class inputNamaScreen extends javax.swing.JFrame {
     private void initComponents() {
 
         panelUtama = new javax.swing.JPanel();
-        panelUtama2 = new javax.swing.JPanel();
-        panelHomeScreen = new javax.swing.JPanel();
         buttonQuit = new javax.swing.JButton();
         buttonStart = new javax.swing.JButton();
-        buttonSetting = new javax.swing.JButton();
         boxNama = new javax.swing.JTextField();
+        labelMasukkanNama = new javax.swing.JLabel();
         textBoxBackground = new javax.swing.JLabel();
         labelTittle = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        panelInputNamaScreen = new javax.swing.JPanel();
-        panelSettingScreen = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 204, 204));
@@ -98,20 +106,17 @@ public class inputNamaScreen extends javax.swing.JFrame {
 
         panelUtama.setBackground(new java.awt.Color(204, 204, 204));
         panelUtama.setPreferredSize(new java.awt.Dimension(1920, 1080));
-        panelUtama.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        panelUtama2.setLayout(new java.awt.CardLayout());
-
-        panelHomeScreen.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelUtama.setLayout(null);
 
         buttonQuit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        buttonQuit.setText("Quit");
+        buttonQuit.setText("Kembali");
         buttonQuit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonQuitActionPerformed(evt);
             }
         });
-        panelHomeScreen.add(buttonQuit, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 320, 140, 70));
+        panelUtama.add(buttonQuit);
+        buttonQuit.setBounds(690, 320, 140, 70);
 
         buttonStart.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         buttonStart.setText("Start");
@@ -120,16 +125,8 @@ public class inputNamaScreen extends javax.swing.JFrame {
                 buttonStartActionPerformed(evt);
             }
         });
-        panelHomeScreen.add(buttonStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 220, 140, 70));
-
-        buttonSetting.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        buttonSetting.setText("Setting");
-        buttonSetting.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonSettingActionPerformed(evt);
-            }
-        });
-        panelHomeScreen.add(buttonSetting, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 340, 140, 70));
+        panelUtama.add(buttonStart);
+        buttonStart.setBounds(680, 220, 140, 70);
 
         boxNama.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         boxNama.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -139,27 +136,26 @@ public class inputNamaScreen extends javax.swing.JFrame {
                 boxNamaActionPerformed(evt);
             }
         });
-        panelHomeScreen.add(boxNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 550, 480, 80));
-        panelHomeScreen.add(textBoxBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 500, 560, 170));
+        panelUtama.add(boxNama);
+        boxNama.setBounds(630, 550, 480, 80);
+
+        labelMasukkanNama.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        labelMasukkanNama.setText("Masukkan Nama : ");
+        panelUtama.add(labelMasukkanNama);
+        labelMasukkanNama.setBounds(420, 190, 160, 25);
+        panelUtama.add(textBoxBackground);
+        textBoxBackground.setBounds(590, 390, 560, 280);
 
         labelTittle.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         labelTittle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelTittle.setText("ini tittle");
-        panelHomeScreen.add(labelTittle, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 270, -1, -1));
+        panelUtama.add(labelTittle);
+        labelTittle.setBounds(320, 270, 179, 64);
 
         background.setBackground(new java.awt.Color(255, 255, 255));
-        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/background/tangga.jpg"))); // NOI18N
-        panelHomeScreen.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
-
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton2.setText("Start");
-        panelHomeScreen.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 267, 140, 70));
-
-        panelUtama2.add(panelHomeScreen, "card2");
-        panelUtama2.add(panelInputNamaScreen, "card3");
-        panelUtama2.add(panelSettingScreen, "card4");
-
-        panelUtama.add(panelUtama2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/background/Fantasy Medieval Castle Wallpaper 4K.jpeg"))); // NOI18N
+        panelUtama.add(background);
+        background.setBounds(0, 0, 1920, 1080);
 
         getContentPane().add(panelUtama, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
 
@@ -172,40 +168,15 @@ public class inputNamaScreen extends javax.swing.JFrame {
 
     private void buttonStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonStartActionPerformed
         
-        // 1. Sembunyikan tombol-tombol yang tidak diperlukan dulu
-        buttonQuit.setVisible(false);
-        buttonSetting.setVisible(false);
-        buttonStart.setVisible(false);
-    
-        // 2. Tampilkan textfield nama beserta background-nya
-        textBoxBackground.setVisible(true);
-        boxNama.setVisible(true);
-    
-        // 3. BARU ATUR ULANG POSISINYA (Taruh paling bawah)
-        aturPosisiKomponen();
-        
-        labelTittle.setLocation(0, 100);
-        teksTittle.tengahHorizontal(this);
-    
-        // 4. Paksa Swing untuk menggambar ulang koordinat baru secara instan
-        this.revalidate();
-        this.repaint();
+        cekDanKirimNama();
         
     }//GEN-LAST:event_buttonStartActionPerformed
 
     private void buttonQuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonQuitActionPerformed
         
-        if (JOptionPane.showConfirmDialog(this, "Konfrmasi jika Anda ingin keluar", "Tic-Tac-Toe", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-            System.exit(0); // Keluar dari program
-        }
-        else {
-            aturPosisiKomponen();
-        }
+        script.Transisi.pindahScene(this, new scene.HomeScreen.homeScreen());
+        
     }//GEN-LAST:event_buttonQuitActionPerformed
-
-    private void buttonSettingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSettingActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonSettingActionPerformed
 
     private void boxNamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxNamaActionPerformed
         // TODO add your handling code here:
@@ -225,20 +196,20 @@ public class inputNamaScreen extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(inputNamaScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(namaScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(inputNamaScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(namaScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(inputNamaScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(namaScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(inputNamaScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(namaScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new inputNamaScreen().setVisible(true);
+            new namaScreen().setVisible(true);
         });
     }
 
@@ -246,15 +217,10 @@ public class inputNamaScreen extends javax.swing.JFrame {
     private javax.swing.JLabel background;
     private javax.swing.JTextField boxNama;
     private javax.swing.JButton buttonQuit;
-    private javax.swing.JButton buttonSetting;
     private javax.swing.JButton buttonStart;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel labelMasukkanNama;
     private javax.swing.JLabel labelTittle;
-    private javax.swing.JPanel panelHomeScreen;
-    private javax.swing.JPanel panelInputNamaScreen;
-    private javax.swing.JPanel panelSettingScreen;
     private javax.swing.JPanel panelUtama;
-    private javax.swing.JPanel panelUtama2;
     private javax.swing.JLabel textBoxBackground;
     // End of variables declaration//GEN-END:variables
 }
