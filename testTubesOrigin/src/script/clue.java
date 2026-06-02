@@ -6,18 +6,19 @@ public class clue {
     private String nama;
     private String deskripsi;
     private boolean benar;
-    private Character pemberi;
+    private Saksi saksi;
+    private String namaSaksi;
     private int poin;
-
-    public clue(String nama, String deskripsi, boolean benar, Character pemberi, int poin) {
+    
+    public clue(String nama, String deskripsi, boolean benar, Saksi saksi, String namaSaksi, int poin) {
 
         this.nama = nama;
         this.deskripsi = deskripsi;
         this.benar = benar;
-        this.pemberi = pemberi;
+        this.saksi = saksi;
+        this.namaSaksi = namaSaksi;
         this.poin = poin;
     }
-    
 
     public String getNama() {
         return nama;
@@ -43,12 +44,20 @@ public class clue {
         this.benar = benar;
     }
 
-    public Character getPemberi() {
-        return pemberi;
+    public Saksi getSaksi() {
+        return saksi;
     }
 
-    public void setPemberi(Character pemberi) {
-        this.pemberi = pemberi;
+    public void setSaksi(Saksi saksi) {
+        this.saksi = saksi;
+    }
+
+    public String getNamaSaksi() {
+        return namaSaksi;
+    }
+
+    public void setNamaSaksi(String namaSaksi) {
+        this.namaSaksi = namaSaksi;
     }
 
     public int getPoin() {
@@ -58,6 +67,7 @@ public class clue {
     public void setPoin(int poin) {
         this.poin = poin;
     }
+        
 
 
 }

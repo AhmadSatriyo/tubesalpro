@@ -4,6 +4,7 @@ import script.Dialog;
 import script.Saksi;
 import script.Tersangka;
 import script.background;
+import script.clue;
 import script.detektif;
 
 public class Global {
@@ -38,11 +39,18 @@ public class Global {
     //chapter 1
     public static Dialog[] dialogVesperChapter1;
     public static Dialog[] dialogVesperChapter1Opsi1;
+    public static Dialog[] dialogVesperChapter1Opsi2;
     
     public static boolean chapter1 = false;
     public static boolean chapter2 = false;
     public static boolean chapter3 = false;
     public static boolean chapter4 = false;
+    
+    //clue
+    //clue chapter 1
+    //clue percakapan
+    public static clue clueMatthias1;
+    public static clue clueMattihias2;
     
     public static String namaPlayer = "Dummy";    
     
@@ -98,6 +106,9 @@ public class Global {
         AldricJr = new Tersangka("/assets/character/dummyAldricJr", "Aldric Jr.", "Kadang jujur");
         Vesper = new Tersangka("/assets/character/dummyVesper.png", "Tuan Vesper", "Kadang jujur");
         
+        clueMatthias1 = new clue("Dua orang dan raja", "Matthias mendengar suara dua orang selain raja sebelum kejadian tersebut.", true, Matthias, Matthias.getNama(), 3);
+        clueMattihias2 = new clue("Raja tertawa sebelum kematiannya", "Matthias mendengarkan suara raja yang tertawa kecil sebelum kematiannya", true, Matthias, Matthias.getNama(), 2);
+    
         
         
         // B. BARU KITA JALANKAN ARRAY DIALOGNYA
@@ -168,7 +179,23 @@ public class Global {
             new Dialog(guwe.getNamaPlayer(), "Raja meniggal di kamarnya kan? Di mana kamarnya?."),
             new Dialog(guwe.getNamaPlayer(), "Aku ingin melihatnya secara langsung."),
             new Dialog(guwe.getNamaPlayer(), "Mungkin terdapat petunjuk dari kasus ini."),
-            
+            new Dialog(Vesper.getNama(), "Baiklah, aku akan memanggil Matthias."),
+            new Dialog(Vesper.getNama(), "Matthias, kemarilah."),
+            new Dialog(Matthias.getNama(), "Baik, tuan, saya akan segera ke sana."),
+            new Dialog(Matthias.getNama(), "Ada apa, tuan?."),
+            new Dialog(Vesper.getNama(), "Inilah Matthias, tuan detektif " + guwe.getNamaPlayer() + "."),
+            new Dialog(Matthias.getNama(), "Perkenalkan, saya Matthias. Saya merupakan pelayan dari kerajaan ini."),
+            new Dialog(guwe.getNamaPlayer(), "Oke, Matthias, aku ingin menanyaimu mengenai kejadian kematian raja."),
+            new Dialog(guwe.getNamaPlayer(), "Apa yang kamu ketahui mengenai kejadian tersebut?"),
+            new Dialog(Matthias.getNama(), "Saya mendengar dua suara di waktu kejadian tersebut."),
+            new Dialog(guwe.getNamaPlayer(), "Dua suara?"),
+            new Dialog(Matthias.getNama(), "Benar, tuan."),
+            new Dialog(guwe.getNamaPlayer(), "Bagaimana dengan raja?"),
+            new Dialog(Matthias.getNama(), "Saya mendengar sang raja tertawa kecil sebelum kejadian tersebut terjadi."),
+            new Dialog(guwe.getNamaPlayer(), "Raja tertawa? berarti totalnya 3 orang termasuk raja?"),
+            new Dialog(Matthias.getNama(), "Benar, tuan"),
+            new Dialog(guwe.getNamaPlayer(), "Baik, terima kasih, Matthias. Aku akan mencatat hal ini."),
+            new Dialog(Matthias.getNama(), "Baik, saya izin permsisi, tuan"),
         };
     }
 }
