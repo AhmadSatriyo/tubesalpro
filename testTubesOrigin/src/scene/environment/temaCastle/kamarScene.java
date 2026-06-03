@@ -26,7 +26,7 @@ public class kamarScene extends javax.swing.JFrame {
     private int pilihan = -1;
     private boolean modeStory = true;
     
-    String[] lokasi = {"Perpustakaan", "Kamar Aldric Jr.", "Kamar Caelan", "Kamar Erian", "Hall kastil"};
+    String[] lokasi = {"Perpustakaan", "Kamar Aldric Jr.", "Kamar Caelan", "Kamar Erian", "Kamar Dorian"};
     
     private int opsi;
 

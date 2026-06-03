@@ -337,6 +337,8 @@ public class kamarRajaScene extends javax.swing.JFrame {
                      + "ia tidak bisa memastikan identitas orang tersebut.\"\n"
                      + "--------------------------------------------------\n"
                      + "Total Poin Clue Saat Ini = " + main.Global.poinClue + " (+5 Poin)";
+    
+    Global.tuduhVesper = true;
                      
     JOptionPane.showMessageDialog(this, pesanClue, "Bukti Kesaksian", JOptionPane.INFORMATION_MESSAGE);
 }

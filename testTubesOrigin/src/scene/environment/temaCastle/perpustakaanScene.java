@@ -4,6 +4,7 @@ package scene.environment.temaCastle;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import main.Global;
@@ -24,20 +25,14 @@ public class perpustakaanScene extends javax.swing.JFrame {
     private posisi posisiButton2;
     private posisi posisiButton3;
     private posisi posisiButton4;
+    private posisi posisiButtonKembaliDariDialog;
+    private posisi posisiButtonKembaliKeKamar;
     
+    private script.Dialog[] antrianDialogCabang;
+    
+    private boolean modeDialogCabang = false;
     private boolean cekBuku;
     private boolean cekBotolRacun;
-    
-    private boolean cekSurat = false;
-    private boolean cekJejakKaki = false;
-    private boolean cekBunga = false;
-    private boolean cekWine = false;
-    private boolean cekKertas = false;
-    private boolean cekCincin = false;
-    private boolean cekLilin = false;
-    private boolean cekLukisan = false;
-    
-
     
     private boolean apakahLagiDialog = false;
     private String[] antrianTeksMC;   // Tempat menyimpan kumpulan teks panjang
@@ -53,10 +48,18 @@ public class perpustakaanScene extends javax.swing.JFrame {
         Global.initCeritaGame(); 
         setExtendedState(perpustakaanScene.MAXIMIZED_BOTH);
         this.getContentPane().setLayout(null);
-
-        ImageIcon backgroundKamarRaja = Global.backgroundKamarRajaScene.ambilGambar(background);
-        background.setIcon(backgroundKamarRaja);
         
+        ImageIcon backgroundKamarCaelan = Global.backgoundKamarScene.ambilGambar(background);
+        
+        if(Global.tersangkaTerpilih[1].getNama().equals(Global.Caelan.getNama())) {
+            backgroundKamarCaelan = Global.backgroundPerpustakaanTersangkaScene.ambilGambar(background);
+        }
+        else {
+            backgroundKamarCaelan = Global.backgroundPerpustakaanScene.ambilGambar(background);
+        }
+        
+        background.setIcon(backgroundKamarCaelan);
+
         boxDialog.setEditable(false);         // Teks tidak bisa diedit/dihapus
         boxDialog.setHighlighter(null);       // Teks tidak bisa diblok/diseleksi warna biru
         boxDialog.setFocusable(false);        // JTextArea tidak bisa menerima fokus klik mouse
@@ -66,6 +69,8 @@ public class perpustakaanScene extends javax.swing.JFrame {
         button1.setVisible(false);
         button2.setVisible(false);
         button3.setVisible(false);
+        button4.setVisible(false);
+        buttonKembaliDariDialog.setVisible(false); 
     
         boxDialog.setSize(800, 250);          // Sesuaikan lebar & tinggi kotak teks game kamu
         
@@ -76,18 +81,19 @@ public class perpustakaanScene extends javax.swing.JFrame {
         caelanSprite.setIcon(caelan);
         
         posisiMC = new script.posisi(detektifSprite);
-        posisCaelan = new script.posisi(caelanSprite);
+        posisiCaelan = new script.posisi(caelanSprite);
         posisiBackgroundDialog = new script.posisi(backgroundDialog);
         posisiBoxDialog = new script.posisi(boxDialog);
         posisiLabelNama = new posisi(labelNama);
         posisiButton1 = new posisi(button1);
         posisiButton2 = new posisi(button2);
         posisiButton3 = new posisi(button3);
+        posisiButton4 = new posisi(button4);
+        posisiButtonKembaliDariDialog = new posisi(buttonKembaliDariDialog);
+        posisiButtonKembaliKeKamar = new posisi(buttonKembaliKeKamar);
 
-        
-       
         detektifSprite.setVisible(false);
-        caelanSprite.setVisible(false);
+        caelanSprite.setVisible(true);
         boxDialog.setVisible(false);
         labelNama.setVisible(false);
         backgroundDialog.setVisible(false); 
@@ -95,7 +101,7 @@ public class perpustakaanScene extends javax.swing.JFrame {
         matikanButton();
         
         posisiMC.kiriBawah(this); 
-        posisiVesper.kananBawah(this);
+        posisiCaelan.kananBawah(this);
         
         aturPosisi(); 
             
@@ -109,82 +115,42 @@ public class perpustakaanScene extends javax.swing.JFrame {
         });
         this.setFocusable(true);
         this.requestFocusInWindow();
+        
+        button1.setFocusable(true);
+button2.setFocusable(true);
+button3.setFocusable(true);
+button4.setFocusable(true);
+buttonKembaliDariDialog.setFocusable(true);
     }
     
     
     private void matikanButton() {
         
-        btnJejakKaki.setContentAreaFilled(false);
-        btnJejakKaki.setBorderPainted(false);
-        btnJejakKaki.setFocusPainted(false);
-        btnJejakKaki.setOpaque(false);
-        btnJejakKaki.setFocusable(false); // <--- TAMBAHKAN INI DI SEMUA TOMBOL!
+        btnBuku.setContentAreaFilled(false);
+        btnBuku.setBorderPainted(false);
+        btnBuku.setFocusPainted(false);
+        btnBuku.setOpaque(false);
+        btnBuku.setFocusable(false); // <--- TAMBAHKAN INI DI SEMUA TOMBOL!
         
-        btnKertas.setContentAreaFilled(false);
-        btnKertas.setBorderPainted(false);
-        btnKertas.setFocusPainted(false);
-        btnKertas.setOpaque(false);
-        btnKertas.setFocusable(false); // <--- TAMBAHKAN INI
-        
-        btnSurat.setContentAreaFilled(false);
-        btnSurat.setBorderPainted(false);
-        btnSurat.setFocusPainted(false);
-        btnSurat.setOpaque(false);
-        btnSurat.setFocusable(false); // <--- TAMBAHKAN INI
-        
-        btnLukisan.setContentAreaFilled(false);
-        btnLukisan.setBorderPainted(false);
-        btnLukisan.setFocusPainted(false);
-        btnLukisan.setOpaque(false);
-        btnLukisan.setFocusable(false); // <--- TAMBAHKAN INI
-        
-        btnWine.setContentAreaFilled(false);
-        btnWine.setBorderPainted(false);
-        btnWine.setFocusPainted(false);
-        btnWine.setOpaque(false);
-        btnWine.setFocusable(false); // <--- TAMBAHKAN INI
-        
-        btnCincin.setContentAreaFilled(false);
-        btnCincin.setBorderPainted(false);
-        btnCincin.setFocusPainted(false);
-        btnCincin.setOpaque(false);
-        btnCincin.setFocusable(false); // <--- TAMBAHKAN INI
-        
-        btnLilin.setContentAreaFilled(false);
-        btnLilin.setBorderPainted(false);
-        btnLilin.setFocusPainted(false);
-        btnLilin.setOpaque(false);
-        btnLilin.setFocusable(false); // <--- TAMBAHKAN INI
-        
-        btnBunga.setContentAreaFilled(false);
-        btnBunga.setBorderPainted(false);
-        btnBunga.setFocusPainted(false);
-        btnBunga.setOpaque(false);
-        btnBunga.setFocusable(false); // <--- TAMBAHKAN INI
+        btnRacun.setContentAreaFilled(false);
+        btnRacun.setBorderPainted(false);
+        btnRacun.setFocusPainted(false);
+        btnRacun.setOpaque(false);
+        btnRacun.setFocusable(false); // <--- TAMBAHKAN INI
         
         // Penamaan Name Tag
-        btnSurat.setName("Surat");
-        btnLilin.setName("Lilin");
-        btnWine.setName("Wine");
-        btnJejakKaki.setName("JejakSepatu"); 
-        btnBunga.setName("Bunga");
-        btnKertas.setName("Kertas");
-        btnCincin.setName("Cincin");
-        btnLukisan.setName("Lukisan");
+        btnBuku.setName("BukuRacun"); 
+        btnRacun.setName("BotolRacun");
   
     }
-    
-    
+  
     
     private void aturPosisi() {
         posisiMC.posisi(0, 200);
         posisiMC.kiriBawah(this);
         
-        posisiVesper.posisi(0, 200);
-        posisiVesper.kananBawah(this);
-        
-        posisiMatthias.posisi(0, 200);  
-        posisiMatthias.kananBawah(this);
+        posisiCaelan.posisi(0, 200);
+        posisiCaelan.kananBawah(this);
         
         posisiBackgroundDialog.aturSebagaiBackgroundDialog(this);
         
@@ -192,12 +158,18 @@ public class perpustakaanScene extends javax.swing.JFrame {
         
         posisiLabelNama.aturSebagaiLabelNama();
         
-        posisiButton1.posisi(0, 300);
+        posisiButton1.posisi(0, 250); 
         posisiButton1.tengahHorizontal(this);
-        posisiButton2.posisi(0, 350);
+        posisiButton2.posisi(0, 310); 
         posisiButton2.tengahHorizontal(this);
-        posisiButton3.posisi(0, 400);
+        posisiButton3.posisi(0, 370); 
         posisiButton3.tengahHorizontal(this);
+        posisiButton4.posisi(0, 430); 
+        posisiButton4.tengahHorizontal(this);
+        posisiButtonKembaliDariDialog.posisi(0, 490);
+        posisiButtonKembaliDariDialog.tengahHorizontal(this);
+        
+        buttonKembaliKeKamar.setLocation(20, 20); // Pojok kiri atas layar
         
     }
   
@@ -223,103 +195,88 @@ public class perpustakaanScene extends javax.swing.JFrame {
     private void melanjutkanDialogAtauTutup() {
         if (!apakahLagiDialog) return;
 
-    indeksHalamanMC++;
-    
-    // 1. PENGECEKAN JIKA BERADA DI MODE DIALOG RAHASIA MATTHIAS
-    if (modeDialogRahasia) {
-        if (indeksHalamanMC < main.Global.dialogMatthiasChapter1Rahasia.length) {
-            script.Dialog d = main.Global.dialogMatthiasChapter1Rahasia[indeksHalamanMC];
-            
-            // Atur nama pembicara
-            if (d.getNama().equals("")) {
-                labelNama.setText("???");
-            } else {
-                labelNama.setText(d.getNama());
-            }
-            
-            // Kontrol visibilitas Sprite Matthias secara dinamis berdasarkan nama pembicara
-            if (d.getNama().equalsIgnoreCase(main.Global.Caelan.getNama())) {
-                caelanSprite.setVisible(true);  // Nyala jika Matthias berbicara
-            } else if (d.getNama().equals("")) {
-                caelanSprite.setVisible(false); // Sembunyikan jika hanya narasi/sound effect ("Tok tok tok")
-            }
-            
-            boxDialog.setText(d.getTeks());
-            
-        } 
-        else {
-            // Selesai membaca Dialog Rahasia Matthias sepenuhnya
-            boxDialog.setVisible(false);
-            detektifSprite.setVisible(false);
-            caelanSprite.setVisible(false); // Pastikan dimatikan saat selesai
-            labelNama.setVisible(false);
-            backgroundDialog.setVisible(false);
-            apakahLagiDialog = false;
-            modeDialogRahasia = false;
-            
-            tampilkanInfoClueRahasia();
-            
-            main.Global.chapter2 = true;
-            main.Global.hari = 2;
-            script.Transisi.pindahScene(this, new scene.environment.temaCastle.kamarScene());
-            Global.modeBebas = true;
-            
-            Global.energi = 7;
+        indeksHalamanMC++;
         
-        }
-        return; 
-    }
-
-    // 2. KONDISI DIALOG INVESTIGASI BARANG BIASA
-    if (indeksHalamanMC < antrianTeksMC.length) {
-        boxDialog.setText(antrianTeksMC[indeksHalamanMC]);
-    } else {
-        boxDialog.setVisible(false);
-        detektifSprite.setVisible(false);
-        labelNama.setVisible(false);
-        backgroundDialog.setVisible(false);
-        apakahLagiDialog = false;
-        this.requestFocusInWindow();
-        
-        if (main.Global.energi <= 0) {
-            matikanButton();
-            
-            if (main.Global.opsiCeritaKamarVesper == 3) {
-                modeDialogRahasia = true;
-                apakahLagiDialog = true;
-                indeksHalamanMC = 0;
+        // A. JALUR BARU: MEMPROSES DIALOG CABANG INTEROGASI CAELAN
+        if (modeDialogCabang) {
+            if (indeksHalamanMC < antrianDialogCabang.length) {
+                script.Dialog d = antrianDialogCabang[indeksHalamanMC];
                 
-                boxDialog.setVisible(true);
-                detektifSprite.setVisible(true);
-                caelanSprite.setVisible(false);
-                labelNama.setVisible(true);
-                backgroundDialog.setVisible(true);
+                labelNama.setText(d.getNama().equals("") ? "???" : d.getNama());
+                boxDialog.setText(d.getTeks());
                 
-                script.Dialog dPertama = main.Global.dialogMatthiasChapter1Rahasia[0];
-                
-                // Cek nama pembicara pertama (Detektif/Player)
-                if (dPertama.getNama().equals("")) {
-                    labelNama.setText("???");
-                } else {
-                    labelNama.setText(dPertama.getNama());
+                // Atur kedipan/visibilitas karakter pendukung
+                if (d.getNama().equalsIgnoreCase(main.Global.Caelan.getNama())) {
+                    caelanSprite.setVisible(true);
                 }
-                
-                // Karena dialog pertama adalah monolog Player, matthias belum muncul di ruangan
-                caelanSprite.setVisible(false); 
-                
-                boxDialog.setText(dPertama.getTeks());
-                this.requestFocusInWindow();
             } else {
-                JOptionPane.showMessageDialog(this, 
-                    "Kesadaranmu mulai kabur... Kamu terlalu lelah untuk melanjutkan penyelidikan malam ini.", 
-                    "Kelelahan Ekstrem",
-                    JOptionPane.ERROR_MESSAGE);
+                // Selesai dialog interogasi, tutup layar dialog kembali bersih ke ruangan bebas
+                boxDialog.setVisible(false);
+                detektifSprite.setVisible(false);
+                labelNama.setVisible(false);
+                backgroundDialog.setVisible(false);
+                apakahLagiDialog = false;
+                modeDialogCabang = false;
+                this.requestFocusInWindow();
+            }
+            return; // Interupsi agar tidak mengeksekusi kode bawaan di bawahnya
+        }
+
+        // B. JALUR LAMA: DIALOG RAHASIA MATTHIAS (Bawaan aslimu, biarkan tetap ada)
+        if (modeDialogRahasia) {
+            if (indeksHalamanMC < main.Global.dialogMatthiasChapter1Rahasia.length) {
+                script.Dialog d = main.Global.dialogMatthiasChapter1Rahasia[indeksHalamanMC];
+                labelNama.setText(d.getNama().equals("") ? "???" : d.getNama());
+                if (d.getNama().equalsIgnoreCase(main.Global.Caelan.getNama())) {
+                    caelanSprite.setVisible(true); 
+                } else if (d.getNama().equals("")) {
+                    caelanSprite.setVisible(false);
+                }
+                boxDialog.setText(d.getTeks());
+            } else {
+                boxDialog.setVisible(false);
+                detektifSprite.setVisible(false);
+                caelanSprite.setVisible(false);
+                labelNama.setVisible(false);
+                backgroundDialog.setVisible(false);
+                apakahLagiDialog = false;
+                modeDialogRahasia = false;
+                tampilkanInfoClueRahasia();
                 main.Global.chapter2 = true;
                 main.Global.hari = 2;
                 script.Transisi.pindahScene(this, new scene.environment.temaCastle.kamarScene());
+                Global.modeBebas = true;
+                Global.energi = 7;
+            }
+            return; 
+        }
+
+        // C. JALUR INVESTIGASI BARANG BIASA
+        if (indeksHalamanMC < antrianTeksMC.length) {
+            boxDialog.setText(antrianTeksMC[indeksHalamanMC]);
+        } else {
+            boxDialog.setVisible(false);
+            detektifSprite.setVisible(false);
+            labelNama.setVisible(false);
+            backgroundDialog.setVisible(false);
+            apakahLagiDialog = false;
+            this.requestFocusInWindow();
+            
+            // Cek kelelahan ekstrem jika energi habis setelah lihat barang
+            if (main.Global.energi <= 0) {
+                matikanButton();
+                if (main.Global.opsiCeritaKamarVesper == 3) {
+                    // (Logika rahasia matthias bawaanmu...)
+                } else {
+                    JOptionPane.showMessageDialog(this, 
+                        "Kesadaranmu mulai kabur... Kamu terlalu lelah untuk melanjutkan penyelidikan malam ini.", 
+                        "Kelelahan Ekstrem", JOptionPane.ERROR_MESSAGE);
+                    main.Global.chapter2 = true;
+                    main.Global.hari = 2;
+                    script.Transisi.pindahScene(this, new scene.environment.temaCastle.kamarScene());
+                }
             }
         }
-    }
     }
     
     private void tampilkanInfoClueRahasia() {
@@ -340,6 +297,34 @@ public class perpustakaanScene extends javax.swing.JFrame {
     JOptionPane.showMessageDialog(this, pesanClue, "Bukti Kesaksian", JOptionPane.INFORMATION_MESSAGE);
 }
     
+    private void mulaiDialogPercabangan(script.Dialog[] skripTerpilih) {
+        bersihkanMenuOpsi(); // Method ini otomatis menyembunyikan button 1-4
+    
+    // --- TAMBAHKAN INI ---
+    buttonKembaliDariDialog.setVisible(false); // Sembunyikan tombol kembali saat dialog cerita dimulai!
+    
+    apakahLagiDialog = true;
+    modeDialogCabang = true;
+    indeksHalamanMC = 0;
+    antrianDialogCabang = skripTerpilih;
+    
+    detektifSprite.setVisible(true);
+    
+    // Muat halaman pertama percakapan
+    script.Dialog dataPertama = antrianDialogCabang[indeksHalamanMC];
+    labelNama.setText(dataPertama.getNama().equals("") ? "???" : dataPertama.getNama());
+    boxDialog.setText(dataPertama.getTeks());
+    this.requestFocusInWindow();
+    }
+    
+    private void bersihkanMenuOpsi() {
+        button1.setVisible(false);
+        button2.setVisible(false);
+        button3.setVisible(false);
+        button4.setVisible(false);
+        buttonKembaliKeKamar.setVisible(true); // Tampilkan kembali tombol navigasi peta
+    }
+    
     
 
     /**
@@ -353,21 +338,17 @@ public class perpustakaanScene extends javax.swing.JFrame {
 
         labelNama = new javax.swing.JLabel();
         boxDialog = new javax.swing.JTextArea();
-        detektifSprite = new javax.swing.JLabel();
         backgroundDialog = new javax.swing.JLabel();
+        detektifSprite = new javax.swing.JLabel();
         caelanSprite = new javax.swing.JLabel();
-        btnJejakKaki = new javax.swing.JButton();
-        btnKertas = new javax.swing.JButton();
-        btnSurat = new javax.swing.JButton();
-        btnLukisan = new javax.swing.JButton();
-        btnCincin = new javax.swing.JButton();
-        btnWine = new javax.swing.JButton();
-        btnLilin = new javax.swing.JButton();
-        btnBunga = new javax.swing.JButton();
+        btnBuku = new javax.swing.JButton();
+        btnRacun = new javax.swing.JButton();
         button1 = new javax.swing.JButton();
         button2 = new javax.swing.JButton();
         button3 = new javax.swing.JButton();
         button4 = new javax.swing.JButton();
+        buttonKembaliDariDialog = new javax.swing.JButton();
+        buttonKembaliKeKamar = new javax.swing.JButton();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -396,67 +377,31 @@ public class perpustakaanScene extends javax.swing.JFrame {
         boxDialog.setText("\nsddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
         boxDialog.setBorder(null);
         getContentPane().add(boxDialog, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 900, 190));
-        getContentPane().add(detektifSprite, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 350, 80, 120));
 
         backgroundDialog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/ui/dialogueBox.png"))); // NOI18N
         getContentPane().add(backgroundDialog, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 820, 1000, 270));
+        getContentPane().add(detektifSprite, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 350, 80, 120));
+
+        caelanSprite.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                caelanSpriteMouseClicked(evt);
+            }
+        });
         getContentPane().add(caelanSprite, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 350, 80, 120));
 
-        btnJejakKaki.addActionListener(new java.awt.event.ActionListener() {
+        btnBuku.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnJejakKakiActionPerformed(evt);
+                btnBukuActionPerformed(evt);
             }
         });
-        getContentPane().add(btnJejakKaki, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 800, 180, 130));
+        getContentPane().add(btnBuku, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 800, 180, 130));
 
-        btnKertas.addActionListener(new java.awt.event.ActionListener() {
+        btnRacun.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnKertasActionPerformed(evt);
+                btnRacunActionPerformed(evt);
             }
         });
-        getContentPane().add(btnKertas, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 810, 150, 110));
-
-        btnSurat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSuratActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnSurat, new org.netbeans.lib.awtextra.AbsoluteConstraints(1530, 540, 140, 100));
-
-        btnLukisan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLukisanActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnLukisan, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 240, 220, 150));
-
-        btnCincin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCincinActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnCincin, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 660, 100, 80));
-
-        btnWine.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnWineActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnWine, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 450, 140, 100));
-
-        btnLilin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLilinActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnLilin, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 570, 140, 100));
-
-        btnBunga.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBungaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnBunga, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 760, 140, 100));
+        getContentPane().add(btnRacun, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 810, 150, 110));
 
         button1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         button1.setText("Interaksi bebas");
@@ -494,6 +439,24 @@ public class perpustakaanScene extends javax.swing.JFrame {
         });
         getContentPane().add(button4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1540, 420, 330, 40));
 
+        buttonKembaliDariDialog.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        buttonKembaliDariDialog.setText("Kembali");
+        buttonKembaliDariDialog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonKembaliDariDialogActionPerformed(evt);
+            }
+        });
+        getContentPane().add(buttonKembaliDariDialog, new org.netbeans.lib.awtextra.AbsoluteConstraints(1540, 480, 330, 40));
+
+        buttonKembaliKeKamar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        buttonKembaliKeKamar.setText("Kembali ke kamar");
+        buttonKembaliKeKamar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonKembaliKeKamarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(buttonKembaliKeKamar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 640, 330, 40));
+
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/background/backgroundKamarRajaClue.png"))); // NOI18N
         background.setPreferredSize(new java.awt.Dimension(1920, 1080));
         getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -510,285 +473,165 @@ public class perpustakaanScene extends javax.swing.JFrame {
     }//GEN-LAST:event_formMouseClicked
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
-
+        main.Global.energi -= 1; // Potong energi di sini
+    this.setFocusable(true);  // Kembalikan fokus ke frame untuk Spacebar
+    mulaiDialogPercabangan(main.Global.dialogCaelanInteraksiBebas);
     }//GEN-LAST:event_button1ActionPerformed
 
     private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
-        // TODO add your handling code here:
+        main.Global.energi -= 1; // Potong energi di sini
+    this.setFocusable(true);  
+    mulaiDialogPercabangan(main.Global.dialogCaelanKertas);
     }//GEN-LAST:event_button2ActionPerformed
 
     private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
-        // TODO add your handling code here:
+        main.Global.energi -= 1; // Potong energi di sini
+    this.setFocusable(true);  
+    mulaiDialogPercabangan(main.Global.dialogCaelanBuku);
     }//GEN-LAST:event_button3ActionPerformed
 
-    private void btnJejakKakiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJejakKakiActionPerformed
+    private void btnBukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBukuActionPerformed
         
         if (apakahLagiDialog) return;
-    if (main.Global.energi <= 0) {
-        JOptionPane.showMessageDialog(this, "Kamu terlalu lelah untuk menyelidiki.", "Energi Habis", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    if (cekJejakKaki) {
-        JOptionPane.showMessageDialog(this, "Kamu sudah memeriksa objek ini sebelumnya.", "Investigasi", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    
-    cekJejakKaki = true;
-    main.Global.poinClue += 3;
-    main.Global.energi -= 1;
-    
-    String pesan = "[BENDA - PENTING]\nObjek: Jejak sepatu\n\nHasil Penyelidikan:\n"
-                 + "Jejak sepatu milik seseorang. Ukurannya besar. (+3 Poin)\n"
-                 + "--------------------------------------------------\n"
-                 + "Poin saat ini   = " + main.Global.poinClue + "\n"
-                 + "Energi saat ini = " + main.Global.energi;
-    JOptionPane.showMessageDialog(this, pesan, "Petunjuk Ditemukan", JOptionPane.INFORMATION_MESSAGE);
-    
-    String[] dialogJejak = {
-        "(Jejak tanah berlumpur samar tercetak di atas karpet beludru merah yang mahal ini.)",
-        "(Ukurannya luar biasa besar dan cetakan tumitnya sangat dalam. Pelaku pastilah seorang pria dengan postur tubuh tinggi, tegap, dan berbobot berat.)",
-        "(Di sekitar lingkungan militer kerajaan, ukuran sepatu sebesar ini... sangat identik dengan langkah kaki milik AldricJr.)"
-    };
-    munculkanDialogMC(dialogJejak);
-    
-    btnJejakKaki.setEnabled(false);
-    }//GEN-LAST:event_btnJejakKakiActionPerformed
-
-    private void btnSuratActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuratActionPerformed
+        if (main.Global.energi <= 0) {
+            JOptionPane.showMessageDialog(this, "Kamu terlalu lelah untuk menyelidiki.", "Energi Habis", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (cekBuku) {
+            JOptionPane.showMessageDialog(this, "Kamu sudah memeriksa objek ini sebelumnya.", "Investigasi", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         
-        if (apakahLagiDialog) return; 
-    if (main.Global.energi <= 0) {
-        JOptionPane.showMessageDialog(this, "Kamu terlalu lelah untuk menyelidiki.", "Energi Habis", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    if (cekSurat) {
-        JOptionPane.showMessageDialog(this, "Kamu sudah memeriksa objek ini sebelumnya.", "Investigasi", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    
-    cekSurat = true;
-    main.Global.poinClue += 3;
-    main.Global.energi -= 1;
-    
-    String pesan = "[BENDA - PENTING]\nObjek: Surat raja\n\nHasil Penyelidikan:\n"
-                 + "Surat raja yang segelnya telah terbuka (+3 Poin)\n"
-                 + "--------------------------------------------------\n"
-                 + "Poin saat ini   = " + main.Global.poinClue + "\n"
-                 + "Energi saat ini = " + main.Global.energi;
-    JOptionPane.showMessageDialog(this, pesan, "Petunjuk Ditemukan", JOptionPane.INFORMATION_MESSAGE);
-    
-    String[] dialogSurat = {
-        "(Ini adalah surat resmi dari raja... Tapi tunggu, segel lilin kerajaan ini sudah rusak dan robek.)",
-        "(Berdasarkan arsip, surat ini ditujukan khusus untuk Erian. Seseorang telah membaca isinya secara paksa sebelum surat ini sampai ke tangannya.)",
-        "(Siapa yang begitu berani mencuri informasi rahasia di kediaman raja? Apakah sang pelaku ingin menjebak Erian, atau justru menyembunyikan kebenaran darinya?)"
-    };
-    munculkanDialogMC(dialogSurat);
-    
-    btnSurat.setEnabled(false);
-    }//GEN-LAST:event_btnSuratActionPerformed
+        cekBuku = true;
+        main.Global.poinClue += 3;
+        main.Global.energi -= 1;
+        
+        String pesan = "[BUKTI - BUKU POISON]\nObjek: Buku Toksikologi Kerajaan\n\nHasil Penyelidikan:\n"
+                     + "Buku milik Caelan mengenai racun dan penawarnya. (+3 Poin)\n"
+                     + "--------------------------------------------------\n"
+                     + "Poin saat ini    = " + main.Global.poinClue + "\n"
+                     + "Energi saat ini = " + main.Global.energi;
+        JOptionPane.showMessageDialog(this, pesan, "Petunjuk Ditemukan", JOptionPane.INFORMATION_MESSAGE);
+        
+        String[] dialogBukuLokal = {
+            "(Sebuah buku tua bersampul kulit tebal tergeletak di meja belajar Caelan.)",
+            "(Judulnya 'Studi Toksikologi Komparatif'. Ini adalah buku medis tingkat tinggi yang membahas racun-racun mematikan...)"
+        };
+        munculkanDialogMC(dialogBukuLokal);
+        btnBuku.setEnabled(false);
+    }//GEN-LAST:event_btnBukuActionPerformed
 
-    private void btnKertasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKertasActionPerformed
+    private void btnRacunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRacunActionPerformed
         
         if (apakahLagiDialog) return;
-    if (main.Global.energi <= 0) {
-        JOptionPane.showMessageDialog(this, "Kamu terlalu lelah untuk menyelidiki.", "Energi Habis", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    if (cekKertas) {
-        JOptionPane.showMessageDialog(this, "Kamu sudah memeriksa objek ini sebelumnya.", "Investigasi", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    
-    cekKertas = true;
-    main.Global.poinClue += 3;
-    main.Global.energi -= 1;
-    
-    String pesan = "[BENDA - PENTING]\nObjek: Sobekan kertas\n\nHasil Penyelidikan:\n"
-                 + "Sobekan kertas berisi rumus matematika. Orang yang memiliki ini pasti cerdas. (+3 Poin)\n"
-                 + "--------------------------------------------------\n"
-                 + "Poin saat ini   = " + main.Global.poinClue + "\n"
-                 + "Energi saat ini = " + main.Global.energi;
-    JOptionPane.showMessageDialog(this, pesan, "Petunjuk Ditemukan", JOptionPane.INFORMATION_MESSAGE);
-    
-    String[] dialogKertas = {
-        "(Ada sobekan kertas kecil terselip di bawah kaki kursi kerja sang raja.)",
-        "(Isinya dipenuhi coretan rumus fraktal dan perhitungan matriks matematika yang sangat rumit. Orang awam tidak akan paham maksud kertas ini.)",
-        "(Ini adalah kertas riset tingkat tinggi. Pemiliknya pasti seorang jenius berotak encer... Caelan. Apa yang dia hitung di ruangan ini?)"
-    };
-    munculkanDialogMC(dialogKertas);
-    
-    btnKertas.setEnabled(false);
-    }//GEN-LAST:event_btnKertasActionPerformed
-
-    private void btnLukisanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLukisanActionPerformed
+        if (main.Global.energi <= 0) {
+            JOptionPane.showMessageDialog(this, "Kamu terlalu lelah untuk menyelidiki.", "Energi Habis", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (cekBotolRacun) {
+            JOptionPane.showMessageDialog(this, "Kamu sudah memeriksa objek ini sebelumnya.", "Investigasi", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         
-        if (apakahLagiDialog) return;
-    if (main.Global.energi <= 0) {
-        JOptionPane.showMessageDialog(this, "Kamu terlalu lelah untuk menyelidiki.", "Energi Habis", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    if (cekLukisan) {
-        JOptionPane.showMessageDialog(this, "Kamu sudah memeriksa objek ini sebelumnya.", "Investigasi", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    
-    cekLukisan = true;
-    main.Global.poinClue += 1;
-    main.Global.energi -= 1;
-    
-    String pesan = "[BENDA - TIDAK PENTING]\nObjek: Lukisan keluarga raja\n\nHasil Penyelidikan:\n"
-                 + "Berisikan keluarga raja (+1 Poin)\n"
-                 + "--------------------------------------------------\n"
-                 + "Poin saat ini   = " + main.Global.poinClue + "\n"
-                 + "Energi saat ini = " + main.Global.energi;
-    JOptionPane.showMessageDialog(this, pesan, "Petunjuk Ditemukan", JOptionPane.INFORMATION_MESSAGE);
-    
-    String[] dialogLukisan = {
-        "(Sebuah lukisan potret besar berbingkai emas megah terpajang kokoh di dinding kamar.)",
-        "(Lukisan ini menggambarkan kehangatan keluarga inti kerajaan di masa lalu. Di sana juga ada Erian, tersenyum dengan sangat tulus.)",
-        "(Melihat tragedi yang terjadi malam ini... senyuman di dalam lukisan kuno ini justru terasa sangat dingin dan ironis.)"
-    };
-    munculkanDialogMC(dialogLukisan);
-    
-    btnLukisan.setEnabled(false);
-    }//GEN-LAST:event_btnLukisanActionPerformed
-
-    private void btnCincinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCincinActionPerformed
+        cekBotolRacun = true;
+        main.Global.poinClue += 5; // Bukti kunci pembunuh otomatis dapat poin lebih tinggi
+        main.Global.energi -= 1;
         
-        if (apakahLagiDialog) return;
-    if (main.Global.energi <= 0) {
-        JOptionPane.showMessageDialog(this, "Kamu terlalu lelah untuk menyelidiki.", "Energi Habis", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    if (cekCincin) {
-        JOptionPane.showMessageDialog(this, "Kamu sudah memeriksa objek ini sebelumnya.", "Investigasi", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    
-    cekCincin = true;
-    main.Global.poinClue += 3;
-    main.Global.energi -= 1;
-    
-    String pesan = "[BENDA - PENTING]\nObjek: Cincin besi\n\nHasil Penyelidikan:\n"
-                 + "Sebuah cincin besi. Nampak usang. (+3 Poin)\n"
-                 + "--------------------------------------------------\n"
-                 + "Poin saat ini   = " + main.Global.poinClue + "\n"
-                 + "Energi saat ini = " + main.Global.energi;
-    JOptionPane.showMessageDialog(this, pesan, "Petunjuk Ditemukan", JOptionPane.INFORMATION_MESSAGE);
-    
-    String[] dialogCincin = {
-        "(Sebuah cincin logam tergeletak di celah lantai kayu. Saat kuambil... rasanya kasar dan dingin.)",
-        "(Ini bukan emas, bukan pula perak. Hanya besi tua usang yang bahkan sudah mulai berkarat di bagian dalamnya.)",
-        "(Sangat kontras dengan kemewahan kamar raja. Perhiasan sekasar ini hanya dipakai oleh orang dengan latar belakang pekerja keras atau luar istana... seperti Vesper.)"
-    };
-    munculkanDialogMC(dialogCincin);
-    
-    btnCincin.setEnabled(false);
-    }//GEN-LAST:event_btnCincinActionPerformed
-
-    private void btnWineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWineActionPerformed
-       
-        if (apakahLagiDialog) return;
-    if (main.Global.energi <= 0) {
-        JOptionPane.showMessageDialog(this, "Kamu terlalu lelah untuk menyelidiki.", "Energi Habis", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    if (cekWine) {
-        JOptionPane.showMessageDialog(this, "Kamu sudah memeriksa objek ini sebelumnya.", "Investigasi", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    
-    cekWine = true;
-    main.Global.poinClue += 3;
-    main.Global.energi -= 1;
-    
-    String pesan = "[BENDA - PENTING]\nObjek: Botol Wine\n\nHasil Penyelidikan:\n"
-                 + "Kandungan anggur mencurigakan di meja makan raja (+3 Poin)\n"
-                 + "--------------------------------------------------\n"
-                 + "Poin saat ini   = " + main.Global.poinClue + "\n"
-                 + "Energi saat ini = " + main.Global.energi;
-    JOptionPane.showMessageDialog(this, pesan, "Petunjuk Ditemukan", JOptionPane.INFORMATION_MESSAGE);
-    
-    String[] dialogWine = {
-        "(Botol wine mewah ini adalah jenis anggur yang biasa disajikan khusus untuk menjamu Erian ketika berdiskusi dengan raja.)",
-        "(Aromanya sangat manis... terlalu manis hingga menyengat hidung. Ini tidak wajar untuk ukuran anggur berkelas.)",
-        "(Bisa saja ini sudah dicampur zat penenang atau racun pelumpuh saraf. Sang pelaku tahu betul kebiasaan minum di kamar ini!)"
-    };
-    munculkanDialogMC(dialogWine);
-    
-    btnWine.setEnabled(false);
-    }//GEN-LAST:event_btnWineActionPerformed
-
-    private void btnLilinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLilinActionPerformed
+        String pesan = "[BUKTI KUNCI - RACUN]\nObjek: Botol Cairan Gelap\n\nHasil Penyelidikan:\n"
+                     + "Botol berisi racun murni yang disembunyikan di dalam laci terkunci. (+5 Poin)\n"
+                     + "--------------------------------------------------\n"
+                     + "Poin saat ini    = " + main.Global.poinClue + "\n"
+                     + "Energi saat ini = " + main.Global.energi;
+        JOptionPane.showMessageDialog(this, pesan, "Petunjuk Vital Ditemukan", JOptionPane.INFORMATION_MESSAGE);
         
-        if (apakahLagiDialog) return;
-    if (main.Global.energi <= 0) {
-        JOptionPane.showMessageDialog(this, "Kamu terlalu lelah untuk menyelidiki.", "Energi Habis", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    if (cekLilin) {
-        JOptionPane.showMessageDialog(this, "Kamu sudah memeriksa objek ini sebelumnya.", "Investigasi", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    
-    cekLilin = true;
-    main.Global.poinClue += 3;
-    main.Global.energi -= 1;
-    
-    String pesan = "[BENDA - PENTING]\nObjek: Lilin\n\nHasil Penyelidikan:\n"
-                 + "Terdapat pesan rahasia \"... Sudah mengetahui rencana ... Jangan percaya V .... Erian harus ...\" (+3 Poin)\n"
-                 + "--------------------------------------------------\n"
-                 + "Poin saat ini   = " + main.Global.poinClue + "\n"
-                 + "Energi saat ini = " + main.Global.energi;
-    JOptionPane.showMessageDialog(this, pesan, "Petunjuk Ditemukan", JOptionPane.INFORMATION_MESSAGE);
-    
-    String[] dialogLilin = {
-        "(Lilin di sudut meja ini terlihat biasa saja... tapi sisa lelehan malamnya membeku dengan cara yang aneh.)",
-        "(Tunggu... ada sesuatu yang sengaja disembunyikan di bawah wadah penampung lilin ini! Sebuah sobekan memo kecil.)",
-        "('... Sudah mengetahui rencana ... Jangan percaya V .... Erian harus ...')",
-        "(Jangan percaya V...? Di istana ini, inisial V hanya merujuk pada satu orang... Vesper! Informasi ini harus kusimpan baik-baik.)"
-    };
-    munculkanDialogMC(dialogLilin);
-    
-    btnLilin.setEnabled(false);
-    }//GEN-LAST:event_btnLilinActionPerformed
-
-    private void btnBungaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBungaActionPerformed
-        
-        if (apakahLagiDialog) return;
-    if (main.Global.energi <= 0) {
-        JOptionPane.showMessageDialog(this, "Kamu terlalu lelah untuk menyelidiki.", "Energi Habis", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    if (cekBunga) {
-        JOptionPane.showMessageDialog(this, "Kamu sudah memeriksa objek ini sebelumnya.", "Investigasi", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    
-    cekBunga = true;
-    main.Global.poinClue += 3;
-    main.Global.energi -= 1;
-    
-    String pesan = "[BENDA - PENTING]\nObjek: Beberapa kelopak bunga mawar\n\nHasil Penyelidikan:\n"
-                 + "Sepertinya dimiliki oleh orang yang romantis (+3 Poin)\n"
-                 + "--------------------------------------------------\n"
-                 + "Poin saat ini   = " + main.Global.poinClue + "\n"
-                 + "Energi saat ini = " + main.Global.energi;
-    JOptionPane.showMessageDialog(this, pesan, "Petunjuk Ditemukan", JOptionPane.INFORMATION_MESSAGE);
-    
-    String[] dialogBunga = {
-        "(Beberapa lembar kelopak bunga mawar segar berceceran di dekat tirai jendela...)",
-        "(Siapa yang membawa bunga segar ke kamar raja di malam seperti ini? Aromanya sangat khas, parfum mawar yang elegan.)",
-        "(Hanya satu orang di lingkungan istana yang dikenal sangat eksentrik, berjiwa romantis, dan selalu membawa mawar sebagai simbol statusnya... Dorian.)"
-    };
-    munculkanDialogMC(dialogBunga);
-    
-    btnBunga.setEnabled(false);
-    }//GEN-LAST:event_btnBungaActionPerformed
+        String[] dialogRacunLokal = {
+            "(Aku berhasil mencongkel laci rahasia di sudut lemari pakaian Caelan.)",
+            "(Di dalamnya terdapat sebuah botol kaca kecil tak berlabel berisi sisa cairan bening berbau aneh...)"
+        };
+        munculkanDialogMC(dialogRacunLokal);
+        btnRacun.setEnabled(false);
+    }//GEN-LAST:event_btnRacunActionPerformed
 
     private void button4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button4ActionPerformed
-        // TODO add your handling code here:
+        main.Global.energi -= 1; // Potong energi di sini
+    this.setFocusable(true);  
+    mulaiDialogPercabangan(main.Global.dialogCaelanBotolRacun);
     }//GEN-LAST:event_button4ActionPerformed
+
+    private void caelanSpriteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_caelanSpriteMouseClicked
+        if (apakahLagiDialog || modeDialogCabang || button1.isVisible()) return;
+
+    if (main.Global.energi <= 0) {
+        JOptionPane.showMessageDialog(this, "Kamu terlalu lelah untuk berbicara dengan siapa pun saat ini.", "Energi Habis", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    // PENTING: Pengurangan energi DIHAPUS dari sini, dipindah ke tombol aksi!
+    apakahLagiDialog = false;
+    modeDialogCabang = false;
+    
+    boxDialog.setText("");
+    boxDialog.setVisible(true);
+    backgroundDialog.setVisible(true);
+    detektifSprite.setVisible(false);
+    caelanSprite.setVisible(true);
+    labelNama.setVisible(true);
+    labelNama.setText("Pilih Topik Interogasi:");
+
+    buttonKembaliKeKamar.setVisible(false);
+
+    // Aktifkan tombol menu pertanyaan
+    button1.setVisible(true);
+
+    button2.setVisible(true);
+
+    if (cekBuku) {
+        button3.setVisible(true);
+    } else {
+        button3.setVisible(false);
+    }
+
+    if (cekBotolRacun) {
+        button4.setVisible(true);
+    } else {
+        button4.setVisible(false);
+    }
+    
+    buttonKembaliDariDialog.setVisible(true); 
+    
+    // Memastikan frame tidak mencuri fokus mouse dari tombol
+    this.setFocusable(false);
+    }//GEN-LAST:event_caelanSpriteMouseClicked
+
+    private void buttonKembaliDariDialogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonKembaliDariDialogActionPerformed
+        button1.setVisible(false);
+    button2.setVisible(false);
+    button3.setVisible(false);
+    button4.setVisible(false);
+    
+    // 2. Sembunyikan tombol 'Kembali' ini sendiri
+    buttonKembaliDariDialog.setVisible(false);
+    
+    // 3. Bersihkan dan sembunyikan komponen GUI dialog
+    boxDialog.setText("");
+    boxDialog.setVisible(false);
+    backgroundDialog.setVisible(false);
+    labelNama.setVisible(false);
+    
+    // 4. Munculkan kembali tombol navigasi utama map untuk kembali ke kamar induk
+    buttonKembaliKeKamar.setVisible(true); 
+    
+    // 5. Kembalikan fokus ke Frame utama agar input Spacebar/Keyboard tidak macet
+    this.setFocusable(true); 
+    this.requestFocusInWindow();
+    }//GEN-LAST:event_buttonKembaliDariDialogActionPerformed
+
+    private void buttonKembaliKeKamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonKembaliKeKamarActionPerformed
+        if (apakahLagiDialog || modeDialogCabang) return;
+        
+        // Pindah scene kembali ke kamar induk peta tanpa pengurangan energi
+        script.Transisi.pindahScene(this, new scene.environment.temaCastle.kamarScene());
+    }//GEN-LAST:event_buttonKembaliKeKamarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -860,18 +703,14 @@ public class perpustakaanScene extends javax.swing.JFrame {
     private javax.swing.JLabel background;
     private javax.swing.JLabel backgroundDialog;
     private javax.swing.JTextArea boxDialog;
-    private javax.swing.JButton btnBunga;
-    private javax.swing.JButton btnCincin;
-    private javax.swing.JButton btnJejakKaki;
-    private javax.swing.JButton btnKertas;
-    private javax.swing.JButton btnLilin;
-    private javax.swing.JButton btnLukisan;
-    private javax.swing.JButton btnSurat;
-    private javax.swing.JButton btnWine;
+    private javax.swing.JButton btnBuku;
+    private javax.swing.JButton btnRacun;
     private javax.swing.JButton button1;
     private javax.swing.JButton button2;
     private javax.swing.JButton button3;
     private javax.swing.JButton button4;
+    private javax.swing.JButton buttonKembaliDariDialog;
+    private javax.swing.JButton buttonKembaliKeKamar;
     private javax.swing.JLabel caelanSprite;
     private javax.swing.JLabel detektifSprite;
     private javax.swing.JLabel labelNama;
