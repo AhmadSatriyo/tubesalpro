@@ -4,6 +4,7 @@
  */
 package scene.environment.temaCastle;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import main.Global;
 import script.posisi;
 /**
@@ -15,6 +16,7 @@ public class kamarVesperScene extends javax.swing.JFrame {
     private posisi posisiBackgroundDialog;
     private posisi posisiMC;
     private posisi posisiVesper;
+    private posisi posisiMatthias;
     private posisi posisiBoxDialog;
     private String teks;
     private posisi posisiLabelNama;
@@ -54,11 +56,17 @@ public class kamarVesperScene extends javax.swing.JFrame {
     ImageIcon vesper = main.Global.Vesper.ambilGambar(vesperSprite);
     vesperSprite.setIcon(vesper);
     
+    matthiasSprite.setVisible(false);
+    
+    ImageIcon matthias = main.Global.Matthias.ambilGambar(matthiasSprite);
+    matthiasSprite.setIcon(matthias);
+    
     // 5. Inisialisasi & Eksekusi Class Posisi
     posisiMC = new script.posisi(detektifSprite);
     posisiBackgroundDialog = new script.posisi(backgroundDialog);
     posisiBoxDialog = new script.posisi(boxDialog);
     posisiVesper = new posisi(vesperSprite);
+    posisiMatthias = new posisi(matthiasSprite);
     posisiLabelNama = new posisi(labelNama);
     posisiButton1 = new posisi(button1);
     posisiButton2 = new posisi(button2);
@@ -67,6 +75,7 @@ public class kamarVesperScene extends javax.swing.JFrame {
     // Atur posisi posisi VN (Misal: detektif berdiri di kiri bawah)
     posisiMC.kiriBawah(this); 
     posisiVesper.kananBawah(this);
+    posisiMatthias.kananBawah(this);
     
     // Jalankan method custom bawaan kamu
     aturPosisi(); 
@@ -88,6 +97,8 @@ public class kamarVesperScene extends javax.swing.JFrame {
     });
     this.setFocusable(true);
     this.requestFocusInWindow();
+    
+    
    
         
     }
@@ -98,6 +109,9 @@ public class kamarVesperScene extends javax.swing.JFrame {
         
         posisiVesper.posisi(0, 200);
         posisiVesper.kananBawah(this);
+        
+        posisiMatthias.posisi(0, 200);
+        posisiMatthias.kananBawah(this);
         
         posisiBackgroundDialog.aturSebagaiBackgroundDialog(this);
         
@@ -137,47 +151,112 @@ public class kamarVesperScene extends javax.swing.JFrame {
         boxDialog.setText(d.getTeks());
     }
     
-    private void tampilkanDialogOpsiSekarang() {
-        script.Dialog d = main.Global.dialogVesperChapter1Opsi1[main.Global.indeksDialog];
-        labelNama.setText(d.getNama());
-        boxDialog.setText(d.getTeks());
-        
-        // Efek loncat animasi (opsional, bisa kamu aktifkan nanti)
-        if (d.getNama().equals(Global.guwe.getNama())) {
-            // posisiMC.bicaraLoncat(detektifSprite, detektifSprite.getWidth(), detektifSprite.getHeight());
-        }
+    private void tampilkanDialogOpsiSekarang(script.Dialog[] arrayOpsi) {
+    // Ambil dialog dari arrayOpsi yang dikirim sesuai indeksDialog saat ini
+    script.Dialog dialogAktif = arrayOpsi[main.Global.indeksDialog];
+    
+    // Set teks ke UI
+    labelNama.setText(dialogAktif.getNama());
+    boxDialog.setText(dialogAktif.getTeks());
+    
+    // Efek loncat animasi (opsional, bisa kamu aktifkan nanti)
+    if (dialogAktif.getNama().equals(Global.guwe.getNama())) {
+        // posisiMC.bicaraLoncat(detektifSprite, detektifSprite.getWidth(), detektifSprite.getHeight());
     }
+    else if (dialogAktif.getNama().equals(Global.Matthias.getNama())) {
+        vesperSprite.setVisible(false);
+        matthiasSprite.setVisible(true);
+    }
+    else if (dialogAktif.getNama().equals(Global.Vesper.getNama())) {
+        vesperSprite.setVisible(true);
+        matthiasSprite.setVisible(false);
+    }
+}
     
     private void mouseClicked(java.awt.event.MouseEvent evt) {                              
         
         
         switch(opsi) {
-            case 0 : // JALUR UTAMA
-                if (main.Global.indeksDialog < main.Global.dialogVesperChapter1.length - 1) {
-                    main.Global.indeksDialog++; 
-                    tampilkanDialogSekarang();    
-                } else {
-                    // Jika dialog utama habis, munculkan pilihan opsi button
-                    button1.setVisible(true);
-                    button2.setVisible(true);
-                    button3.setVisible(true);
-                }
-                break;
+        case 0 : // JALUR UTAMA
+            if (main.Global.indeksDialog < main.Global.dialogVesperChapter1.length - 1) {
+                main.Global.indeksDialog++; 
+                tampilkanDialogSekarang();    
+            } else {
+                button1.setVisible(true);
+                button2.setVisible(true);
+                button3.setVisible(true);
+            }
+            break;
+            
+        case 1 : // JALUR OPSI 1
+            if (main.Global.indeksDialog < main.Global.dialogVesperChapter1Opsi1.length - 1) {
+                main.Global.indeksDialog++; 
+                tampilkanDialogOpsiSekarang(main.Global.dialogVesperChapter1Opsi1); 
+            } else {
+                System.out.println("Cerita Opsi 1 Selesai! Pindah Scene berikutnya.");
                 
-            case 1 : // JALUR OPSI 1 (Setelah tombol 1 diklik)
-                if (main.Global.indeksDialog < main.Global.dialogVesperChapter1Opsi1.length - 1) {
-                    main.Global.indeksDialog++; 
-                    // Kita buat method refresh khusus opsi di bawah
-                    tampilkanDialogOpsiSekarang(); 
-                } else {
-                    // Jika dialog opsi 1 sudah habis
-                    System.out.println("Cerita Opsi 1 Selesai! Pindah Scene berikutnya.");
-                    // new sceneBerikutnya().setVisible(true);
-                    // this.dispose();
-                }
-                break;
+                script.Transisi.pindahScene(this, new scene.environment.temaCastle.kamarRajaScene());
+            }
+            break;
+            
+        case 2 : // JALUR OPSI 2
+            if (main.Global.indeksDialog < main.Global.dialogVesperChapter1Opsi2.length - 1) {
+                main.Global.indeksDialog++; 
+                tampilkanDialogOpsiSekarang(main.Global.dialogVesperChapter1Opsi2); 
+            } else {
+                System.out.println("Cerita Opsi 2 Selesai! Pindah Scene berikutnya.");
+                
+                // PANGGIL POP-UP POIN DI SINI (Misal Opsi 2 dapet 3 poin)
+                
+                
+                script.Transisi.pindahScene(this, new scene.environment.temaCastle.kamarRajaScene());
+                beriPoinPercakapan("Interogasi Alibi Vesper", 2);
+            }
+            break;
+            
+        case 3 : // JALUR OPSI 3
+            if (main.Global.indeksDialog < main.Global.dialogVesperChapter1Opsi3.length - 1) {
+        main.Global.indeksDialog++; 
+        tampilkanDialogOpsiSekarang(main.Global.dialogVesperChapter1Opsi3); 
+    } else {
+        System.out.println("Cerita Opsi 3 Selesai! Pindah Scene berikutnya.");
+        
+        // 🔥 KUNCI DI SINI: Catat rute pilihan player ke Global (Tanpa pop-up poin dulu)
+        main.Global.opsiCeritaKamarVesper = 3; 
+        
+        // Kunci energi tetap 5 agar aman bawaan dari Vesper
+        main.Global.energi = 5; 
+        
+        
+        
+        // Langsung pindah ke Kamar Raja
+        script.Transisi.pindahScene(this, new scene.environment.temaCastle.kamarRajaScene());
+        beriPoinPercakapan("Mencari Matthias", 5);
+    }
+    break;
         }
-    }        
+        
+        
+    }
+    
+    private void beriPoinPercakapan(String namaOpsi, int tambahPoin) {
+    // Tambahkan poin ke database global
+    main.Global.poinClue += tambahPoin;
+    
+    // Kunci energi tetap di angka 5 sesuai request
+    main.Global.energi = 5; 
+    
+    // Susun pesan informasi untuk pop-up info statistik
+    String pesan = "[INFORMASI - CERITA]\n"
+                 + "Rute: " + namaOpsi + "\n\n"
+                 + "Hasil Percakapan:\n"
+                 + "Kamu mendapatkan petunjuk baru dari kesaksian! (+" + tambahPoin + " Poin)\n"
+                 + "--------------------------------------------------\n"
+                 + "Poin saat ini   = " + main.Global.poinClue + "\n"
+                 + "Energi saat ini = " + main.Global.energi;
+                 
+    JOptionPane.showMessageDialog(this, pesan, "Kesaksian Dicatat", JOptionPane.INFORMATION_MESSAGE);
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -194,6 +273,7 @@ public class kamarVesperScene extends javax.swing.JFrame {
         labelNama = new javax.swing.JLabel();
         boxDialog = new javax.swing.JTextArea();
         backgroundDialog = new javax.swing.JLabel();
+        matthiasSprite = new javax.swing.JLabel();
         vesperSprite = new javax.swing.JLabel();
         detektifSprite = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
@@ -218,7 +298,7 @@ public class kamarVesperScene extends javax.swing.JFrame {
                 button1ActionPerformed(evt);
             }
         });
-        getContentPane().add(button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 440, 330, 40));
+        getContentPane().add(button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 380, 330, 40));
 
         button2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         button2.setText("Tanya lebih jauh");
@@ -227,7 +307,7 @@ public class kamarVesperScene extends javax.swing.JFrame {
                 button2ActionPerformed(evt);
             }
         });
-        getContentPane().add(button2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 500, 330, 40));
+        getContentPane().add(button2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 440, 330, 40));
 
         button3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         button3.setText("Temui Matthias");
@@ -236,7 +316,7 @@ public class kamarVesperScene extends javax.swing.JFrame {
                 button3ActionPerformed(evt);
             }
         });
-        getContentPane().add(button3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 370, 330, 40));
+        getContentPane().add(button3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 490, 330, 40));
 
         labelNama.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         labelNama.setForeground(new java.awt.Color(0, 0, 0));
@@ -254,6 +334,7 @@ public class kamarVesperScene extends javax.swing.JFrame {
 
         backgroundDialog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/ui/dialogueBox.png"))); // NOI18N
         getContentPane().add(backgroundDialog, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 720, 1000, 270));
+        getContentPane().add(matthiasSprite, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 350, 80, 120));
         getContentPane().add(vesperSprite, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 350, 80, 120));
         getContentPane().add(detektifSprite, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 350, 80, 120));
 
@@ -268,36 +349,13 @@ public class kamarVesperScene extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        switch(opsi) {
-            case 0 : // JALUR UTAMA
-                if (main.Global.indeksDialog < main.Global.dialogVesperChapter1.length - 1) {
-                    main.Global.indeksDialog++; 
-                    tampilkanDialogSekarang();    
-                } else {
-                    // Jika dialog utama habis, munculkan pilihan opsi button
-                    button1.setVisible(true);
-                    button2.setVisible(true);
-                    button3.setVisible(true);
-                }
-                break;
-                
-            case 1 : // JALUR OPSI 1 (Setelah tombol 1 diklik)
-                if (main.Global.indeksDialog < main.Global.dialogVesperChapter1Opsi1.length - 1) {
-                    main.Global.indeksDialog++; 
-                    // Kita buat method refresh khusus opsi di bawah
-                    tampilkanDialogOpsiSekarang(); 
-                } else {
-                    // Jika dialog opsi 1 sudah habis
-                    System.out.println("Cerita Opsi 1 Selesai! Pindah Scene berikutnya.");
-                    // new sceneBerikutnya().setVisible(true);
-                    // this.dispose();
-                }
-                break;
-        }
+        
+        mouseClicked(null);
     }//GEN-LAST:event_formMouseClicked
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
         this.opsi = 1; 
+        Global.opsiCeritaKamarVesper = 1;
         
         // Reset indeks kembali ke 0 untuk membaca array baru
         main.Global.indeksDialog = 0;
@@ -308,18 +366,48 @@ public class kamarVesperScene extends javax.swing.JFrame {
         button3.setVisible(false);
         
         // Tampilkan dialog pertama dari rute Opsi 1
-        tampilkanDialogOpsiSekarang();
+        tampilkanDialogOpsiSekarang(main.Global.dialogVesperChapter1Opsi1);
         
         // Kembalikan fokus ke Frame agar tombol SPACE tetap berfungsi setelah klik button
         this.requestFocusInWindow();
     }//GEN-LAST:event_button1ActionPerformed
 
     private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
-        // TODO add your handling code here:
+        this.opsi = 2; 
+        Global.opsiCeritaKamarVesper = 2;
+        
+        // Reset indeks kembali ke 0 untuk membaca array baru
+        main.Global.indeksDialog = 0;
+        
+        // Sembunyikan semua tombol pilihan kembali
+        button1.setVisible(false);
+        button2.setVisible(false);
+        button3.setVisible(false);
+        
+        // Tampilkan dialog pertama dari rute Opsi 1
+        tampilkanDialogOpsiSekarang(main.Global.dialogVesperChapter1Opsi2);
+        
+        // Kembalikan fokus ke Frame agar tombol SPACE tetap berfungsi setelah klik button
+        this.requestFocusInWindow();
     }//GEN-LAST:event_button2ActionPerformed
 
     private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
-        // TODO add your handling code here:
+        this.opsi = 3; 
+        Global.opsiCeritaKamarVesper = 3;
+        
+        // Reset indeks kembali ke 0 untuk membaca array baru
+        main.Global.indeksDialog = 0;
+        
+        // Sembunyikan semua tombol pilihan kembali
+        button1.setVisible(false);
+        button2.setVisible(false);
+        button3.setVisible(false);
+        
+        // Tampilkan dialog pertama dari rute Opsi 1
+        tampilkanDialogOpsiSekarang(main.Global.dialogVesperChapter1Opsi3);
+        
+        // Kembalikan fokus ke Frame agar tombol SPACE tetap berfungsi setelah klik button
+        this.requestFocusInWindow();
     }//GEN-LAST:event_button3ActionPerformed
 
     /**
@@ -367,6 +455,7 @@ public class kamarVesperScene extends javax.swing.JFrame {
     private javax.swing.JButton button3;
     private javax.swing.JLabel detektifSprite;
     private javax.swing.JLabel labelNama;
+    private javax.swing.JLabel matthiasSprite;
     private javax.swing.JLabel vesperSprite;
     // End of variables declaration//GEN-END:variables
 }
