@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import main.Global;
 import script.posisi;
+import clueManage.nyimpenclue;
 /**
  *
  * @author ryo
@@ -195,7 +196,7 @@ public class kamarVesperScene extends javax.swing.JFrame {
                 
                 // PANGGIL POP-UP POIN DI SINI (Misal Opsi 1 dapet 3 poin)
                 beriPoinPercakapan("Melihat Kamar Raja", 3);
-                
+                nyimpenclue.tambahClue("Kamar Raja");
                 script.Transisi.pindahScene(this, new scene.environment.temaCastle.kamarRajaScene());
             }
             break;
@@ -209,7 +210,7 @@ public class kamarVesperScene extends javax.swing.JFrame {
                 
                 // PANGGIL POP-UP POIN DI SINI (Misal Opsi 2 dapet 3 poin)
                 beriPoinPercakapan("Interogasi Alibi Vesper", 3);
-                
+                nyimpenclue.tambahClue("Vesper mengaku sedang berada di perpustakaan saat Raja ditemukan tewas.");
                 script.Transisi.pindahScene(this, new scene.environment.temaCastle.kamarRajaScene());
             }
             break;
@@ -223,6 +224,7 @@ public class kamarVesperScene extends javax.swing.JFrame {
                 
                 // PANGGIL POP-UP POIN DI SINI (Misal Opsi 3 dapet 3 poin)
                 beriPoinPercakapan("Mencari Matthias", 3);
+                nyimpenclue.tambahClue("Menurut Vesper, Matthias adalah orang terakhir yang bertemu Raja malam itu.");
                 
                 script.Transisi.pindahScene(this, new scene.environment.temaCastle.kamarRajaScene());
             }

@@ -5,7 +5,7 @@ import javax.swing.ImageIcon;
 import main.Global;
 import script.Transisi;
 import script.posisi;
-
+import clueManage.bukuclueFrame;
 /**
  *
  * @author ryo
@@ -241,6 +241,9 @@ public class kamarScene extends javax.swing.JFrame {
         panelBukuTersangka.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(29, 112, 128), 2));
         panelBukuClue.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 153, 255), 3));
         panelPetaKastil.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(29, 112, 128), 2));
+        
+        bukuclueFrame bukuclue = new bukuclueFrame();
+        bukuclue.setVisible(true);
 
     }//GEN-LAST:event_panelBukuClueMouseClicked
 
