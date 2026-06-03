@@ -15,17 +15,23 @@ public class Global {
     public static int hari = 1;
     public static int energi = 5;
     public static int poinClue = 0;
+    public static boolean tuduhVesper = false;
+    
+    public static boolean modeBebas = false;
+    
+    public static int opsiCeritaKamarVesper = 0;
     
     // 1. DAFTAR BACKGROUND (Tetap boleh langsung dibuat karena tidak butuh nama player)
-    public static background bgTangga = new background("/assets/background/tangga.jpg", "Latar Tangga");
     public static background homeScreenBackground = new background("/assets/background/homeScreen.png", "lobby screen");
     public static background textBoxBackground = new background("/assets/ui/input.png", "teks box input nama");
     public static background backroundThemeScene = new background("/assets/character/homeScreen.png", "background theme");
-    public static background backgroundIntroScene = new background("/assets/background/castleIntro.jpeg", "background intro");
+    public static background backgroundIntroScene = new background("/assets/background/BbackgroundKastilIntroScene.jpeg", "background intro");
     public static background backgroundIntroScene2 = new background("/assets/background/backgroundKastil.jpg", "background kastil");
     public static background backgoundKamarScene = new background("/assets/background/backgroundKamarMC.jpg", "background kamar mc");
     public static background backgroundKamarVesperScene = new background("/assets/background/kamarVesper.jpg", "background kamar vesper");
     public static background backgroundKamarRajaScene = new background("/assets/background/backgroundKamarRajaClue.png", "background kamar raja dengan clue");
+    public static background backgroundPerpustakaanScene = new background("(\"/assets/background/backgroundKamarRajaClue.png", "background perpustakaan");
+    
         
     // 2. DEKLARASI KARAKTER & DIALOG (Kosongkan dulu, jangan di-'new' di sini!)
     public static detektif guwe;
@@ -44,17 +50,18 @@ public class Global {
     public static Dialog[] dialogVesperChapter1Opsi1;
     public static Dialog[] dialogVesperChapter1Opsi2;
     public static Dialog[] dialogVesperChapter1Opsi3;
+    public static Dialog[] dialogMatthiasChapter1Rahasia;
+    
+    //chapter 2 -> caelan
+    public static Dialog[] dialogCaelanInteraksiBebas;
+    public static Dialog[] dialogCaelanKertas;
+    public static Dialog[] dialogCaelanBuku;
+    public static Dialog[] dialogCaelanBotolRacun;
     
     public static boolean chapter1 = false;
     public static boolean chapter2 = false;
     public static boolean chapter3 = false;
     public static boolean chapter4 = false;
-    
-    //clue
-    //clue chapter 1
-    //clue percakapan
-    public static clue clueMatthias1;
-    public static clue clueMattihias2;
     
     //clue barang
     public static clue clueUtamaKamarRajaSurat;
@@ -268,6 +275,81 @@ public class Global {
             new Dialog(guwe.getNamaPlayer(), "Aku ingin melihatnya secara langsung."),
             new Dialog(guwe.getNamaPlayer(), "Mungkin terdapat petunjuk dari kasus ini."),
             new Dialog(Vesper.getNama(), "Baik, silakan lewat sebelah sini.")
+        };
+        
+        dialogMatthiasChapter1Rahasia = new Dialog[] {
+            new Dialog(guwe.getNamaPlayer(), "Yah, aku rasa itu sudah cukup untuk hari ini."),
+            new Dialog("", "Tok tok tok tok ..."),
+            new Dialog(guwe.getNamaPlayer(), "Masuk."),
+            new Dialog(Matthias.getNama(), "Detektif."),
+            new Dialog(Matthias.getNama(), "Benar, tuan.Maaf mengganggu."),
+            new Dialog(guwe.getNamaPlayer(), "Oh, ada apa, Matthias?"),
+            new Dialog(guwe.getNamaPlayer(), "Ada sesuatu yang belum kau ceritakan?"),
+            new Dialog(Matthias.getNama(), "Saya... tidak yakin apakah ini penting."),
+            new Dialog(guwe.getNamaPlayer(), "Biarkan aku yang menentukan itu."),
+            new Dialog(Matthias.getNama(), "Saya sudah tua."),
+            new Dialog(Matthias.getNama(), "Mata saya tidak lagi setajam dulu."),
+            new Dialog(guwe.getNamaPlayer(), "Dan justru karena mata saya sudah buruk, saya takut mengatakan ini."),
+            new Dialog(guwe.getNamaPlayer(), "Mengatakan apa?"),
+            new Dialog(Matthias.getNama(), "Sebelum jenazah ditemukan..."),
+            new Dialog(Matthias.getNama(), "Saya melihat seseorang keluar dari koridor pribadi raja."),
+            new Dialog(guwe.getNamaPlayer(), "Kapan?"),
+            new Dialog(Matthias.getNama(), "Kira-kira satu setengah jam sebelum upacara."),
+            new Dialog(guwe.getNamaPlayer(), "Kau mengenalinya?"),
+            new Dialog(Matthias.getNama(), "Tidak sepenuhnya."),
+            new Dialog(Matthias.getNama(), "Koridor itu remang-remang."),
+            new Dialog(guwe.getNamaPlayer(), "Tapi?"),
+            new Dialog(Matthias.getNama(), "Sosoknya..."),
+            new Dialog(Matthias.getNama(), "Mirip seseorang."),
+            new Dialog(guwe.getNamaPlayer(), "Siapa?"),
+            new Dialog(Matthias.getNama(), "Tuan Vesper."),
+            new Dialog(guwe.getNamaPlayer(), "Mirip Tuan Vesper?"),
+            new Dialog(Matthias.getNama(), "Ya."),
+            new Dialog(guwe.getNamaPlayer(), "Mirip atau memang dia?"),
+            new Dialog(Matthias.getNama(), "Saya tidak berani bersumpah."),
+            new Dialog(Matthias.getNama(), "Terlalu jauh. Terlalu gelap."),
+            new Dialog(guwe.getNamaPlayer(), "Kenapa baru memberitahuku sekarang?"),
+            new Dialog(Matthias.getNama(), "Karena kalau saya salah... Saya baru saja menuduh penasihat kerajaan."),
+            new Dialog(guwe.getNamaPlayer(), "Dan kalau kau benar?"),
+            new Dialog(Matthias.getNama(), "Maka saya mungkin orang berikutnya yang ditemukan mati di kastil ini."),
+            new Dialog(guwe.getNamaPlayer(), "(Ketakutan itu terdengar nyata. Terlalu nyata untuk dipalsukan.)"),
+            new Dialog(guwe.getNamaPlayer(), "Apa lagi yang kau ingat?"),
+            new Dialog(Matthias.getNama(), "Tidak banyak."),
+            new Dialog(Matthias.getNama(), "Orang itu berjalan cepat. Seolah tidak ingin dilihat."),
+            new Dialog(guwe.getNamaPlayer(), "Jadi kau yakin soal waktunya?"),
+            new Dialog(Matthias.getNama(), "Sangat yakin."),
+            new Dialog(guwe.getNamaPlayer(), "(Satu setengah jam sebelum kematian.)"),
+            new Dialog(guwe.getNamaPlayer(), "(Dekat dengan waktu kejadian.)"),
+            new Dialog(guwe.getNamaPlayer(), "(Terlalu dekat untuk diabaikan.)"),
+            new Dialog(guwe.getNamaPlayer(), "Baiklah, terima kasih, Matthias. Aku akan mencari tau lebih banyak"),
+        };
+        
+        dialogCaelanInteraksiBebas = new Dialog[] {
+            new Dialog(guwe.getNamaPlayer(), "Kau masih membaca?"),
+            new Dialog(Caelan.getNama(), "Ya."),
+            new Dialog(guwe.getNamaPlayer(), "Ayahmu baru saja meninggal."),
+            new Dialog(Caelan.getNama(), "Fakta yang sudah aku ketahui."),
+            new Dialog(guwe.getNamaPlayer(), "Dan itu tidak mengganggumu?"),
+            new Dialog(Caelan.getNama(), "Tentu menggangguku."),
+            new Dialog(Caelan.getNama(), "Tetapi kesedihan tidak akan menghidupkannya kembali."),
+            new Dialog(Caelan.getNama(), "Jadi aku memilih menggunakan waktuku untuk memahami apa yang terjadi."),      
+        };
+        
+        dialogCaelanKertas = new Dialog[] {
+            new Dialog(guwe.getNamaPlayer(), "Aku menemukan sobekan kertas ini di kamar raja."),
+            new Dialog(guwe.getNamaPlayer(), "Tulisan ini milikmu?"),
+            new Dialog(Caelan.getNama(), "Ya."),
+            new Dialog(guwe.getNamaPlayer(), "Rumus apa ini?"),
+            new Dialog(Caelan.getNama(), "Model prediksi hasil panen kerajaan."),
+            new Dialog(guwe.getNamaPlayer(), "Kedengarannya tidak berhubungan dengan pembunuhan."),
+            new Dialog(Caelan.getNama(), "Karena memang tidak berhubungan."),
+            new Dialog(guwe.getNamaPlayer(), "Jadi kenapa ada di kamar raja?"),
+            new Dialog(Caelan.getNama(), "Ayah memintaku menjelaskan laporan ekonomi seminggu lalu."),
+            new Dialog(Caelan.getNama(), "Kemungkinan kertas itu tertinggal."),
+            new Dialog(guwe.getNamaPlayer(), "(Jawaban masuk akal.)"),
+            new Dialog(guwe.getNamaPlayer(), "Biarkan aku yang menentukan itu."),
+            new Dialog(guwe.getNamaPlayer(), "Biarkan aku yang menentukan itu.Dan terlalu membosankan untuk menjadi kebohongan."),
+            
         };
     }
 }

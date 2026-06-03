@@ -97,6 +97,8 @@ public class kamarVesperScene extends javax.swing.JFrame {
     });
     this.setFocusable(true);
     this.requestFocusInWindow();
+    
+    
    
         
     }
@@ -193,9 +195,6 @@ public class kamarVesperScene extends javax.swing.JFrame {
             } else {
                 System.out.println("Cerita Opsi 1 Selesai! Pindah Scene berikutnya.");
                 
-                // PANGGIL POP-UP POIN DI SINI (Misal Opsi 1 dapet 3 poin)
-                beriPoinPercakapan("Melihat Kamar Raja", 3);
-                
                 script.Transisi.pindahScene(this, new scene.environment.temaCastle.kamarRajaScene());
             }
             break;
@@ -208,25 +207,33 @@ public class kamarVesperScene extends javax.swing.JFrame {
                 System.out.println("Cerita Opsi 2 Selesai! Pindah Scene berikutnya.");
                 
                 // PANGGIL POP-UP POIN DI SINI (Misal Opsi 2 dapet 3 poin)
-                beriPoinPercakapan("Interogasi Alibi Vesper", 3);
+                
                 
                 script.Transisi.pindahScene(this, new scene.environment.temaCastle.kamarRajaScene());
+                beriPoinPercakapan("Interogasi Alibi Vesper", 2);
             }
             break;
             
         case 3 : // JALUR OPSI 3
             if (main.Global.indeksDialog < main.Global.dialogVesperChapter1Opsi3.length - 1) {
-                main.Global.indeksDialog++; 
-                tampilkanDialogOpsiSekarang(main.Global.dialogVesperChapter1Opsi3); 
-            } else {
-                System.out.println("Cerita Opsi 3 Selesai! Pindah Scene berikutnya.");
-                
-                // PANGGIL POP-UP POIN DI SINI (Misal Opsi 3 dapet 3 poin)
-                beriPoinPercakapan("Mencari Matthias", 3);
-                
-                script.Transisi.pindahScene(this, new scene.environment.temaCastle.kamarRajaScene());
-            }
-            break;
+        main.Global.indeksDialog++; 
+        tampilkanDialogOpsiSekarang(main.Global.dialogVesperChapter1Opsi3); 
+    } else {
+        System.out.println("Cerita Opsi 3 Selesai! Pindah Scene berikutnya.");
+        
+        // 🔥 KUNCI DI SINI: Catat rute pilihan player ke Global (Tanpa pop-up poin dulu)
+        main.Global.opsiCeritaKamarVesper = 3; 
+        
+        // Kunci energi tetap 5 agar aman bawaan dari Vesper
+        main.Global.energi = 5; 
+        
+        
+        
+        // Langsung pindah ke Kamar Raja
+        script.Transisi.pindahScene(this, new scene.environment.temaCastle.kamarRajaScene());
+        beriPoinPercakapan("Mencari Matthias", 5);
+    }
+    break;
         }
         
         
@@ -348,6 +355,7 @@ public class kamarVesperScene extends javax.swing.JFrame {
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
         this.opsi = 1; 
+        Global.opsiCeritaKamarVesper = 1;
         
         // Reset indeks kembali ke 0 untuk membaca array baru
         main.Global.indeksDialog = 0;
@@ -366,6 +374,7 @@ public class kamarVesperScene extends javax.swing.JFrame {
 
     private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
         this.opsi = 2; 
+        Global.opsiCeritaKamarVesper = 2;
         
         // Reset indeks kembali ke 0 untuk membaca array baru
         main.Global.indeksDialog = 0;
@@ -384,6 +393,7 @@ public class kamarVesperScene extends javax.swing.JFrame {
 
     private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
         this.opsi = 3; 
+        Global.opsiCeritaKamarVesper = 3;
         
         // Reset indeks kembali ke 0 untuk membaca array baru
         main.Global.indeksDialog = 0;

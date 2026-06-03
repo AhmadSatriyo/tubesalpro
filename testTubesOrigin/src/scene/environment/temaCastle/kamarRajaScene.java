@@ -17,6 +17,7 @@ public class kamarRajaScene extends javax.swing.JFrame {
     private posisi posisiBackgroundDialog;
     private posisi posisiMC;
     private posisi posisiVesper;
+    private posisi posisiMatthias;
     private posisi posisiBoxDialog;
     private String teks;
     private posisi posisiLabelNama;
@@ -38,6 +39,7 @@ public class kamarRajaScene extends javax.swing.JFrame {
     private int indeksHalamanMC = 0;   // Pencatat halaman dialog saat ini
     
     private int opsi = 0;
+    private boolean modeDialogRahasia = false; // Sebagai penanda fase dialog Matthias
 
     public kamarRajaScene() {
         this.setUndecorated(true);
@@ -50,61 +52,61 @@ public class kamarRajaScene extends javax.swing.JFrame {
         ImageIcon backgroundKamarRaja = Global.backgroundKamarRajaScene.ambilGambar(background);
         background.setIcon(backgroundKamarRaja);
         
-    boxDialog.setEditable(false);         // Teks tidak bisa diedit/dihapus
-    boxDialog.setHighlighter(null);       // Teks tidak bisa diblok/diseleksi warna biru
-    boxDialog.setFocusable(false);        // JTextArea tidak bisa menerima fokus klik mouse
-    boxDialog.setCursor(null);            // Mengubah kursor [I] jadi kursor panah biasa
-    boxDialog.setBackground(new java.awt.Color(0, 0, 0, 0)); // Transparan
-    
+        boxDialog.setEditable(false);         // Teks tidak bisa diedit/dihapus
+        boxDialog.setHighlighter(null);       // Teks tidak bisa diblok/diseleksi warna biru
+        boxDialog.setFocusable(false);        // JTextArea tidak bisa menerima fokus klik mouse
+        boxDialog.setCursor(null);            // Mengubah kursor [I] jadi kursor panah biasa
+        boxDialog.setBackground(new java.awt.Color(0, 0, 0, 0)); // Transparan
+        
         button1.setVisible(false);
         button2.setVisible(false);
         button3.setVisible(false);
     
-    // 3. Set Ukuran Komponen Secara Manual (Agar class posisi tidak salah hitung lebar)
-    boxDialog.setSize(800, 250);          // Sesuaikan lebar & tinggi kotak teks game kamu
-    
-    ImageIcon detektif = main.Global.guwe.ambilGambar(detektifSprite);
-    detektifSprite.setIcon(detektif);
-    
-    ImageIcon vesper = main.Global.Vesper.ambilGambar(vesperSprite);
-    vesperSprite.setIcon(vesper);
-    
-    // 5. Inisialisasi & Eksekusi Class Posisi
-    posisiMC = new script.posisi(detektifSprite);
-    posisiBackgroundDialog = new script.posisi(backgroundDialog);
-    posisiBoxDialog = new script.posisi(boxDialog);
-    posisiVesper = new posisi(vesperSprite);
-    posisiLabelNama = new posisi(labelNama);
-    posisiButton1 = new posisi(button1);
-    posisiButton2 = new posisi(button2);
-    posisiButton3 = new posisi(button3);
-    
-    detektifSprite.setVisible(false);
-    vesperSprite.setVisible(false);
-    boxDialog.setVisible(false);
-    labelNama.setVisible(false);
-    backgroundDialog.setVisible(false);
-    
-    matikanButton();
-    
-    // Atur posisi posisi VN (Misal: detektif berdiri di kiri bawah)
-    posisiMC.kiriBawah(this); 
-    posisiVesper.kananBawah(this);
-    
-    // Jalankan method custom bawaan kamu
-    aturPosisi(); 
+        boxDialog.setSize(800, 250);          // Sesuaikan lebar & tinggi kotak teks game kamu
         
+        ImageIcon detektif = main.Global.guwe.ambilGambar(detektifSprite);
+        detektifSprite.setIcon(detektif);
+        
+        ImageIcon vesper = main.Global.Vesper.ambilGambar(vesperSprite);
+        vesperSprite.setIcon(vesper);
+        
+        ImageIcon matthias = main.Global.Matthias.ambilGambar(matthiasSprite);
+        matthiasSprite.setIcon(matthias);
+        
+        posisiMC = new script.posisi(detektifSprite);
+        posisiBackgroundDialog = new script.posisi(backgroundDialog);
+        posisiBoxDialog = new script.posisi(boxDialog);
+        posisiVesper = new posisi(vesperSprite);
+        posisiLabelNama = new posisi(labelNama);
+        posisiButton1 = new posisi(button1);
+        posisiButton2 = new posisi(button2);
+        posisiButton3 = new posisi(button3);
+        posisiMatthias = new posisi(matthiasSprite);
+        
+        matthiasSprite.setVisible(false); // Sembunyikan dulu di awal game
+        detektifSprite.setVisible(false);
+        vesperSprite.setVisible(false);
+        boxDialog.setVisible(false);
+        labelNama.setVisible(false);
+        backgroundDialog.setVisible(false);
+        
+        matikanButton();
+        
+        posisiMC.kiriBawah(this); 
+        posisiVesper.kananBawah(this);
+        
+        aturPosisi(); 
+            
         this.addKeyListener(new java.awt.event.KeyAdapter() {
-        @Override
-        public void keyPressed(java.awt.event.KeyEvent evt) {
-            if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_SPACE) {
-                melanjutkanDialogAtauTutup();
+            @Override
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_SPACE) {
+                    melanjutkanDialogAtauTutup();
+                }
             }
-        }
-    });
-    this.setFocusable(true);
-    this.requestFocusInWindow();
-    
+        });
+        this.setFocusable(true);
+        this.requestFocusInWindow();
     }
     
     
@@ -179,6 +181,9 @@ public class kamarRajaScene extends javax.swing.JFrame {
         posisiVesper.posisi(0, 200);
         posisiVesper.kananBawah(this);
         
+        posisiMatthias.posisi(0, 200);  
+        posisiMatthias.kananBawah(this);
+        
         posisiBackgroundDialog.aturSebagaiBackgroundDialog(this);
         
         posisiBoxDialog.aturSebagaiBoxDialog(this);
@@ -197,18 +202,16 @@ public class kamarRajaScene extends javax.swing.JFrame {
     
     private void munculkanDialogMC(String[] kumpulanTeks) {
         apakahLagiDialog = true;
-        indeksHalamanMC = 0;       // Reset ke halaman pertama (indeks 0)
-        antrianTeksMC = kumpulanTeks; // Masukkan daftar teks panjang ke antrian
+        modeDialogRahasia = false; // Pastikan reset agar tidak bentrok dengan dialog barang biasa
+        indeksHalamanMC = 0;       
+        antrianTeksMC = kumpulanTeks; 
         
-        // Nyalakan UI Dialog
         boxDialog.setVisible(true);
         detektifSprite.setVisible(true);
         labelNama.setVisible(true);
         backgroundDialog.setVisible(true);
         
-        labelNama.setText(main.Global.guwe.getNama()); 
-        
-        // Tampilkan halaman pertama
+        labelNama.setText(main.Global.guwe.getNamaPlayer()); 
         boxDialog.setText(antrianTeksMC[indeksHalamanMC]);
         
         this.requestFocusInWindow();
@@ -217,39 +220,127 @@ public class kamarRajaScene extends javax.swing.JFrame {
     
     private void melanjutkanDialogAtauTutup() {
         if (!apakahLagiDialog) return;
-    
-    // Naikkan indeks halaman
+
     indeksHalamanMC++;
     
-    // Cek apakah halaman baru masih ada di dalam panjang Array
+    // 1. PENGECEKAN JIKA BERADA DI MODE DIALOG RAHASIA MATTHIAS
+    if (modeDialogRahasia) {
+        if (indeksHalamanMC < main.Global.dialogMatthiasChapter1Rahasia.length) {
+            script.Dialog d = main.Global.dialogMatthiasChapter1Rahasia[indeksHalamanMC];
+            
+            // Atur nama pembicara
+            if (d.getNama().equals("")) {
+                labelNama.setText("???");
+            } else {
+                labelNama.setText(d.getNama());
+            }
+            
+            // Kontrol visibilitas Sprite Matthias secara dinamis berdasarkan nama pembicara
+            if (d.getNama().equalsIgnoreCase(main.Global.Matthias.getNama())) {
+                matthiasSprite.setVisible(true);  // Nyala jika Matthias berbicara
+            } else if (d.getNama().equals("")) {
+                matthiasSprite.setVisible(false); // Sembunyikan jika hanya narasi/sound effect ("Tok tok tok")
+            }
+            
+            boxDialog.setText(d.getTeks());
+            
+        } 
+        else {
+            // Selesai membaca Dialog Rahasia Matthias sepenuhnya
+            boxDialog.setVisible(false);
+            detektifSprite.setVisible(false);
+            matthiasSprite.setVisible(false); // Pastikan dimatikan saat selesai
+            labelNama.setVisible(false);
+            backgroundDialog.setVisible(false);
+            apakahLagiDialog = false;
+            modeDialogRahasia = false;
+            
+            tampilkanInfoClueRahasia();
+            
+            main.Global.chapter2 = true;
+            main.Global.hari = 2;
+            script.Transisi.pindahScene(this, new scene.environment.temaCastle.kamarScene());
+            Global.modeBebas = true;
+            
+            Global.energi = 7;
+        
+        }
+        return; 
+    }
+
+    // 2. KONDISI DIALOG INVESTIGASI BARANG BIASA
     if (indeksHalamanMC < antrianTeksMC.length) {
-        // Jika ada, ganti teks box dengan halaman berikutnya
         boxDialog.setText(antrianTeksMC[indeksHalamanMC]);
     } else {
-        // Jika halaman sudah habis, tutup UI Dialog
         boxDialog.setVisible(false);
         detektifSprite.setVisible(false);
         labelNama.setVisible(false);
         backgroundDialog.setVisible(false);
-        
         apakahLagiDialog = false;
         this.requestFocusInWindow();
         
-        // =====================================================================
-        // PENGECEKAN ENERGI HABIS (DIEXIT SEMENTARA)
-        // =====================================================================
         if (main.Global.energi <= 0) {
-            JOptionPane.showMessageDialog(this, 
-                "Kesadaranmu mulai kabur... Kamu terlalu lelah untuk melanjutkan penyelidikan malam ini.", 
-                "Kelelahan Ekstrem",
-                JOptionPane.ERROR_MESSAGE);
-            Global.chapter2 = true;
-            Global.hari = 2;
-            // Keluar dari sistem langsung (bisa kamu ganti ke transisi nanti)
-            script.Transisi.pindahScene(this, new scene.environment.temaCastle.kamarScene());
+            matikanButton();
+            
+            if (main.Global.opsiCeritaKamarVesper == 3) {
+                modeDialogRahasia = true;
+                apakahLagiDialog = true;
+                indeksHalamanMC = 0;
+                
+                boxDialog.setVisible(true);
+                detektifSprite.setVisible(true);
+                vesperSprite.setVisible(false);
+                labelNama.setVisible(true);
+                backgroundDialog.setVisible(true);
+                
+                script.Dialog dPertama = main.Global.dialogMatthiasChapter1Rahasia[0];
+                
+                // Cek nama pembicara pertama (Detektif/Player)
+                if (dPertama.getNama().equals("")) {
+                    labelNama.setText("???");
+                } else {
+                    labelNama.setText(dPertama.getNama());
+                }
+                
+                // Karena dialog pertama adalah monolog Player, matthias belum muncul di ruangan
+                matthiasSprite.setVisible(false); 
+                
+                boxDialog.setText(dPertama.getTeks());
+                this.requestFocusInWindow();
+            } else {
+                JOptionPane.showMessageDialog(this, 
+                    "Kesadaranmu mulai kabur... Kamu terlalu lelah untuk melanjutkan penyelidikan malam ini.", 
+                    "Kelelahan Ekstrem",
+                    JOptionPane.ERROR_MESSAGE);
+                main.Global.chapter2 = true;
+                main.Global.hari = 2;
+                Global.modeBebas = true;
+            
+            Global.energi = 7;
+                script.Transisi.pindahScene(this, new scene.environment.temaCastle.kamarScene());
+            }
         }
     }
     }
+    
+    private void tampilkanInfoClueRahasia() {
+    /// 🔥 Berikan 5 poinnya di sini, karena di Vesper tadi belum dikasih!
+    main.Global.poinClue += 5; 
+    
+    // Teks Resume Petunjuk Cerita
+    String pesanClue = "[KESAKSIAN RAHASIA MATTHIAS DICATAT]\n\n"
+                     + "Petunjuk Baru Berhasil Diungkap:\n"
+                     + "\"Matthias mengaku melihat seseorang yang sangat mirip\n"
+                     + "Lord Vesper keluar dari koridor pribadi Raja\n"
+                     + "sekitar 1,5 jam sebelum upacara dimulai.\n\n"
+                     + "Karena penglihatannya buruk,\n"
+                     + "ia tidak bisa memastikan identitas orang tersebut.\"\n"
+                     + "--------------------------------------------------\n"
+                     + "Total Poin Clue Saat Ini = " + main.Global.poinClue + " (+5 Poin)";
+                     
+    JOptionPane.showMessageDialog(this, pesanClue, "Bukti Kesaksian", JOptionPane.INFORMATION_MESSAGE);
+}
+    
     
 
     /**
@@ -261,6 +352,12 @@ public class kamarRajaScene extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        labelNama = new javax.swing.JLabel();
+        boxDialog = new javax.swing.JTextArea();
+        backgroundDialog = new javax.swing.JLabel();
+        matthiasSprite = new javax.swing.JLabel();
+        detektifSprite = new javax.swing.JLabel();
+        vesperSprite = new javax.swing.JLabel();
         btnJejakKaki = new javax.swing.JButton();
         btnKertas = new javax.swing.JButton();
         btnSurat = new javax.swing.JButton();
@@ -272,11 +369,6 @@ public class kamarRajaScene extends javax.swing.JFrame {
         button1 = new javax.swing.JButton();
         button2 = new javax.swing.JButton();
         button3 = new javax.swing.JButton();
-        labelNama = new javax.swing.JLabel();
-        boxDialog = new javax.swing.JTextArea();
-        backgroundDialog = new javax.swing.JLabel();
-        vesperSprite = new javax.swing.JLabel();
-        detektifSprite = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -291,6 +383,26 @@ public class kamarRajaScene extends javax.swing.JFrame {
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        labelNama.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        labelNama.setForeground(new java.awt.Color(0, 0, 0));
+        labelNama.setText("dummyyyyyyyyyyyyyyyy");
+        getContentPane().add(labelNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 730, 200, 50));
+
+        boxDialog.setEditable(false);
+        boxDialog.setColumns(5);
+        boxDialog.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        boxDialog.setForeground(new java.awt.Color(0, 0, 0));
+        boxDialog.setRows(5);
+        boxDialog.setText("\nsddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
+        boxDialog.setBorder(null);
+        getContentPane().add(boxDialog, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 900, 190));
+
+        backgroundDialog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/ui/dialogueBox.png"))); // NOI18N
+        getContentPane().add(backgroundDialog, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 820, 1000, 270));
+        getContentPane().add(matthiasSprite, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 350, 80, 120));
+        getContentPane().add(detektifSprite, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 350, 80, 120));
+        getContentPane().add(vesperSprite, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 350, 80, 120));
 
         btnJejakKaki.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -374,25 +486,6 @@ public class kamarRajaScene extends javax.swing.JFrame {
             }
         });
         getContentPane().add(button3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1550, 290, 330, 40));
-
-        labelNama.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        labelNama.setForeground(new java.awt.Color(0, 0, 0));
-        labelNama.setText("dummyyyyyyyyyyyyyyyy");
-        getContentPane().add(labelNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 730, 200, 50));
-
-        boxDialog.setEditable(false);
-        boxDialog.setColumns(5);
-        boxDialog.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        boxDialog.setForeground(new java.awt.Color(0, 0, 0));
-        boxDialog.setRows(5);
-        boxDialog.setText("\nsddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
-        boxDialog.setBorder(null);
-        getContentPane().add(boxDialog, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 900, 190));
-
-        backgroundDialog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/ui/dialogueBox.png"))); // NOI18N
-        getContentPane().add(backgroundDialog, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 820, 1000, 270));
-        getContentPane().add(vesperSprite, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 350, 80, 120));
-        getContentPane().add(detektifSprite, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 350, 80, 120));
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/background/backgroundKamarRajaClue.png"))); // NOI18N
         background.setPreferredSize(new java.awt.Dimension(1920, 1080));
@@ -745,6 +838,7 @@ public class kamarRajaScene extends javax.swing.JFrame {
     private javax.swing.JButton button3;
     private javax.swing.JLabel detektifSprite;
     private javax.swing.JLabel labelNama;
+    private javax.swing.JLabel matthiasSprite;
     private javax.swing.JLabel vesperSprite;
     // End of variables declaration//GEN-END:variables
 }
