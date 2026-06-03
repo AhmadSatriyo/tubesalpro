@@ -126,8 +126,9 @@ public class homeScreen extends javax.swing.JFrame {
         panelUtama.add(buttonSetting);
         buttonSetting.setBounds(540, 340, 140, 70);
 
-        boxNama.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        boxNama.setFont(new java.awt.Font("ScriptS_IV50", 1, 24)); // NOI18N
         boxNama.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        boxNama.setText("Visual Story");
         boxNama.setHighlighter(null);
         boxNama.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -139,11 +140,12 @@ public class homeScreen extends javax.swing.JFrame {
         panelUtama.add(textBoxBackground);
         textBoxBackground.setBounds(590, 500, 560, 170);
 
-        labelTittle.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        labelTittle.setBackground(new java.awt.Color(204, 204, 204));
+        labelTittle.setFont(new java.awt.Font("ScriptS_IV50", 3, 60)); // NOI18N
         labelTittle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelTittle.setText("ini tittle");
+        labelTittle.setText("Visual Story");
         panelUtama.add(labelTittle);
-        labelTittle.setBounds(320, 270, 179, 64);
+        labelTittle.setBounds(320, 270, 560, 76);
 
         background.setBackground(new java.awt.Color(255, 255, 255));
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/background/Fantasy Medieval Castle Wallpaper 4K.jpeg"))); // NOI18N

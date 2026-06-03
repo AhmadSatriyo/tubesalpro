@@ -196,12 +196,9 @@ public class kamarVesperScene extends javax.swing.JFrame {
             } else {
                 System.out.println("Cerita Opsi 1 Selesai! Pindah Scene berikutnya.");
                 
-<<<<<<< HEAD
                 // PANGGIL POP-UP POIN DI SINI (Misal Opsi 1 dapet 3 poin)
-                beriPoinPercakapan("Melihat Kamar Raja", 3);
+                beriPoinPercakapan("Melihat Kamar Raja", 0);
                 nyimpenclue.tambahClue("Kamar Raja");
-=======
->>>>>>> origin/satriyo
                 script.Transisi.pindahScene(this, new scene.environment.temaCastle.kamarRajaScene());
             }
             break;
@@ -213,54 +210,42 @@ public class kamarVesperScene extends javax.swing.JFrame {
             } else {
                 System.out.println("Cerita Opsi 2 Selesai! Pindah Scene berikutnya.");
                 
-                // PANGGIL POP-UP POIN DI SINI (Misal Opsi 2 dapet 3 poin)
-<<<<<<< HEAD
-                beriPoinPercakapan("Interogasi Alibi Vesper", 3);
-                nyimpenclue.tambahClue("Vesper mengaku sedang berada di perpustakaan saat Raja ditemukan tewas.");
-=======
-                
-                
->>>>>>> origin/satriyo
-                script.Transisi.pindahScene(this, new scene.environment.temaCastle.kamarRajaScene());
+
                 beriPoinPercakapan("Interogasi Alibi Vesper", 2);
+                nyimpenclue.tambahClue("Vesper mengaku sedang berada di perpustakaan saat Raja ditemukan tewas.");
+
+                script.Transisi.pindahScene(this, new scene.environment.temaCastle.kamarRajaScene());
             }
             break;
             
         case 3 : // JALUR OPSI 3
             if (main.Global.indeksDialog < main.Global.dialogVesperChapter1Opsi3.length - 1) {
-<<<<<<< HEAD
-                main.Global.indeksDialog++; 
-                tampilkanDialogOpsiSekarang(main.Global.dialogVesperChapter1Opsi3); 
+            main.Global.indeksDialog++; 
+            tampilkanDialogOpsiSekarang(main.Global.dialogVesperChapter1Opsi3); 
             } else {
-                System.out.println("Cerita Opsi 3 Selesai! Pindah Scene berikutnya.");
-                
-                // PANGGIL POP-UP POIN DI SINI (Misal Opsi 3 dapet 3 poin)
-                beriPoinPercakapan("Mencari Matthias", 3);
-                nyimpenclue.tambahClue("Menurut Vesper, Matthias adalah orang terakhir yang bertemu Raja malam itu.");
-                
-                script.Transisi.pindahScene(this, new scene.environment.temaCastle.kamarRajaScene());
-            }
-            break;
-=======
-        main.Global.indeksDialog++; 
-        tampilkanDialogOpsiSekarang(main.Global.dialogVesperChapter1Opsi3); 
-    } else {
-        System.out.println("Cerita Opsi 3 Selesai! Pindah Scene berikutnya.");
-        
-        // 🔥 KUNCI DI SINI: Catat rute pilihan player ke Global (Tanpa pop-up poin dulu)
-        main.Global.opsiCeritaKamarVesper = 3; 
-        
-        // Kunci energi tetap 5 agar aman bawaan dari Vesper
-        main.Global.energi = 5; 
-        
-        
-        
-        // Langsung pindah ke Kamar Raja
-        script.Transisi.pindahScene(this, new scene.environment.temaCastle.kamarRajaScene());
-        beriPoinPercakapan("Mencari Matthias", 5);
+            System.out.println("Cerita Opsi 3 Selesai! Pindah Scene berikutnya.");
+
+            // simpan pilihan player
+            main.Global.opsiCeritaKamarVesper = 3;
+
+            // kunci energi tetap
+            main.Global.energi = 5;
+
+            // kasih poin percakapan
+            beriPoinPercakapan("Mencari Matthias", 3);
+
+            // tambah clue penting
+            nyimpenclue.tambahClue(
+                "Menurut Vesper, Matthias adalah orang terakhir yang bertemu Raja malam itu."
+            );
+
+        // pindah scene
+        script.Transisi.pindahScene(
+            this,
+            new scene.environment.temaCastle.kamarRajaScene()
+        );
     }
     break;
->>>>>>> origin/satriyo
         }
         
         
