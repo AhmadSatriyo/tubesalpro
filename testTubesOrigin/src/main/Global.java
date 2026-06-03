@@ -32,7 +32,7 @@ public class Global {
     public static background backgroundKamarRajaScene = new background("/assets/background/backgroundKamarRajaClue.png", "background kamar raja dengan clue");
     public static background backgroundPerpustakaanScene = new background("/assets/background/backgroundCaelan.png", "background perpustakaan");
     public static background backgroundPerpustakaanTersangkaScene = new background("/assets/background/backgroundCaelantersangka.png", "background perpustakaan");
-    
+    public static background backgroundPengadilanScene = new background("/assets/background/pengadilan.jpeg", "background pengadilan");
         
     // 2. DEKLARASI KARAKTER & DIALOG (Kosongkan dulu, jangan di-'new' di sini!)
     public static detektif guwe;
@@ -58,6 +58,10 @@ public class Global {
     public static Dialog[] dialogCaelanKertas;
     public static Dialog[] dialogCaelanBuku;
     public static Dialog[] dialogCaelanBotolRacun;
+    
+    
+    //endingscene
+    public static Dialog[] dialogPengadilan;
     
     public static boolean chapter1 = false;
     public static boolean chapter2 = false;
@@ -389,5 +393,14 @@ public class Global {
             new Dialog(guwe.getNamaPlayer(), "bahkan aku tidak tahu apakah dia sedang membela diri..."),
             new Dialog(guwe.getNamaPlayer(), "atau sedang mempersiapkan pengakuan."),
         };
+        dialogPengadilan = new Dialog[] {
+            new Dialog(guwe.getNamaPlayer(), "Ini saatnya. Aku harus menentukan siapa pelakunya."),
+            new Dialog(guwe.getNamaPlayer(), "Semua bukti yang aku kumpulkan... semuanya mengarah ke satu orang."),
+            new Dialog(Caelan.getNama(), "Detektif. Apapun kesimpulanmu, aku harap kau benar-benar yakin."),
+            new Dialog(Dorian.getNama(), "Jangan salah langkah. Kerajaan ini tidak memberi ruang untuk kesalahan."),
+            new Dialog(AldricJr.getNama(), "Aku tidak melakukan apapun. Ingat itu."),
+            new Dialog(guwe.getNamaPlayer(), "Siapa yang membunuh Raja Aldric?"),
+            new Dialog(guwe.getNamaPlayer(), "Aku sudah memutuskan."),
+};
     }
 }
