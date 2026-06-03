@@ -1,7 +1,6 @@
 
 package scene.ThemeScreen;
 
-
 import script.posisi;
 
 public class briefingScrene extends javax.swing.JFrame {
@@ -12,8 +11,8 @@ public class briefingScrene extends javax.swing.JFrame {
     private posisi posisiButtonNext;
             
     public briefingScrene() {
-        this.setUndecorated(true);
         
+        this.setUndecorated(true);
         initComponents();
         setExtendedState(briefingScrene.MAXIMIZED_BOTH);
         this.getContentPane().setLayout(null);
@@ -21,7 +20,6 @@ public class briefingScrene extends javax.swing.JFrame {
         counterTeks = 1;
     
         opsiTeks(counterTeks); 
-        boxText.setSize(800, 250); 
         boxText.setBackground(new java.awt.Color(0, 0, 0, 0));
     
     
@@ -49,15 +47,17 @@ public class briefingScrene extends javax.swing.JFrame {
                 teks = """
                        Selama empat puluh tahun, Raja Aldric memimpin Kerajaan Valdris.
                        
-                       Di bawah pemerintahannya, kerajaan berkembang menjadi salah satu kekuatan terbesar di benua ini. 
-                       Namun usia sang raja telah senja, dan seluruh negeri menanti satu hal:
+                       Di bawah pemerintahannya, kerajaan berkembang menjadi salah satu kekuatan 
+                       terbesar di benua ini. Namun usia sang raja telah senja, 
+                       dan seluruh negeri menanti satu hal.
                        
-                       siapa yang akan mewarisi mahkota?""";
+                       Siapa yang akan mewarisi mahkota?""";
                 break;
             case 2 :
                 teks = """
-                       Berbeda dengan tradisi kerajaan yang biasanya memberikan takhta kepada putra sulung, 
-                       Raja Aldric mengambil keputusan yang mengejutkan seluruh bangsawan.
+                       Berbeda dengan tradisi kerajaan yang biasanya memberikan takhta 
+                       kepada putra sulung, Raja Aldric mengambil keputusan yang mengejutkan 
+                       seluruh bangsawan.
      
                        Ia memilih putra keduanya, Pangeran Eran, sebagai penerus kerajaan.""";
                 break;
@@ -96,6 +96,25 @@ public class briefingScrene extends javax.swing.JFrame {
                        Hanya sebuah gelas anggur yang belum habis diminum.
                        
                        Dan sebuah kerajaan yang kini berada di ambang kekacauan.""";
+                break;
+            case 9 :
+                teks = """
+                       Apabila kasus tersebut tidak diungkap, maka Pangeran Aldric Jr.
+                       akan secara otomatis dipilih untuk menjadi raja.
+                       """;
+                break;
+            case 10 :
+                teks = """
+                       Terdapat beberapa spekulasi mengenai kematian raja.
+                       Salah satu menyebutkan bahwa dikhianati oleh orang terdekatnya.
+                       """;
+                break;
+            case 11 :
+                teks = """
+                       Di tengah kekacauan dan tenggat sebelum Pangeran Aldric Jr.
+                       diangkat menjadi raja secara "sah", seseorang memulai kembali
+                       perjalanannya.
+                       """;
                 break;
         }
         
@@ -143,7 +162,7 @@ public class briefingScrene extends javax.swing.JFrame {
         boxText.setCaretColor(new java.awt.Color(0, 0, 0));
         boxText.setHighlighter(null);
         background.add(boxText);
-        boxText.setBounds(173, 145, 874, 230);
+        boxText.setBounds(173, 145, 890, 230);
 
         buttonNext.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         buttonNext.setText("Next");
@@ -162,20 +181,21 @@ public class briefingScrene extends javax.swing.JFrame {
 
     private void buttonNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNextActionPerformed
         
-
-        if (counterTeks < 8) {
-        counterTeks++;          // Naikkan ke teks berikutnya (misal dari 1 ke 2)
-        opsiTeks(counterTeks);  // Tampilkan teks yang baru
-    } else {
-        script.Transisi.pindahScene(this, new scene.ThemeScreen.introScene());
+        if (counterTeks < 12) {
+            counterTeks++;        
+            opsiTeks(counterTeks); 
+        } 
+        else {
+            script.Transisi.pindahScene(this, new scene.ThemeScreen.introScene());
       
-    }
-
+        }
+        
     }//GEN-LAST:event_buttonNextActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         
         aturPosisi();
+        
     }//GEN-LAST:event_formWindowOpened
 
     /**

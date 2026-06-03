@@ -127,12 +127,12 @@ public class transisiChapter1 extends javax.swing.JFrame {
         
 
         if (counterTeks < 8) {
-        counterTeks++;          // Naikkan ke teks berikutnya (misal dari 1 ke 2)
-        opsiTeks(counterTeks);  // Tampilkan teks yang baru
-    } else {
-        script.Transisi.pindahScene(this, new scene.environment.temaCastle.kamarVesperScene());
+            counterTeks++;          
+            opsiTeks(counterTeks);  
+        } else {
+            script.Transisi.pindahScene(this, new scene.environment.temaCastle.kamarVesperScene());
       
-    }
+        }
 
     }//GEN-LAST:event_buttonNextActionPerformed
 

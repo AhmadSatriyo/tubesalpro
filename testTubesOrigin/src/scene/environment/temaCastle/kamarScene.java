@@ -6,15 +6,12 @@ import javax.swing.JOptionPane;
 import main.Global;
 import script.Transisi;
 import script.posisi;
+import clueManage.bukuclueFrame;
 
-/**
- *
- * @author ryo
- */
 public class kamarScene extends javax.swing.JFrame {
 
     private String temaTerpilih;
-    
+   
     private posisi posisiBukuClue;
     private posisi posisiBukuTersangka;
     private posisi posisiPetaKastil;
@@ -30,9 +27,6 @@ public class kamarScene extends javax.swing.JFrame {
     
     private int opsi;
 
-    /**
-     * Creates new form kamarScene
-     */
     public kamarScene() {
         this.setUndecorated(true);
         
@@ -52,9 +46,7 @@ public class kamarScene extends javax.swing.JFrame {
         
         
         aturPosisi();
-        
-        
-        
+
     }
     
     private void aturPosisi() {
@@ -76,7 +68,7 @@ public class kamarScene extends javax.swing.JFrame {
     }
     
     private void bukaPetaMisteri(int pilihanKe) {
-        // Tampilkan transisi sela / resume info statistik sebelum pindah scene
+        
         String namaTempat = lokasi[pilihanKe];
         String pesanTransisi = "=========================================\n"
                              + "       Chapter 2 - Menuju " + namaTempat + "\n"
@@ -86,49 +78,44 @@ public class kamarScene extends javax.swing.JFrame {
                              + " 🎯 Poin Clue   = " + main.Global.poinClue + "\n\n"
                              + "-----------------------------------------\n"
                              + "Klik OK...";
-                             
-//        JOptionPane.showMessageDialog(this, pesanTransisi, "Memulai Investigasi", JOptionPane.INFORMATION_MESSAGE);
 
-        // Proses perpindahan scene berdasarkan lokasi terpilih
        
     }
     
     private void eksekusiPindahLokasi(int pilihanKe) {
-    String namaTempat = lokasi[pilihanKe];
-    String pesanTransisi = "=========================================\n"
-                         + "       Chapter 2 - Menuju " + namaTempat + "\n"
-                         + "=========================================\n\n"
-                         + " Status Detektif Saat Ini:\n"
-                         + " 🔋 Energi Kamu = " + main.Global.energi + "\n"
-                         + " 🎯 Poin Clue   = " + main.Global.poinClue + "\n\n"
-                         + "-----------------------------------------\n"
-                         + "Klik OK untuk memulai investigasi...";
-                         
-    JOptionPane.showMessageDialog(this, pesanTransisi, "Memulai Investigasi", JOptionPane.INFORMATION_MESSAGE);
+        
+        String namaTempat = lokasi[pilihanKe];
+        String pesanTransisi = "=========================================\n"
+                             + "       Chapter 2 - Menuju " + namaTempat + "\n"
+                             + "=========================================\n\n"
+                             + " Status Detektif Saat Ini:\n"
+                             + " 🔋 Energi Kamu = " + main.Global.energi + "\n"
+                             + " 🎯 Poin Clue   = " + main.Global.poinClue + "\n\n"
+                             + "-----------------------------------------\n"
+                             + "Klik OK untuk memulai investigasi...";
 
-    // Proses perpindahan Form/Scene berdasarkan lokasi terpilih
-    switch (pilihanKe) {
-        case 0: // Perpustakaan
-            script.Transisi.pindahScene(this, new scene.environment.temaCastle.perpustakaanScene());
-            break;
-        case 1: // Taman Istana
-            // script.Transisi.pindahScene(this, new scene.environment.temaCastle.tamanScene());
-            System.out.println("Menuju Taman Istana");
-            System.exit(0);
-            break;
-        case 2: // Koridor Utama
-            // script.Transisi.pindahScene(this, new scene.environment.temaCastle.koridorScene());
-            break;
-        case 3: // Gedung Arsip
-            // script.Transisi.pindahScene(this, new scene.environment.temaCastle.gedungArsipScene());
-            break;
-        case 4: // Batalyon Ksatria
-            // script.Transisi.pindahScene(this, new scene.environment.temaCastle.batalyonScene());
-            break;
-        default:
-            break;
+        JOptionPane.showMessageDialog(this, pesanTransisi, "Memulai Investigasi", JOptionPane.INFORMATION_MESSAGE);
+
+        switch (pilihanKe) {
+            case 0: 
+                script.Transisi.pindahScene(this, new scene.environment.temaCastle.perpustakaanScene());
+                break;
+            case 1: 
+                // script.Transisi.pindahScene(this, new scene.environment.temaCastle.tamanScene());
+                break;
+            case 2: // Koridor Utama
+                // script.Transisi.pindahScene(this, new scene.environment.temaCastle.koridorScene());
+                break;
+            case 3: // Gedung Arsip
+                // script.Transisi.pindahScene(this, new scene.environment.temaCastle.gedungArsipScene());
+                break;
+            case 4: // Batalyon Ksatria
+                // script.Transisi.pindahScene(this, new scene.environment.temaCastle.batalyonScene());
+                break;
+            default:
+                break;
+        }
     }
-}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -271,70 +258,58 @@ public class kamarScene extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void panelPetaKastilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelPetaKastilMouseClicked
-        // TODO add your handling code here:
+
         
         if(!Global.modeBebas) {
-        JOptionPane.showMessageDialog(this, "Selesaikan mode cerita terlebih dahulu", "Tic-Tac-Toe", JOptionPane.INFORMATION_MESSAGE);
-        return;
-    }
-    else {
-        pilihan = JOptionPane.showOptionDialog(
-            this,
-            "Pilih lokasi yang ingin kamu investigasi hari ini:",
-            "Peta Kerajaan - Hari " + main.Global.hari,
-            JOptionPane.DEFAULT_OPTION,
-            JOptionPane.PLAIN_MESSAGE,
-            null, 
-            lokasi,
-            lokasi[0]
-        );  
+            JOptionPane.showMessageDialog(this, "Selesaikan mode cerita terlebih dahulu", "The Crown'Shadow", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        else {
+            pilihan = JOptionPane.showOptionDialog(this, "Pilih lokasi yang ingin kamu investigasi hari ini:", "Peta Kerajaan - Hari " + main.Global.hari, JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, lokasi, lokasi[0]);  
         
-        // 🔥 VALIDASI: Jika user menekan tombol 'X' (Cancel), batalkan status pilih
         if (pilihan == JOptionPane.CLOSED_OPTION) {
             sudahMilihLokasi = false;
-            pilihan = -1; // Reset pilihan
+            pilihan = -1; 
         } else {
-            sudahMilihLokasi = true; // Set true HANYA jika lokasi valid dipilih
+            sudahMilihLokasi = true;
             System.out.println("Lokasi disiapkan: " + lokasi[pilihan]);
         }
     }
     
-    // Mengatur warna border visual card
-    panelBukuTersangka.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(29, 112, 128), 2));
-    panelBukuClue.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(29, 112, 128), 2));
-    panelPetaKastil.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 153, 255), 3));
+        panelBukuTersangka.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(29, 112, 128), 2));
+        panelBukuClue.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(29, 112, 128), 2));
+        panelPetaKastil.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 153, 255), 3));
     }//GEN-LAST:event_panelPetaKastilMouseClicked
 
     private void panelPetaKastilMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelPetaKastilMouseEntered
-        // TODO add your handling code here:
+        
         panelPetaKastil.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 153, 255), 3));
     }//GEN-LAST:event_panelPetaKastilMouseEntered
 
     private void panelPetaKastilMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelPetaKastilMouseExited
         panelPetaKastil.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(40, 50, 80), 1));
         if (opsi != 1) {
-        panelBukuTersangka.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(29, 112, 128), 2));
+            panelBukuTersangka.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(29, 112, 128), 2));
         }
     }//GEN-LAST:event_panelPetaKastilMouseExited
 
     private void panelBukuClueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBukuClueMouseClicked
-        // TODO add your handling code here:
         opsi = 2;
 
-        // Kunci border Castle jadi menyala (Biru), matikan border card lainnya
         panelBukuTersangka.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(29, 112, 128), 2));
         panelBukuClue.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 153, 255), 3));
         panelPetaKastil.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(29, 112, 128), 2));
+        
+        bukuclueFrame bukuclue = new bukuclueFrame();
+        bukuclue.setVisible(true);
 
     }//GEN-LAST:event_panelBukuClueMouseClicked
 
     private void panelBukuClueMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBukuClueMouseEntered
-        // TODO add your handling code here:
         panelBukuClue.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 153, 255), 3));
     }//GEN-LAST:event_panelBukuClueMouseEntered
 
     private void panelBukuClueMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBukuClueMouseExited
-        // TODO add your handling code here:
         panelBukuClue.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(40, 50, 80), 1));
 
         if (opsi != 2) {
@@ -353,12 +328,10 @@ public class kamarScene extends javax.swing.JFrame {
     }//GEN-LAST:event_panelBukuTersangkaMouseClicked
 
     private void panelBukuTersangkaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBukuTersangkaMouseEntered
-        // TODO add your handling code here:
         panelBukuTersangka.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 153, 255), 3));
     }//GEN-LAST:event_panelBukuTersangkaMouseEntered
 
     private void panelBukuTersangkaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBukuTersangkaMouseExited
-        // TODO add your handling code here:
         panelBukuTersangka.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(40, 50, 80), 1));
 
         if (opsi != 3) {
@@ -371,23 +344,20 @@ public class kamarScene extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void buttonLanjutkanInvestigasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLanjutkanInvestigasiActionPerformed
-        if(!Global.modeBebas) {
-        main.Global.chapter1 = true;
-        script.Transisi.pindahScene(this, new scene.environment.temaCastle.transisiChapter1());
-    }
-    else {
-        // 🔥 VALIDASI UTAMA: Jika belum memilih lokasi di peta, cegah masuk!
-        if (!sudahMilihLokasi || pilihan == -1) {
-            JOptionPane.showMessageDialog(this, 
-                "Kamu harus memilih salah satu lokasi di Peta Kastil terlebih dahulu sebelum melanjutkan investigasi!", 
-                "Tujuan Belum Ditentukan", 
-                JOptionPane.WARNING_MESSAGE);
-            return; 
-        }
         
-        // Lolos validasi, panggil fungsi pengalihan scene beserta transisinya
-        eksekusiPindahLokasi(pilihan);
-    }
+        if(!Global.modeBebas) {
+            main.Global.chapter1 = true;
+            script.Transisi.pindahScene(this, new scene.environment.temaCastle.transisiChapter1());
+        }
+        else {
+
+            if (!sudahMilihLokasi || pilihan == -1) {
+                JOptionPane.showMessageDialog(this, "Kamu harus memilih salah satu lokasi di Peta Kastil terlebih dahulu sebelum melanjutkan investigasi!", "The Crown'Shadow", JOptionPane.WARNING_MESSAGE);
+                return; 
+            }
+
+            eksekusiPindahLokasi(pilihan);
+        }
     }//GEN-LAST:event_buttonLanjutkanInvestigasiActionPerformed
 
     private void buttonIstirahatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonIstirahatActionPerformed
@@ -397,7 +367,7 @@ public class kamarScene extends javax.swing.JFrame {
             return;
         }
         else {
-            // Logika istirahat ganti hari
+            
         }
     
     }//GEN-LAST:event_buttonIstirahatActionPerformed

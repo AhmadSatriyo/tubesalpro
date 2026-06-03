@@ -1,16 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package scene.environment.temaCastle;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import main.Global;
 import script.posisi;
-/**
- *
- * @author ryo
- */
+import clueManage.nyimpenclue;
+
 public class kamarVesperScene extends javax.swing.JFrame {
     
     private posisi posisiBackgroundDialog;
@@ -37,70 +32,59 @@ public class kamarVesperScene extends javax.swing.JFrame {
         ImageIcon backgroundKamarVesperScene = Global.backgroundKamarVesperScene.ambilGambar(background);
         background.setIcon(backgroundKamarVesperScene);
         
-    boxDialog.setEditable(false);         // Teks tidak bisa diedit/dihapus
-    boxDialog.setHighlighter(null);       // Teks tidak bisa diblok/diseleksi warna biru
-    boxDialog.setFocusable(false);        // JTextArea tidak bisa menerima fokus klik mouse
-    boxDialog.setCursor(null);            // Mengubah kursor [I] jadi kursor panah biasa
-    boxDialog.setBackground(new java.awt.Color(0, 0, 0, 0)); // Transparan
+        boxDialog.setEditable(false);         
+        boxDialog.setHighlighter(null);       
+        boxDialog.setFocusable(false);        
+        boxDialog.setCursor(null);           
+        boxDialog.setBackground(new java.awt.Color(0, 0, 0, 0)); 
     
         button1.setVisible(false);
         button2.setVisible(false);
         button3.setVisible(false);
     
-    // 3. Set Ukuran Komponen Secara Manual (Agar class posisi tidak salah hitung lebar)
-    boxDialog.setSize(800, 250);          // Sesuaikan lebar & tinggi kotak teks game kamu
-    
-    ImageIcon detektif = main.Global.guwe.ambilGambar(detektifSprite);
-    detektifSprite.setIcon(detektif);
-    
-    ImageIcon vesper = main.Global.Vesper.ambilGambar(vesperSprite);
-    vesperSprite.setIcon(vesper);
-    
-    matthiasSprite.setVisible(false);
-    
-    ImageIcon matthias = main.Global.Matthias.ambilGambar(matthiasSprite);
-    matthiasSprite.setIcon(matthias);
-    
-    // 5. Inisialisasi & Eksekusi Class Posisi
-    posisiMC = new script.posisi(detektifSprite);
-    posisiBackgroundDialog = new script.posisi(backgroundDialog);
-    posisiBoxDialog = new script.posisi(boxDialog);
-    posisiVesper = new posisi(vesperSprite);
-    posisiMatthias = new posisi(matthiasSprite);
-    posisiLabelNama = new posisi(labelNama);
-    posisiButton1 = new posisi(button1);
-    posisiButton2 = new posisi(button2);
-    posisiButton3 = new posisi(button3);
-    
-    // Atur posisi posisi VN (Misal: detektif berdiri di kiri bawah)
-    posisiMC.kiriBawah(this); 
-    posisiVesper.kananBawah(this);
-    posisiMatthias.kananBawah(this);
-    
-    // Jalankan method custom bawaan kamu
-    aturPosisi(); 
-    
-     // 2. Alur Inisialisasi Data Dialog
-    main.Global.indeksDialog = 0;       // Mulai dari awal dialog (indeks 0)
-    tampilkanDialogSekarang();            // Tampilkan teks pertama ke boxDialog
-    
-    // =========================================================================
-    // FILTER KEYBOARD: Jalankan Dialog via Tombol SPACE
-    // =========================================================================
-    this.addKeyListener(new java.awt.event.KeyAdapter() {
-        @Override
-        public void keyPressed(java.awt.event.KeyEvent evt) {
-            if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_SPACE) {
-                mouseClicked(null);
+        boxDialog.setSize(800, 250);     
+
+        ImageIcon detektif = main.Global.guwe.ambilGambar(detektifSprite);
+        detektifSprite.setIcon(detektif);
+
+        ImageIcon vesper = main.Global.Vesper.ambilGambar(vesperSprite);
+        vesperSprite.setIcon(vesper);
+
+        matthiasSprite.setVisible(false);
+
+        ImageIcon matthias = main.Global.Matthias.ambilGambar(matthiasSprite);
+        matthiasSprite.setIcon(matthias);
+
+        posisiMC = new script.posisi(detektifSprite);
+        posisiBackgroundDialog = new script.posisi(backgroundDialog);
+        posisiBoxDialog = new script.posisi(boxDialog);
+        posisiVesper = new posisi(vesperSprite);
+        posisiMatthias = new posisi(matthiasSprite);
+        posisiLabelNama = new posisi(labelNama);
+        posisiButton1 = new posisi(button1);
+        posisiButton2 = new posisi(button2);
+        posisiButton3 = new posisi(button3);
+
+        posisiMC.kiriBawah(this); 
+        posisiVesper.kananBawah(this);
+        posisiMatthias.kananBawah(this);
+
+        aturPosisi(); 
+
+        main.Global.indeksDialog = 0;      
+        tampilkanDialogSekarang();          
+
+        this.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_SPACE) {
+                    mouseClicked(null);
+                }
             }
-        }
-    });
-    this.setFocusable(true);
-    this.requestFocusInWindow();
-    
-    
+        });
+        this.setFocusable(true);
+        this.requestFocusInWindow();
    
-        
     }
     
     private void aturPosisi() {
@@ -132,131 +116,110 @@ public class kamarVesperScene extends javax.swing.JFrame {
         
         script.Dialog d = main.Global.dialogVesperChapter1[main.Global.indeksDialog];
 
-    // Pasang nama pembicara ke JLabel nama
         labelNama.setText(d.getNama());
-        
-        if (d.getNama().equals(Global.Vesper.getNama())) {
-//            // Jika Dorian yang ngomong, posisi objek dorian memicu efek loncat ke JLabel gambarnya
-//            posisiVesper.bicaraLoncat(vesperSprite, vesperSprite.getWidth(), vesperSprite.getHeight()); 
-        } 
-        else if (d.getNama().equals(Global.guwe.getNama())) {
-//            posisiMC.bicaraLoncat(detektifSprite, detektifSprite.getWidth(), detektifSprite.getHeight());
-    }
-
-    // Pasang isi teks ke JLabel/boxText kamu (Pakai HTML biar otomatis center & wrap)
-        
-        
-        
-       
         boxDialog.setText(d.getTeks());
     }
     
     private void tampilkanDialogOpsiSekarang(script.Dialog[] arrayOpsi) {
-    // Ambil dialog dari arrayOpsi yang dikirim sesuai indeksDialog saat ini
-    script.Dialog dialogAktif = arrayOpsi[main.Global.indeksDialog];
-    
-    // Set teks ke UI
-    labelNama.setText(dialogAktif.getNama());
-    boxDialog.setText(dialogAktif.getTeks());
-    
-    // Efek loncat animasi (opsional, bisa kamu aktifkan nanti)
-    if (dialogAktif.getNama().equals(Global.guwe.getNama())) {
-        // posisiMC.bicaraLoncat(detektifSprite, detektifSprite.getWidth(), detektifSprite.getHeight());
+        
+        script.Dialog dialogAktif = arrayOpsi[main.Global.indeksDialog];
+
+        labelNama.setText(dialogAktif.getNama());
+        boxDialog.setText(dialogAktif.getTeks());
+
+        if (dialogAktif.getNama().equals(Global.guwe.getNama())) {
+            // posisiMC.bicaraLoncat(detektifSprite, detektifSprite.getWidth(), detektifSprite.getHeight());
+        }
+        else if (dialogAktif.getNama().equals(Global.Matthias.getNama())) {
+            vesperSprite.setVisible(false);
+            matthiasSprite.setVisible(true);
+        }
+        else if (dialogAktif.getNama().equals(Global.Vesper.getNama())) {
+            vesperSprite.setVisible(true);
+            matthiasSprite.setVisible(false);
+        }
     }
-    else if (dialogAktif.getNama().equals(Global.Matthias.getNama())) {
-        vesperSprite.setVisible(false);
-        matthiasSprite.setVisible(true);
-    }
-    else if (dialogAktif.getNama().equals(Global.Vesper.getNama())) {
-        vesperSprite.setVisible(true);
-        matthiasSprite.setVisible(false);
-    }
-}
     
     private void mouseClicked(java.awt.event.MouseEvent evt) {                              
         
         
         switch(opsi) {
-        case 0 : // JALUR UTAMA
-            if (main.Global.indeksDialog < main.Global.dialogVesperChapter1.length - 1) {
-                main.Global.indeksDialog++; 
-                tampilkanDialogSekarang();    
-            } else {
-                button1.setVisible(true);
-                button2.setVisible(true);
-                button3.setVisible(true);
-            }
-            break;
-            
-        case 1 : // JALUR OPSI 1
-            if (main.Global.indeksDialog < main.Global.dialogVesperChapter1Opsi1.length - 1) {
-                main.Global.indeksDialog++; 
-                tampilkanDialogOpsiSekarang(main.Global.dialogVesperChapter1Opsi1); 
-            } else {
-                System.out.println("Cerita Opsi 1 Selesai! Pindah Scene berikutnya.");
-                
-                script.Transisi.pindahScene(this, new scene.environment.temaCastle.kamarRajaScene());
-            }
-            break;
-            
-        case 2 : // JALUR OPSI 2
-            if (main.Global.indeksDialog < main.Global.dialogVesperChapter1Opsi2.length - 1) {
-                main.Global.indeksDialog++; 
-                tampilkanDialogOpsiSekarang(main.Global.dialogVesperChapter1Opsi2); 
-            } else {
-                System.out.println("Cerita Opsi 2 Selesai! Pindah Scene berikutnya.");
-                
-                // PANGGIL POP-UP POIN DI SINI (Misal Opsi 2 dapet 3 poin)
-                
-                
-                script.Transisi.pindahScene(this, new scene.environment.temaCastle.kamarRajaScene());
-                beriPoinPercakapan("Interogasi Alibi Vesper", 2);
-            }
-            break;
-            
-        case 3 : // JALUR OPSI 3
-            if (main.Global.indeksDialog < main.Global.dialogVesperChapter1Opsi3.length - 1) {
-        main.Global.indeksDialog++; 
-        tampilkanDialogOpsiSekarang(main.Global.dialogVesperChapter1Opsi3); 
-    } else {
-        System.out.println("Cerita Opsi 3 Selesai! Pindah Scene berikutnya.");
-        
-        // 🔥 KUNCI DI SINI: Catat rute pilihan player ke Global (Tanpa pop-up poin dulu)
-        main.Global.opsiCeritaKamarVesper = 3; 
-        
-        // Kunci energi tetap 5 agar aman bawaan dari Vesper
-        main.Global.energi = 5; 
-        
-        
-        
-        // Langsung pindah ke Kamar Raja
-        script.Transisi.pindahScene(this, new scene.environment.temaCastle.kamarRajaScene());
-        beriPoinPercakapan("Mencari Matthias", 5);
-    }
-    break;
+            case 0 : 
+                if (main.Global.indeksDialog < main.Global.dialogVesperChapter1.length - 1) {
+                    main.Global.indeksDialog++; 
+                    tampilkanDialogSekarang();    
+                } else {
+                    button1.setVisible(true);
+                    button2.setVisible(true);
+                    button3.setVisible(true);
+                }
+                break;
+
+            case 1 : 
+                if (main.Global.indeksDialog < main.Global.dialogVesperChapter1Opsi1.length - 1) {
+                    main.Global.indeksDialog++; 
+                    tampilkanDialogOpsiSekarang(main.Global.dialogVesperChapter1Opsi1); 
+                } else {
+
+                    beriPoinPercakapan("Melihat Kamar Raja", 0);
+                    nyimpenclue.tambahClue("Kamar Raja");
+                    script.Transisi.pindahScene(this, new scene.environment.temaCastle.kamarRajaScene());
+                }
+                break;
+
+            case 2 : 
+                if (main.Global.indeksDialog < main.Global.dialogVesperChapter1Opsi2.length - 1) {
+                    main.Global.indeksDialog++; 
+                    tampilkanDialogOpsiSekarang(main.Global.dialogVesperChapter1Opsi2); 
+                } else {
+
+                    beriPoinPercakapan("Interogasi Alibi Vesper", 2);
+                    nyimpenclue.tambahClue("Vesper mengaku sedang berada di perpustakaan saat Raja ditemukan tewas.");
+
+                    script.Transisi.pindahScene(this, new scene.environment.temaCastle.kamarRajaScene());
+                }
+                break;
+
+            case 3 : 
+                if (main.Global.indeksDialog < main.Global.dialogVesperChapter1Opsi3.length - 1) {
+                    main.Global.indeksDialog++; 
+                    tampilkanDialogOpsiSekarang(main.Global.dialogVesperChapter1Opsi3); 
+                } else {
+
+                    main.Global.opsiCeritaKamarVesper = 3;
+
+                    main.Global.energi = 5;
+
+                    beriPoinPercakapan("Mencari Matthias", 3);
+
+
+                    nyimpenclue.tambahClue("Menurut Vesper, Matthias adalah orang terakhir yang bertemu Raja malam itu.");
+
+
+                    script.Transisi.pindahScene(this, new scene.environment.temaCastle.kamarRajaScene());
+                }
+                break;
         }
         
         
     }
     
     private void beriPoinPercakapan(String namaOpsi, int tambahPoin) {
-    // Tambahkan poin ke database global
-    main.Global.poinClue += tambahPoin;
     
-    // Kunci energi tetap di angka 5 sesuai request
-    main.Global.energi = 5; 
-    
-    // Susun pesan informasi untuk pop-up info statistik
-    String pesan = "[INFORMASI - CERITA]\n"
-                 + "Rute: " + namaOpsi + "\n\n"
-                 + "Hasil Percakapan:\n"
-                 + "Kamu mendapatkan petunjuk baru dari kesaksian! (+" + tambahPoin + " Poin)\n"
-                 + "--------------------------------------------------\n"
-                 + "Poin saat ini   = " + main.Global.poinClue + "\n"
-                 + "Energi saat ini = " + main.Global.energi;
-                 
-    JOptionPane.showMessageDialog(this, pesan, "Kesaksian Dicatat", JOptionPane.INFORMATION_MESSAGE);
-}
+        main.Global.poinClue += tambahPoin;
+
+        main.Global.energi = 5; 
+
+        String pesan = "[INFORMASI - CERITA]\n"
+                     + "Rute: " + namaOpsi + "\n\n"
+                     + "Hasil Percakapan:\n"
+                     + "Kamu mendapatkan petunjuk baru dari kesaksian! (+" + tambahPoin + " Poin)\n"
+                     + "--------------------------------------------------\n"
+                     + "Poin saat ini   = " + main.Global.poinClue + "\n"
+                     + "Energi saat ini = " + main.Global.energi;
+
+        JOptionPane.showMessageDialog(this, pesan, "Kesaksian Dicatat", JOptionPane.INFORMATION_MESSAGE);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -357,18 +320,14 @@ public class kamarVesperScene extends javax.swing.JFrame {
         this.opsi = 1; 
         Global.opsiCeritaKamarVesper = 1;
         
-        // Reset indeks kembali ke 0 untuk membaca array baru
         main.Global.indeksDialog = 0;
         
-        // Sembunyikan semua tombol pilihan kembali
         button1.setVisible(false);
         button2.setVisible(false);
         button3.setVisible(false);
         
-        // Tampilkan dialog pertama dari rute Opsi 1
         tampilkanDialogOpsiSekarang(main.Global.dialogVesperChapter1Opsi1);
         
-        // Kembalikan fokus ke Frame agar tombol SPACE tetap berfungsi setelah klik button
         this.requestFocusInWindow();
     }//GEN-LAST:event_button1ActionPerformed
 
@@ -376,18 +335,14 @@ public class kamarVesperScene extends javax.swing.JFrame {
         this.opsi = 2; 
         Global.opsiCeritaKamarVesper = 2;
         
-        // Reset indeks kembali ke 0 untuk membaca array baru
         main.Global.indeksDialog = 0;
         
-        // Sembunyikan semua tombol pilihan kembali
         button1.setVisible(false);
         button2.setVisible(false);
         button3.setVisible(false);
         
-        // Tampilkan dialog pertama dari rute Opsi 1
         tampilkanDialogOpsiSekarang(main.Global.dialogVesperChapter1Opsi2);
         
-        // Kembalikan fokus ke Frame agar tombol SPACE tetap berfungsi setelah klik button
         this.requestFocusInWindow();
     }//GEN-LAST:event_button2ActionPerformed
 
@@ -395,18 +350,14 @@ public class kamarVesperScene extends javax.swing.JFrame {
         this.opsi = 3; 
         Global.opsiCeritaKamarVesper = 3;
         
-        // Reset indeks kembali ke 0 untuk membaca array baru
         main.Global.indeksDialog = 0;
         
-        // Sembunyikan semua tombol pilihan kembali
         button1.setVisible(false);
         button2.setVisible(false);
         button3.setVisible(false);
         
-        // Tampilkan dialog pertama dari rute Opsi 1
         tampilkanDialogOpsiSekarang(main.Global.dialogVesperChapter1Opsi3);
         
-        // Kembalikan fokus ke Frame agar tombol SPACE tetap berfungsi setelah klik button
         this.requestFocusInWindow();
     }//GEN-LAST:event_button3ActionPerformed
 
