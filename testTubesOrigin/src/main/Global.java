@@ -4,9 +4,12 @@ import script.Dialog;
 import script.Saksi;
 import script.Tersangka;
 import script.background;
+import script.clue;
 import script.detektif;
 
 public class Global {
+    
+    private static boolean sudahInit = false;
     
     public static int indeksDialog = 0;
     public static int hari = 1;
@@ -22,6 +25,7 @@ public class Global {
     public static background backgroundIntroScene2 = new background("/assets/background/backgroundKastil.jpg", "background kastil");
     public static background backgoundKamarScene = new background("/assets/background/backgroundKamarMC.jpg", "background kamar mc");
     public static background backgroundKamarVesperScene = new background("/assets/background/kamarVesper.jpg", "background kamar vesper");
+    public static background backgroundKamarRajaScene = new background("/assets/background/backgroundKamarRajaClue.png", "background kamar raja dengan clue");
         
     // 2. DEKLARASI KARAKTER & DIALOG (Kosongkan dulu, jangan di-'new' di sini!)
     public static detektif guwe;
@@ -38,11 +42,29 @@ public class Global {
     //chapter 1
     public static Dialog[] dialogVesperChapter1;
     public static Dialog[] dialogVesperChapter1Opsi1;
+    public static Dialog[] dialogVesperChapter1Opsi2;
+    public static Dialog[] dialogVesperChapter1Opsi3;
     
     public static boolean chapter1 = false;
     public static boolean chapter2 = false;
     public static boolean chapter3 = false;
     public static boolean chapter4 = false;
+    
+    //clue
+    //clue chapter 1
+    //clue percakapan
+    public static clue clueMatthias1;
+    public static clue clueMattihias2;
+    
+    //clue barang
+    public static clue clueUtamaKamarRajaSurat;
+    public static clue clueUtamaKamarRajaLilin;
+    public static clue clueUtamaKamarRajaWine;
+    public static clue clueUtamaAldricKamarRajaJejakSepatu;
+    public static clue clueUtamaDorianKamarRajaBunga;
+    public static clue clueUtamaCaelanKamarRajaKertas;
+    public static clue clueUtamaVesperKamarRajaCincin;
+    public static clue clueSampinganKamarRajaLukisan;
     
     public static String namaPlayer = "Dummy";    
     
@@ -73,7 +95,9 @@ public class Global {
         
         tersangkaTerpilih[1] = kandidat[indeksAcak];
         
+        
         for(Tersangka namaTersangka : tersangkaTerpilih) {
+            System.out.println("pembunuh : " + namaTersangka.getNama());
             namaTersangka.setPembunuh(true);
         }
     
@@ -88,6 +112,13 @@ public class Global {
     // =========================================================================
     public static void initCeritaGame() {
         
+        if (sudahInit) {
+            return; 
+        }
+        
+        // Tandai bahwa game sudah berhasil di-init untuk pertama kalinya
+        sudahInit = true;
+        
         // A. BARU KITA BUAT OBJEK DETEKTIF DAN KARAKTER DI SINI (Nama Player dijamin ter-update!)
         guwe = new detektif("/assets/character/detektif.jpg", "detektif", namaPlayer);
         NyonyaSera = new Saksi("/assets/character/dummyNyonysSera.png", "Nyonya Sera");
@@ -96,10 +127,24 @@ public class Global {
         Dorian = new Tersangka("/assets/character/dummyDorian.png", "Dorian", "Selalu bohong");
         Caelan = new Tersangka("/assets/character/dummyCaelan.png", "Caelan", "Selalu jujur");
         AldricJr = new Tersangka("/assets/character/dummyAldricJr", "Aldric Jr.", "Kadang jujur");
-        Vesper = new Tersangka("/assets/character/dummyVesper.png", "Tuan Vesper", "Kadang jujur");
+        Vesper = new Tersangka("/assets/character/detektif.jpg", "Tuan Vesper", "Kadang jujur");
         
+        acakTersangka();
         
-        
+//        clueMatthias1 = new clue("Dua orang dan raja", "Matthias mendengar suara dua orang selain raja sebelum kejadian tersebut.", true, Matthias, Matthias.getNama(), 3);
+//        clueMattihias2 = new clue("Raja tertawa sebelum kematiannya", "Matthias mendengarkan suara raja yang tertawa kecil sebelum kematiannya", true, Matthias, Matthias.getNama(), 2);
+//    
+//        public clue(String nama, String deskripsi, String tipe, String prioritas ,boolean benar, Saksi saksi, String namaSaksi, int poin)
+
+        clueUtamaKamarRajaSurat = new clue("Surat raja", "Surat raja yang segelnya telah terbuka", "Benda", "Penting", true, Erian, Erian.getNama(), 3);
+        clueUtamaKamarRajaLilin = new clue("Lilin", "Terdapat pesan rahasia \"... Sudah mengetahui rencana ... Jangan percaya V .... Erian harus ...\"", "Benda", "Penting", true, Erian, Erian.getNama(), 3);
+        clueUtamaKamarRajaWine = new clue("Surat raja", "Surat raja yang segelnya telah terbuka", "Benda", "Penting", true, Erian, Erian.getNama(), 3);
+        clueUtamaAldricKamarRajaJejakSepatu = new clue("Jejak sepatu", "Jejak sepatu milik seseorang. Ukurannya besar.", "Benda", "Penting", true, AldricJr, Erian.getNama(), 3);
+        clueUtamaDorianKamarRajaBunga = new clue("Beberapa kelopak bunga mawar", "Sepertinya dimiliki oleh orang yang romantis", "Benda", "Penting", true, Dorian, Dorian.getNama(), 3);
+        clueUtamaCaelanKamarRajaKertas = new clue("Sobekan kertas", "Sobekan kertas berisi rumus matematika. Orang yang memiliki ini pasti cerdas.", "Benda", "Penting", true, Caelan, Caelan.getNama(), 3);
+        clueUtamaVesperKamarRajaCincin = new clue("Cincin besi", "Sebuah cincin besi. Nampak usang.", "Benda", "Penting", true, Vesper, Vesper.getNama(), 3);
+        clueSampinganKamarRajaLukisan = new clue("Lukisan keluarga raja", "Berisikan keluarga raja", "Benda", "Tidak penting", true, Erian, Erian.getNama(), 1);
+                
         // B. BARU KITA JALANKAN ARRAY DIALOGNYA
         listBriefing = new Dialog[] {
             new Dialog(guwe.getNamaPlayer(), "Namaku " + guwe.getNamaPlayer()), // Ambil nama langsung dari getter detektif!
@@ -153,14 +198,6 @@ public class Global {
             new Dialog(Vesper.getNama(), "Matthias. Pelayan tua kerajaan."),
             new Dialog(guwe.getNamaPlayer(), "Dan tersangkanya?"),
             new Dialog(Vesper.getNama(), "Untuk saat ini, pasukan tengah mencari informasi mengenai kemungkinan penghianat"),
-            new Dialog(guwe.getNamaPlayer(), "Dan kamu memanggilku karena kamu yakin kemungkinan pelakunya bukan berasal dari luar?"),
-            new Dialog(Vesper.getNama(), "Hahaha, anda  memang cermat"),
-            new Dialog(guwe.getNamaPlayer(), "Berarti untuk saat ini, tersangkanya adalah keempat pangeran?"),
-            new Dialog(Vesper.getNama(), "Benar, saya mengerti bahwa terdapat gejolak kekuasaan di dalam internal keluarga kerajaan"),
-            new Dialog(guwe.getNamaPlayer(), "Dan kau?"),
-            new Dialog(Vesper.getNama(), "Aku? Aku hanya penasihat tua yang terlalu lama hidup untuk percaya pada kebetulan."),
-            new Dialog(guwe.getNamaPlayer(), "Itu bukan jawaban."),
-            new Dialog(Vesper.getNama(), "Kalau begitu anggap aku juga tersangka."),
             
         };
         
@@ -168,7 +205,69 @@ public class Global {
             new Dialog(guwe.getNamaPlayer(), "Raja meniggal di kamarnya kan? Di mana kamarnya?."),
             new Dialog(guwe.getNamaPlayer(), "Aku ingin melihatnya secara langsung."),
             new Dialog(guwe.getNamaPlayer(), "Mungkin terdapat petunjuk dari kasus ini."),
-            
+            new Dialog(Vesper.getNama(), "Baik, silakan lewat sebelah sini.")
+        };
+        
+        dialogVesperChapter1Opsi2 = new Dialog[] {
+            new Dialog(guwe.getNamaPlayer(), "Ada satu hal yang menggangguku."),
+            new Dialog(Vesper.getNama(), "Dan itu?"),
+            new Dialog(guwe.getNamaPlayer(), "Kenapa kamu yang memanggilku?"),
+            new Dialog(Vesper.getNama(), "Aku menduga kau akan menanyakan itu."),
+            new Dialog(guwe.getNamaPlayer(), "(Terlalu cepat.)"),
+            new Dialog(guwe.getNamaPlayer(), "Seolah dia sudah menyiapkan jawabannya sebelum aku masuk ruangan ini."),
+            new Dialog(guwe.getNamaPlayer(), "Jadi?"),
+            new Dialog(Vesper.getNama(), "Karena penjaga kerajaan tidak akan cukup."),
+            new Dialog(guwe.getNamaPlayer(), "Kapten penjaga sudah menyelidiki?"),
+            new Dialog(Vesper.getNama(), "Ya."),
+            new Dialog(guwe.getNamaPlayer(), "Dan?"),
+            new Dialog(Vesper.getNama(), "Mereka sudah memiliki tersangka."),
+            new Dialog(guwe.getNamaPlayer(), "(Cepat sekali.)"),
+            new Dialog(guwe.getNamaPlayer(), "Siapa?"),
+            new Dialog(Vesper.getNama(), tersangkaTerpilih[1].getNama()),
+            new Dialog(Vesper.getNama(), "Motifnya jelas."),
+            new Dialog(Vesper.getNama(), "Menurutku kasus yang terlalu mudah biasanya berbahaya."),
+            new Dialog(guwe.getNamaPlayer(), "(Jawaban yang bagus.)"),
+            new Dialog(guwe.getNamaPlayer(), "(Terlalu bagus.)"),
+            new Dialog(guwe.getNamaPlayer(), "Kenapa tidak memanggil hakim kerajaan?"),
+            new Dialog(Vesper.getNama(), "Karena hakim mencari orang untuk dihukum."),
+            new Dialog(guwe.getNamaPlayer(), "Dan aku?"),
+            new Dialog(Vesper.getNama(), "Kau mencari kebenaran."),
+            new Dialog(guwe.getNamaPlayer(), "(Kalimat itu terdengar seperti pujian.)"),
+            new Dialog(guwe.getNamaPlayer(), "(Tapi juga terdengar seperti sesuatu yang sudah dihafalkan berkali-kali.)"),
+            new Dialog(guwe.getNamaPlayer(), "Kau terdengar sangat siap menghadapi pertanyaan ini."),
+            new Dialog(Vesper.getNama(), "Aku sudah menjadi penasihat selama dua puluh lima tahun, Detektif."),
+            new Dialog(Vesper.getNama(), "Aku belajar bahwa setiap keputusan besar akan selalu dipertanyakan"),
+            new Dialog(guwe.getNamaPlayer(), "Baiklah."),
+            new Dialog(guwe.getNamaPlayer(), "Raja meniggal di kamarnya kan? Di mana kamarnya?."),
+            new Dialog(guwe.getNamaPlayer(), "Aku ingin melihatnya secara langsung."),
+            new Dialog(guwe.getNamaPlayer(), "Mungkin terdapat petunjuk dari kasus ini."),
+            new Dialog(Vesper.getNama(), "Baik, silakan lewat sebelah sini.")
+        };
+        
+        dialogVesperChapter1Opsi3 = new Dialog[] {
+            new Dialog(guwe.getNamaPlayer(), "Aku ingin bertemu dengan Matthias."),
+            new Dialog(Vesper.getNama(), "Baiklah, aku akan memanggil Matthias."),
+            new Dialog(Vesper.getNama(), "Matthias, kemarilah."),
+            new Dialog(Matthias.getNama(), "Baik, tuan, saya akan segera ke sana."),
+            new Dialog(Matthias.getNama(), "Ada apa, tuan?."),
+            new Dialog(Vesper.getNama(), "Inilah Matthias, tuan detektif " + guwe.getNamaPlayer() + "."),
+            new Dialog(Matthias.getNama(), "Perkenalkan, saya Matthias. Saya merupakan pelayan dari kerajaan ini."),
+            new Dialog(guwe.getNamaPlayer(), "Oke, Matthias, aku ingin menanyaimu mengenai kejadian kematian raja."),
+            new Dialog(guwe.getNamaPlayer(), "Apa yang kamu ketahui mengenai kejadian tersebut?"),
+            new Dialog(Matthias.getNama(), "Saya mendengar dua suara di waktu kejadian tersebut."),
+            new Dialog(guwe.getNamaPlayer(), "Dua suara?"),
+            new Dialog(Matthias.getNama(), "Benar, tuan."),
+            new Dialog(guwe.getNamaPlayer(), "Bagaimana dengan raja?"),
+            new Dialog(Matthias.getNama(), "Saya mendengar sang raja tertawa kecil sebelum kejadian tersebut terjadi."),
+            new Dialog(guwe.getNamaPlayer(), "Raja tertawa? berarti totalnya 3 orang termasuk raja?"),
+            new Dialog(Matthias.getNama(), "Benar, tuan"),
+            new Dialog(guwe.getNamaPlayer(), "Baik, terima kasih, Matthias. Aku akan mencatat hal ini."),
+            new Dialog(Matthias.getNama(), "Baik, saya izin permsisi, tuan"),
+            new Dialog(guwe.getNamaPlayer(), "Baiklah."),
+            new Dialog(guwe.getNamaPlayer(), "Raja meniggal di kamarnya kan? Di mana kamarnya?."),
+            new Dialog(guwe.getNamaPlayer(), "Aku ingin melihatnya secara langsung."),
+            new Dialog(guwe.getNamaPlayer(), "Mungkin terdapat petunjuk dari kasus ini."),
+            new Dialog(Vesper.getNama(), "Baik, silakan lewat sebelah sini.")
         };
     }
 }

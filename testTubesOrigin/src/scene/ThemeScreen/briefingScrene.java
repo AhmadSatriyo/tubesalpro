@@ -143,7 +143,7 @@ public class briefingScrene extends javax.swing.JFrame {
         boxText.setCaretColor(new java.awt.Color(0, 0, 0));
         boxText.setHighlighter(null);
         background.add(boxText);
-        boxText.setBounds(173, 145, 874, 230);
+        boxText.setBounds(173, 145, 867, 230);
 
         buttonNext.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         buttonNext.setText("Next");
