@@ -1,5 +1,10 @@
 package main;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import java.io.File;
+
 import script.Dialog;
 import script.Saksi;
 import script.Tersangka;
@@ -21,20 +26,20 @@ public class Global {
     
     public static int opsiCeritaKamarVesper = 0;
     
-    // 1. DAFTAR BACKGROUND (Tetap boleh langsung dibuat karena tidak butuh nama player)
+    public static Clip bgmClip;
+    
     public static background homeScreenBackground = new background("/assets/background/homeScreen.png", "lobby screen");
     public static background textBoxBackground = new background("/assets/ui/input.png", "teks box input nama");
     public static background backroundThemeScene = new background("/assets/character/homeScreen.png", "background theme");
-    public static background backgroundIntroScene = new background("/assets/background/backgroundKastilIntroScene.jpeg", "background intro");
-    public static background backgroundIntroScene2 = new background("/assets/background/backgroundKastil.jpg", "background kastil");
+    public static background backgroundIntroScene = new background("/assets/background/backgroundAwal.png", "background intro");
+    public static background backgroundIntroScene2 = new background("/assets/background/backgroundKastil.png", "background kastil");
     public static background backgoundKamarScene = new background("/assets/background/backgroundKamarMC.jpg", "background kamar mc");
-    public static background backgroundKamarVesperScene = new background("/assets/background/kamarVesper.jpg", "background kamar vesper");
+    public static background backgroundKamarVesperScene = new background("/assets/background/backgroundKamarVesper.png", "background kamar vesper");
     public static background backgroundKamarRajaScene = new background("/assets/background/backgroundKamarRajaClue.png", "background kamar raja dengan clue");
     public static background backgroundPerpustakaanScene = new background("/assets/background/backgroundCaelan.png", "background perpustakaan");
     public static background backgroundPerpustakaanTersangkaScene = new background("/assets/background/backgroundCaelantersangka.png", "background perpustakaan");
     
         
-    // 2. DEKLARASI KARAKTER & DIALOG (Kosongkan dulu, jangan di-'new' di sini!)
     public static detektif guwe;
     public static Saksi NyonyaSera;
     public static Saksi Erian;
@@ -89,71 +94,65 @@ public class Global {
     public static Tersangka[] tersangkaTerpilih = new Tersangka[2];
     
     public static void acakTersangka() {
-    // 1. Array sementara untuk menampung pangeran yang bisa dituduh
         Tersangka[] kandidat = {Dorian, Caelan, AldricJr};
     
-    // 2. Buat objek Random buat mengocok indeks
         java.util.Random hoki = new java.util.Random();
     
-    // 3. Ambil angka acak dari 0 sampai 2 (karena panjang array kandidat adalah 3)
         int indeksAcak = hoki.nextInt(kandidat.length);
     
-    // 4. SLOT 1: Vesper selalu jadi tersangka utama, kunci di indeks 0
         tersangkaTerpilih[0] = Vesper;
-        
         tersangkaTerpilih[1] = kandidat[indeksAcak];
-        
         
         for(Tersangka namaTersangka : tersangkaTerpilih) {
             System.out.println("pembunuh : " + namaTersangka.getNama());
             namaTersangka.setPembunuh(true);
         }
-    
-    // 5. TUGASMU: Masukkan pangeran dari array 'kandidat' berdasarkan 'indeksAcak' 
-    //    ke dalam array 'tersangkaTerpilih' di indeks ke-1
-
-    //    tersangkaTerpilih[1] = ... ;
+   
     }
     
-    // =========================================================================
-    // SAKELAR UTAMA: Method ini wajib dipanggil setelah user input nama!
-    // =========================================================================
+    public static void putarMusik(String pathFileMusik) {
+        if (bgmClip != null && bgmClip.isRunning()) {
+            return; 
+        }
+        
+        try {
+            File fileMusik = new File(pathFileMusik);
+            if (fileMusik.exists()) {
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream(fileMusik);
+                bgmClip = AudioSystem.getClip();
+                bgmClip.open(audioInput);
+                
+                // Mengatur agar musik loop terus-menerus sampai game ditutup
+                bgmClip.loop(Clip.LOOP_CONTINUOUSLY); 
+                bgmClip.start();
+            } else {
+                System.out.println("File musik tidak ditemukan di: " + pathFileMusik);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void initCeritaGame() {
         
         if (sudahInit) {
             return; 
         }
-        
-        // Tandai bahwa game sudah berhasil di-init untuk pertama kalinya
+       
         sudahInit = true;
         
-        // A. BARU KITA BUAT OBJEK DETEKTIF DAN KARAKTER DI SINI (Nama Player dijamin ter-update!)
-        guwe = new detektif("/assets/character/detektif.jpg", "detektif", namaPlayer);
+        guwe = new detektif("/assets/character/detektifKael.png", "detektif", namaPlayer);
         NyonyaSera = new Saksi("/assets/character/dummyNyonysSera.png", "Nyonya Sera");
-        Erian = new Saksi("/assets/character/dummyErian.png", "Erian");
-        Matthias = new Saksi("/assets/character/dummyMatthias.png", "Matthias");
+        Erian = new Saksi("/assets/character/dummyErian.png", "Eran");
+        Matthias = new Saksi("/assets/character/matthias.png", "Matthias");
         Dorian = new Tersangka("/assets/character/dummyDorian.png", "Dorian", "Selalu bohong");
         Caelan = new Tersangka("/assets/character/dummyCaelan.png", "Caelan", "Selalu jujur");
         AldricJr = new Tersangka("/assets/character/dummyAldricJr", "Aldric Jr.", "Kadang jujur");
-        Vesper = new Tersangka("/assets/character/detektif.jpg", "Tuan Vesper", "Kadang jujur");
+        Vesper = new Tersangka("/assets/character/vesper.png", "Tuan Vesper", "Kadang jujur");
         
         acakTersangka();
-        
-//        clueMatthias1 = new clue("Dua orang dan raja", "Matthias mendengar suara dua orang selain raja sebelum kejadian tersebut.", true, Matthias, Matthias.getNama(), 3);
-//        clueMattihias2 = new clue("Raja tertawa sebelum kematiannya", "Matthias mendengarkan suara raja yang tertawa kecil sebelum kematiannya", true, Matthias, Matthias.getNama(), 2);
-//    
-//        public clue(String nama, String deskripsi, String tipe, String prioritas ,boolean benar, Saksi saksi, String namaSaksi, int poin)
 
-        clueUtamaKamarRajaSurat = new clue("Surat raja", "Surat raja yang segelnya telah terbuka", "Benda", "Penting", true, Erian, Erian.getNama(), 3);
-        clueUtamaKamarRajaLilin = new clue("Lilin", "Terdapat pesan rahasia \"... Sudah mengetahui rencana ... Jangan percaya V .... Erian harus ...\"", "Benda", "Penting", true, Erian, Erian.getNama(), 3);
-        clueUtamaKamarRajaWine = new clue("Surat raja", "Surat raja yang segelnya telah terbuka", "Benda", "Penting", true, Erian, Erian.getNama(), 3);
-        clueUtamaAldricKamarRajaJejakSepatu = new clue("Jejak sepatu", "Jejak sepatu milik seseorang. Ukurannya besar.", "Benda", "Penting", true, AldricJr, Erian.getNama(), 3);
-        clueUtamaDorianKamarRajaBunga = new clue("Beberapa kelopak bunga mawar", "Sepertinya dimiliki oleh orang yang romantis", "Benda", "Penting", true, Dorian, Dorian.getNama(), 3);
-        clueUtamaCaelanKamarRajaKertas = new clue("Sobekan kertas", "Sobekan kertas berisi rumus matematika. Orang yang memiliki ini pasti cerdas.", "Benda", "Penting", true, Caelan, Caelan.getNama(), 3);
-        clueUtamaVesperKamarRajaCincin = new clue("Cincin besi", "Sebuah cincin besi. Nampak usang.", "Benda", "Penting", true, Vesper, Vesper.getNama(), 3);
-        clueSampinganKamarRajaLukisan = new clue("Lukisan keluarga raja", "Berisikan keluarga raja", "Benda", "Tidak penting", true, Erian, Erian.getNama(), 1);
                 
-        // B. BARU KITA JALANKAN ARRAY DIALOGNYA
         listBriefing = new Dialog[] {
             new Dialog(guwe.getNamaPlayer(), "Namaku " + guwe.getNamaPlayer()), // Ambil nama langsung dari getter detektif!
             new Dialog(guwe.getNamaPlayer(), "Mantan penjaga kerajaan."),
@@ -167,22 +166,22 @@ public class Global {
             new Dialog(Vesper.getNama(), "\"—" + Vesper.getNama() + "\""),
             new Dialog(guwe.getNamaPlayer(), "Ketika aku tiba di Kastil Valdris, seluruh penghuni istana tampak menyembunyikan sesuatu."),
             new Dialog(guwe.getNamaPlayer(), "Tidak ada yang benar-benar berduka."),
-            new Dialog("dummy", "Tidak ada yang benar-benar jujur."),
-            new Dialog("dummy", "Empat pangeran."),
-            new Dialog("dummy", "Empat calon pewaris."),
-            new Dialog("dummy", "Masing-masing memiliki alasan untuk menginginkan sang raja pergi."),
-            new Dialog("dummy", "Pangeran Aldric Jr."),
-            new Dialog("dummy", "Putra sulung kerajaan."),
-            new Dialog("dummy", "Seharusnya menjadi penerus takhta berdasarkan tradisi."),
-            new Dialog("dummy", "Namun keputusan sang raja merenggut hak tersebut darinya."),
-            new Dialog("Pangeran Eran", "Putra kedua dan calon raja yang dipilih langsung oleh sang ayah."),
-            new Dialog("Pangeran Eran", "Dicintai rakyat karena sifatnya yang baik dan rendah hati."),
-            new Dialog("Pangeran Caelan", "Putra ketiga."),
-            new Dialog("Pangeran Caelan", "Dikenal sebagai orang paling cerdas di kerajaan."),
-            new Dialog("Pangeran Caelan", "Pendiam, sulit ditebak, dan selalu beberapa langkah di depan orang lain."),
-            new Dialog("Pangeran Dorian", "Putra bungsu."),
-            new Dialog("Pangeran Dorian", "Karismatik dan populer di kalangan bangsawan."),
-            new Dialog("Pangeran Dorian", "Sering dianggap tidak tertarik pada urusan politik.")
+            new Dialog(guwe.getNamaPlayer(), "Tidak ada yang benar-benar jujur."),
+            new Dialog(guwe.getNamaPlayer(), "Empat pangeran."),
+            new Dialog(guwe.getNamaPlayer(), "Empat calon pewaris."),
+            new Dialog(guwe.getNamaPlayer(), "Masing-masing memiliki alasan untuk menginginkan sang raja pergi."),
+            new Dialog(guwe.getNamaPlayer(), "Pangeran Aldric Jr."),
+            new Dialog(guwe.getNamaPlayer(), "Putra sulung kerajaan."),
+            new Dialog(guwe.getNamaPlayer(), "Seharusnya menjadi penerus takhta berdasarkan tradisi."),
+            new Dialog(guwe.getNamaPlayer(), "Namun keputusan sang raja merenggut hak tersebut darinya."),
+            new Dialog(guwe.getNamaPlayer(), "Pangeran Eran, Putra kedua dan calon raja yang dipilih langsung oleh sang ayah."),
+            new Dialog(guwe.getNamaPlayer(), "Dicintai rakyat karena sifatnya yang baik dan rendah hati."),
+            new Dialog(guwe.getNamaPlayer(), "Pangeran Caelan. Putra ketiga."),
+            new Dialog(guwe.getNamaPlayer(), "Dikenal sebagai orang paling cerdas di kerajaan."),
+            new Dialog(guwe.getNamaPlayer(), "Pendiam, sulit ditebak, dan selalu beberapa langkah di depan orang lain."),
+            new Dialog(guwe.getNamaPlayer(), "Pangeran Dorian, Putra bungsu."),
+            new Dialog(guwe.getNamaPlayer(), "Karismatik dan populer di kalangan bangsawan."),
+            new Dialog(guwe.getNamaPlayer(), "Sering dianggap tidak tertarik pada urusan politik.")
         };
         
         dialogVesperChapter1 = new Dialog[] {

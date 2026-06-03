@@ -48,17 +48,12 @@ public class namaScreen extends javax.swing.JFrame {
     private void cekDanKirimNama() {
         
         if(!boxNama.getText().equals("")) {
-            // 1. Ambil input nama user
-    Global.masukanNamaPlayer(boxNama.getText());
-    
-    // 2. TIMPA DAN GENERATE ULANG ISI ARRAY DENGAN NAMA BARU (WAJIB ADA!)
-    Global.initCeritaGame(); 
-    
-    // 3. Pindah scene berikutnya
-    script.Transisi.pindahScene(this, new scene.ThemeScreen.theme());
+            Global.masukanNamaPlayer(boxNama.getText());
+            Global.initCeritaGame(); 
+            script.Transisi.pindahScene(this, new scene.ThemeScreen.theme());
         }
         else {
-            JOptionPane.showMessageDialog(this, "Mohon isi nama terlebih dahulu", "Tic-Tac-Toe", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Mohon isi nama terlebih dahulu", "The Crown'Shadow", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
     }
@@ -119,7 +114,7 @@ public class namaScreen extends javax.swing.JFrame {
         buttonQuit.setBounds(690, 320, 140, 70);
 
         buttonStart.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        buttonStart.setText("Start");
+        buttonStart.setText("Mulai");
         buttonStart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonStartActionPerformed(evt);
@@ -148,9 +143,9 @@ public class namaScreen extends javax.swing.JFrame {
 
         labelTittle.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         labelTittle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelTittle.setText("ini tittle");
+        labelTittle.setText("The Crown'Shadow");
         panelUtama.add(labelTittle);
-        labelTittle.setBounds(320, 270, 179, 64);
+        labelTittle.setBounds(210, 110, 580, 64);
 
         background.setBackground(new java.awt.Color(255, 255, 255));
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/background/Fantasy Medieval Castle Wallpaper 4K.jpeg"))); // NOI18N

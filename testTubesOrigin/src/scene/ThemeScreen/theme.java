@@ -1,17 +1,11 @@
 
-
-
 package scene.ThemeScreen;
 
 import script.posisi;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import main.Global;
 
-/**
- * 
- *
- * @author Mahesa Rahmat
- */
 public class theme extends javax.swing.JFrame {
     
     private posisi judul;
@@ -22,9 +16,7 @@ public class theme extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(theme.class.getName());
     private String temaTerpilih = "";
-    /**
-     * Creates new form theme
-     */
+    
     public theme() {
         initComponents();
         
@@ -41,16 +33,9 @@ public class theme extends javax.swing.JFrame {
         
         ImageIcon themeScreenBackground = Global.backroundThemeScene.ambilGambar(labelBackground);
         labelBackground.setIcon(themeScreenBackground);
-        
-        // SAKTI: Menghilangkan kotak background abu-abu bawaan Java
-    tombolPilihTema.setContentAreaFilled(false);
-
-    // Menghilangkan garis border kotak di sekeliling tombol
-    tombolPilihTema.setBorderPainted(false);
-
-    // Menghilangkan garis putus-putus tanda fokus saat tombol diklik
-    tombolPilihTema.setFocusPainted(false);
-//        this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
+        tombolPilihTema.setContentAreaFilled(false);
+        tombolPilihTema.setBorderPainted(false);
+        tombolPilihTema.setFocusPainted(false);
 
         aturPosisi();
     
@@ -59,16 +44,14 @@ public class theme extends javax.swing.JFrame {
     private void aturPosisi() {
         
         judul.posisi(650, 100);
-//        judul.tengahHorizontal(this);
         
         temaCampus.posisi(755, 400);
-//        temaCampus.tengahHorizontal(this);
         
         temaCastle.posisi(550, 400);
         temaOrientExpress.posisi(960, 400);
         
         tombolOpsi.posisi(800, 700);
-//        tombolOpsi.tengahHorizontal(this);
+
     }
     
     @SuppressWarnings("unchecked")
@@ -188,7 +171,7 @@ public class theme extends javax.swing.JFrame {
         labelJudul.setFont(new java.awt.Font("Monotype Corsiva", 1, 48)); // NOI18N
         labelJudul.setForeground(new java.awt.Color(255, 255, 255));
         labelJudul.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelJudul.setText("CHOOSE THEME");
+        labelJudul.setText("The Crown'Shadow");
         getContentPane().add(labelJudul, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 180, 400, 80));
 
         labelBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/background/Fantasy Medieval Castle Wallpaper 4K.jpeg"))); // NOI18N
@@ -200,19 +183,18 @@ public class theme extends javax.swing.JFrame {
 
     private void panelCampusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelCampusMouseClicked
         
-        temaTerpilih = "CAMPUS";
+        JOptionPane.showMessageDialog(this, "Tema terkunci", "The Crown'Shadow", JOptionPane.INFORMATION_MESSAGE);
         
         panelCampus.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 153, 255), 3));
         panelCastle.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(29, 112, 128), 2));
         panelOrientExpress.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(29, 112, 128), 2));
-    
+                
     }//GEN-LAST:event_panelCampusMouseClicked
 
     private void panelCastleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelCastleMouseClicked
-        // TODO add your handling code here:
+        
         temaTerpilih = "CASTLE";
         
-        // Kunci border Castle jadi menyala (Biru), matikan border card lainnya
         panelCampus.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(29, 112, 128), 2));
         panelCastle.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 153, 255), 3));
         panelOrientExpress.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(29, 112, 128), 2));
@@ -221,27 +203,24 @@ public class theme extends javax.swing.JFrame {
     }//GEN-LAST:event_panelCastleMouseClicked
 
     private void panelOrientExpressMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelOrientExpressMouseClicked
-        // TODO add your handling code here:
-        temaTerpilih = "ORIENT EXPRESS";
         
-        // Kunci border Orient Express jadi menyala (Biru), matikan border card lainnya
+        JOptionPane.showMessageDialog(this, "Tema terkunci", "The Crown'Shadow", JOptionPane.INFORMATION_MESSAGE);
+        
         panelCampus.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(29, 112, 128), 2));
         panelCastle.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(29, 112, 128), 2));
         panelOrientExpress.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 153, 255), 3));
     }//GEN-LAST:event_panelOrientExpressMouseClicked
 
     private void panelCampusMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelCampusMouseEntered
-        // TODO add your handling code here:
         panelCampus.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 153, 255), 3));
     }//GEN-LAST:event_panelCampusMouseEntered
 
     private void panelCampusMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelCampusMouseExited
-        // TODO add your handling code here:
         panelCampus.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(40, 50, 80), 1));
         
         if (!temaTerpilih.equals("CAMPUS")) {
-        panelCampus.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(29, 112, 128), 2));
-    }
+            panelCampus.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(29, 112, 128), 2));
+        }
     }//GEN-LAST:event_panelCampusMouseExited
 
     private void panelCastleMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelCastleMouseEntered
@@ -273,21 +252,13 @@ public class theme extends javax.swing.JFrame {
     }//GEN-LAST:event_panelOrientExpressMouseExited
 
     private void tombolPilihTemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolPilihTemaActionPerformed
-        // TODO add your handling code here:
+        
         if (temaTerpilih == null || temaTerpilih.equals("")) {
-        // Jika belum pilih tema, munculkan pop-up peringatan
-        javax.swing.JOptionPane.showMessageDialog(this, 
-                "Silakan pilih salah satu tema terlebih dahulu!", 
-                "Peringatan", 
-                javax.swing.JOptionPane.WARNING_MESSAGE);
-    } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Silakan pilih salah satu tema terlebih dahulu!", "The Crown'Shadow", javax.swing.JOptionPane.WARNING_MESSAGE);
+        } 
+        else {
             script.Transisi.pindahScene(this, new scene.ThemeScreen.briefingScrene());
-        // 2. Tutup window/frame pemilihan tema yang sekarang terbuka
-//        javax.swing.JOptionPane.showMessageDialog(this, 
-//                "Kamu memilih tema: " + temaTerpilih + "\n\n(Nanti kalau file GamePlayFrame sudah dibuat, pop-up ini tinggal diganti)", 
-//                "Sukses", 
-//                javax.swing.JOptionPane.INFORMATION_MESSAGE);
-    }
+        }
     }//GEN-LAST:event_tombolPilihTemaActionPerformed
 
     private void tombolPilihTemaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tombolPilihTemaMouseEntered

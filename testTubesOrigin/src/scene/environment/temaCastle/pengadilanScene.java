@@ -11,13 +11,20 @@ import main.Global;
  * @author ryo
  */
 public class pengadilanScene extends javax.swing.JFrame {
+    
+    private boolean salahMilih;
+    //veser
+    //milihbener
+    //waktuhabis
 
     /**
      * Creates new form pengadilanScene
      */
     public pengadilanScene() {
         initComponents();
+        
     }
+    
     
 
     /**
