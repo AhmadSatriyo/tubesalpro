@@ -25,12 +25,13 @@ public class Global {
     public static background homeScreenBackground = new background("/assets/background/homeScreen.png", "lobby screen");
     public static background textBoxBackground = new background("/assets/ui/input.png", "teks box input nama");
     public static background backroundThemeScene = new background("/assets/character/homeScreen.png", "background theme");
-    public static background backgroundIntroScene = new background("/assets/background/BbackgroundKastilIntroScene.jpeg", "background intro");
+    public static background backgroundIntroScene = new background("/assets/background/backgroundKastilIntroScene.jpeg", "background intro");
     public static background backgroundIntroScene2 = new background("/assets/background/backgroundKastil.jpg", "background kastil");
     public static background backgoundKamarScene = new background("/assets/background/backgroundKamarMC.jpg", "background kamar mc");
     public static background backgroundKamarVesperScene = new background("/assets/background/kamarVesper.jpg", "background kamar vesper");
     public static background backgroundKamarRajaScene = new background("/assets/background/backgroundKamarRajaClue.png", "background kamar raja dengan clue");
-    public static background backgroundPerpustakaanScene = new background("(\"/assets/background/backgroundKamarRajaClue.png", "background perpustakaan");
+    public static background backgroundPerpustakaanScene = new background("/assets/background/backgroundCaelan.png", "background perpustakaan");
+    public static background backgroundPerpustakaanTersangkaScene = new background("/assets/background/backgroundCaelantersangka.png", "background perpustakaan");
     
         
     // 2. DEKLARASI KARAKTER & DIALOG (Kosongkan dulu, jangan di-'new' di sini!)
@@ -347,9 +348,46 @@ public class Global {
             new Dialog(Caelan.getNama(), "Ayah memintaku menjelaskan laporan ekonomi seminggu lalu."),
             new Dialog(Caelan.getNama(), "Kemungkinan kertas itu tertinggal."),
             new Dialog(guwe.getNamaPlayer(), "(Jawaban masuk akal.)"),
-            new Dialog(guwe.getNamaPlayer(), "Biarkan aku yang menentukan itu."),
-            new Dialog(guwe.getNamaPlayer(), "Biarkan aku yang menentukan itu.Dan terlalu membosankan untuk menjadi kebohongan."),
-            
+        };
+        
+        dialogCaelanBuku = new Dialog[] {
+            new Dialog(guwe.getNamaPlayer(), "Aku menemukan buku toksikologi ini."),
+            new Dialog(guwe.getNamaPlayer(), "Halaman tentang racun tanpa warna dan tanpa rasa ditandai"),
+            new Dialog(Caelan.getNama(), "Benar."),
+            new Dialog(guwe.getNamaPlayer(), "Kau tidak mencoba menyangkal?"),
+            new Dialog(Caelan.getNama(), "Mengapa aku harus menyangkal sesuatu yang memang benar?"),
+            new Dialog(guwe.getNamaPlayer(), "Jadi kau mempelajari racun."),
+            new Dialog(Caelan.getNama(), "Detektif."),
+            new Dialog(Caelan.getNama(), "Halaman berikutnya membahas penawar racun yang sama."),
+            new Dialog(Caelan.getNama(), "Apakah kau membacanya?"),
+            new Dialog(guwe.getNamaPlayer(), "..."),
+            new Dialog(Caelan.getNama(), "Orang sering berhenti membaca ketika mereka menemukan sesuatu yang ingin mereka percaya."),
+            new Dialog(guwe.getNamaPlayer(), "(Menyebalkan.)"),
+            new Dialog(guwe.getNamaPlayer(), "(Tapi dia tidak salah.)"),
+        };
+        
+        dialogCaelanBotolRacun = new Dialog[] {
+            new Dialog(guwe.getNamaPlayer(), "Aku menemukan ini di laci terkuncimu."),
+            new Dialog(guwe.getNamaPlayer(), "Botol racun."),
+            new Dialog(Caelan.getNama(), "Ya."),
+            new Dialog(guwe.getNamaPlayer(), "Jadi itu milikmu."),
+            new Dialog(Caelan.getNama(), "Ya."),
+            new Dialog(guwe.getNamaPlayer(), "Racun yang sama dengan yang ditemukan dalam anggur raja."),
+            new Dialog(Caelan.getNama(), "Kemungkinan besar."),
+            new Dialog(guwe.getNamaPlayer(), "Kau tidak menyangkal sedikit pun?"),
+            new Dialog(Caelan.getNama(), "Menyangkal tidak akan mengubah isi botol itu."),
+            new Dialog(guwe.getNamaPlayer(), "Lalu apa penjelasanmu?"),
+            new Dialog(Caelan.getNama(), "Penjelasan dan alasan adalah dua hal berbeda."),
+            new Dialog(Caelan.getNama(), "Aku bisa menjelaskan mengapa botol itu ada di kamarku."),
+            new Dialog(guwe.getNamaPlayer(), "Coba saja."),
+            new Dialog(Caelan.getNama(), "Aku memang menyimpan racun itu."),
+            new Dialog(Caelan.getNama(), "Untuk penelitian."),
+            new Dialog(Caelan.getNama(), "Fakta itu benar."),
+            new Dialog(Caelan.getNama(), "Pertanyaannya adalah:"),
+            new Dialog(Caelan.getNama(), "Apakah aku menggunakannya untuk membunuh ayah?"),
+            new Dialog(guwe.getNamaPlayer(), "Untuk pertama kalinya..."),
+            new Dialog(guwe.getNamaPlayer(), "bahkan aku tidak tahu apakah dia sedang membela diri..."),
+            new Dialog(guwe.getNamaPlayer(), "atau sedang mempersiapkan pengakuan."),
         };
     }
 }
