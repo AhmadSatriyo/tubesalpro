@@ -5,6 +5,10 @@ import main.Global;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import script.posisi;
+import scene.ThemeScreen.badEnding;
+import scene.ThemeScreen.bestEnding;
+import scene.ThemeScreen.normalEnding;
+import scene.ThemeScreen.wrongEnding;
 
 public class pengadilanScene extends javax.swing.JFrame {
     
@@ -251,42 +255,20 @@ public class pengadilanScene extends javax.swing.JFrame {
 
         // 4. Percabangan evaluasi ending
         if (main.Global.poinClue < 25) {
-            tampilkanEndingLayarHitam("========== BAD ENDING: KEHABISAN WAKTU ==========\n\n"
-                    + "Buktimu tidak cukup kuat untuk meyakinkan hakim.\n"
-                    + "Sidang ditunda dan waktu investigasimu habis.\n\n"
-                    + "Pembunuh raja yang asli tidak pernah ditemukan, dan\n"
-                    + "Kerajaan Valdris jatuh ke tangan tirani yang salah." 
-                    + statistik);
-            return;
+            script.Transisi.pindahScene(this,  new badEnding());
         }
 
         if (namaTertuduh.equals(Global.Vesper.getNama())) {
-            tampilkanEndingLayarHitam("========== BEST ENDING: KEBENARAN SEJATI ==========\n\n"
-                    + "\"Tuan Vesper... Kamulah dalang di balik semua ini!\"\n\n"
-                    + "Keheningan mencekam memenuhi ruang sidang sebelum akhirnya Vesper\n"
-                    + "mengaku karena semua bukti mutlak mengunci pergerakannya.\n\n"
-                    + "Vesper berhasil ditangkap dan dieksekusi. Kerajaan aman!" 
-                    + statistik);
-            return;
+            script.Transisi.pindahScene(this, new bestEnding());
         }
 
         if (namaTertuduh.equals(Global.tersangkaTerpilih[1].getNama())) {
-            tampilkanEndingLayarHitam("========== NORMAL ENDING: SETENGAH KEBENARAN ==========\n\n"
-                    + "Kamu berhasil menangkap " + namaTertuduh + " sebagai pelaku lapangan.\n"
-                    + "Keadilan berhasil ditegakkan di mata publik.\n\n"
-                    + "Namun di balik bayangan, sang dalang asli (Vesper) tersenyum puas\n"
-                    + "karena posisinya sama sekali tidak tersentuh oleh hukum." 
-                    + statistik);
-            return;
+            script.Transisi.pindahScene(this, new normalEnding());
         }
 
-        // Jika salah tuduh total
-        tampilkanEndingLayarHitam("========== WRONG ENDING: TRAGEDI SALAH TUDUH ==========\n\n"
-                + "Kamu menjatuhkan tuduhan berat pada " + namaTertuduh + ".\n"
-                + "Ruang sidang gempar karena bukti yang kamu bawa terkesan dipaksakan.\n\n"
-                + "Orang yang tidak bersalah dijebloskan ke penjara, sementara sang\n"
-                + "pembunuh asli menertawakan kebodohanmu dari kegelapan." 
-                + statistik);
+        else {
+            script.Transisi.pindahScene(this, new wrongEnding());
+        }
     }
 
     private void tampilkanEndingLayarHitam(String teksEnding) {
