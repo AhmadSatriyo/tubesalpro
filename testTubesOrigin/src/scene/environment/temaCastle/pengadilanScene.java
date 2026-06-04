@@ -51,10 +51,10 @@ public class pengadilanScene extends javax.swing.JFrame {
         boxDialog.setCursor(null);
         boxDialog.setBackground(new java.awt.Color(0, 0, 0, 0));
         
-        // Menghilangkan border scroll bawaan NetBeans agar transparan
-        jScrollPane1.setBorder(null);
-        jScrollPane1.setOpaque(false);
-        jScrollPane1.getViewport().setOpaque(false);
+//        // Menghilangkan border scroll bawaan NetBeans agar transparan
+//        jScrollPane1.setBorder(null);
+//        jScrollPane1.setOpaque(false);
+//        jScrollPane1.getViewport().setOpaque(false);
 
         // === PASANG SPRITE (Disesuaikan dengan variabel NetBeans barumu) ===
         ImageIcon imgMC = Global.guwe.ambilGambar(detektifSprite1);
@@ -90,7 +90,7 @@ public class pengadilanScene extends javax.swing.JFrame {
         posisiBackgroundDialog = new posisi(backgroundDialog);
         
         // PENTING: Target box dialog diubah ke JScrollPane agar kontainernya ikut bergeser
-        posisiBoxDialog       = new posisi(jScrollPane1);
+        posisiBoxDialog       = new posisi(boxDialog);
         posisiLabelNama       = new posisi(labelNama);
         posisiButtonCaelan    = new posisi(buttonCaelan);
         posisiButtonDorian    = new posisi(buttonDorian);
@@ -138,11 +138,10 @@ public class pengadilanScene extends javax.swing.JFrame {
 
         posisiVesper.posisi(0, 200);
         posisiVesper.kananBawah(this);
-
+        
+        posisiBoxDialog.aturSebagaiBoxDialog(this);
         posisiBackgroundDialog.aturSebagaiBackgroundDialog(this);
         // === LANGSUNG AMBIL KOORDINAT DARI TAB DESIGN ===
-        jScrollPane1.setBounds(jScrollPane1.getX(), jScrollPane1.getY(), jScrollPane1.getWidth(), jScrollPane1.getHeight());
-        jScrollPane1.setSize(jScrollPane1.getWidth(), jScrollPane1.getHeight());
 
         labelNama.setBounds(labelNama.getX(), labelNama.getY(), labelNama.getWidth(), labelNama.getHeight());
         // ===============================================
@@ -208,7 +207,6 @@ public class pengadilanScene extends javax.swing.JFrame {
         // 3. Jaga agar Box UI Dialog & Tombol tetap berada di lapisan paling depan agar tidak tertimbun
         this.getContentPane().setComponentZOrder(labelNama, 0);
         this.getContentPane().setComponentZOrder(boxDialog, 0); // <--- TARGET DIUBAH KE BOXDIALOG
-        this.getContentPane().setComponentZOrder(jScrollPane1, 0);
         this.getContentPane().setComponentZOrder(backgroundDialog, 0);
 
         // 4. Refresh tampilan UI JFrame
@@ -328,7 +326,6 @@ public class pengadilanScene extends javax.swing.JFrame {
         boxDialog.setText(teksEnding);
         
         // Buat text area meluas ke tengah layar agar mirip dengan konsep image_96001b.png
-        jScrollPane1.setBounds(200, 150, 900, 500);
     }
     
 
@@ -346,7 +343,6 @@ public class pengadilanScene extends javax.swing.JFrame {
         buttonAldric = new javax.swing.JButton();
         buttonVesper = new javax.swing.JButton();
         labelNama = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
         boxDialog = new javax.swing.JTextArea();
         backgroundDialog = new javax.swing.JLabel();
         aldricSprite = new javax.swing.JLabel();
@@ -394,9 +390,7 @@ public class pengadilanScene extends javax.swing.JFrame {
 
         boxDialog.setColumns(20);
         boxDialog.setRows(5);
-        jScrollPane1.setViewportView(boxDialog);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 380, 940, 160));
+        getContentPane().add(boxDialog, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 370, 560, 150));
 
         backgroundDialog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/ui/dialogueBox.png"))); // NOI18N
         getContentPane().add(backgroundDialog, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, 1230, 280));
@@ -477,7 +471,6 @@ public class pengadilanScene extends javax.swing.JFrame {
     private javax.swing.JLabel caelanSprite1;
     private javax.swing.JLabel detektifSprite1;
     private javax.swing.JLabel dorianSprite1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelNama;
     private javax.swing.JLabel vesperSprite;
     // End of variables declaration//GEN-END:variables
