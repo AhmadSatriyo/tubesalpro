@@ -86,7 +86,7 @@ public class briefingScrene2 extends javax.swing.JFrame {
                 teks = """
                        Hari 1
                        Kastil Valdris
-                       Kamar Tamu Detektif
+                       Kamar Tamu
                        """;
  
         }
@@ -156,12 +156,13 @@ public class briefingScrene2 extends javax.swing.JFrame {
         
 
         if (counterTeks < 8) {
-        counterTeks++;          // Naikkan ke teks berikutnya (misal dari 1 ke 2)
-        opsiTeks(counterTeks);  // Tampilkan teks yang baru
-    } else {
-        script.Transisi.pindahScene(this, new scene.environment.temaCastle.kamarScene());
+            counterTeks++;          
+            opsiTeks(counterTeks); 
+        } 
+        else {
+            script.Transisi.pindahScene(this, new scene.environment.temaCastle.kamarScene());
       
-    }
+        }
 
     }//GEN-LAST:event_buttonNextActionPerformed
 

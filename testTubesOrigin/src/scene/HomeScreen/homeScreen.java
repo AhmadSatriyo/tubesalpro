@@ -15,7 +15,6 @@ public class homeScreen extends javax.swing.JFrame {
     private posisi btnStart;
     private posisi btnQuit;
     private posisi btnSetting;
-    private boolean klikStart;
 
     public homeScreen() {
         
@@ -46,6 +45,7 @@ public class homeScreen extends javax.swing.JFrame {
         btnSetting = new posisi(buttonSetting);
         
         aturPosisiKomponen();
+        main.Global.putarMusik("src/assets/audio/musik.wav");
     }
     
     private void aturPosisiKomponen() {
@@ -97,7 +97,7 @@ public class homeScreen extends javax.swing.JFrame {
         panelUtama.setLayout(null);
 
         buttonQuit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        buttonQuit.setText("Quit");
+        buttonQuit.setText("Keluar");
         buttonQuit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonQuitActionPerformed(evt);
@@ -107,7 +107,7 @@ public class homeScreen extends javax.swing.JFrame {
         buttonQuit.setBounds(690, 320, 140, 70);
 
         buttonStart.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        buttonStart.setText("Start");
+        buttonStart.setText("Mulai");
         buttonStart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonStartActionPerformed(evt);
@@ -117,7 +117,7 @@ public class homeScreen extends javax.swing.JFrame {
         buttonStart.setBounds(680, 220, 140, 70);
 
         buttonSetting.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        buttonSetting.setText("Setting");
+        buttonSetting.setText("Pengaturan");
         buttonSetting.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonSettingActionPerformed(evt);
@@ -128,7 +128,6 @@ public class homeScreen extends javax.swing.JFrame {
 
         boxNama.setFont(new java.awt.Font("ScriptS_IV50", 1, 24)); // NOI18N
         boxNama.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        boxNama.setText("Visual Story");
         boxNama.setHighlighter(null);
         boxNama.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,11 +140,11 @@ public class homeScreen extends javax.swing.JFrame {
         textBoxBackground.setBounds(590, 500, 560, 170);
 
         labelTittle.setBackground(new java.awt.Color(204, 204, 204));
-        labelTittle.setFont(new java.awt.Font("ScriptS_IV50", 3, 60)); // NOI18N
+        labelTittle.setFont(new java.awt.Font("ScriptS_IV50", 1, 60)); // NOI18N
         labelTittle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelTittle.setText("Visual Story");
+        labelTittle.setText("The Crown's Shadow");
         panelUtama.add(labelTittle);
-        labelTittle.setBounds(320, 270, 560, 76);
+        labelTittle.setBounds(320, 270, 670, 77);
 
         background.setBackground(new java.awt.Color(255, 255, 255));
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/background/Fantasy Medieval Castle Wallpaper 4K.jpeg"))); // NOI18N
@@ -169,7 +168,7 @@ public class homeScreen extends javax.swing.JFrame {
 
     private void buttonQuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonQuitActionPerformed
         
-        if (JOptionPane.showConfirmDialog(this, "Konfrmasi jika Anda ingin keluar", "Tic-Tac-Toe", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+        if (JOptionPane.showConfirmDialog(this, "Konfrmasi jika Anda ingin keluar", "The Crown'Shadow", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             System.exit(0); 
         }
         else {

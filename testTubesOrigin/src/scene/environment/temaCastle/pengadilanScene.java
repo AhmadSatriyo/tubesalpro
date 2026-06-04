@@ -13,6 +13,11 @@ import script.posisi;
  * @author ryo
  */
 public class pengadilanScene extends javax.swing.JFrame {
+    
+    private boolean salahMilih;
+    //veser
+    //milihbener
+    //waktuhabis
 
     /**
      * Creates new form pengadilanScene
@@ -36,6 +41,7 @@ public class pengadilanScene extends javax.swing.JFrame {
         this.setUndecorated(true);
         initComponents();
         
+<<<<<<< HEAD
         Global.initCeritaGame();
         setExtendedState(pengadilanScene.MAXIMIZED_BOTH);
         this.getContentPane().setLayout(null);
@@ -326,7 +332,10 @@ public class pengadilanScene extends javax.swing.JFrame {
         boxDialog.setText(teksEnding);
         
         // Buat text area meluas ke tengah layar agar mirip dengan konsep image_96001b.png
+=======
+>>>>>>> origin/satriyo
     }
+    
     
 
     /**

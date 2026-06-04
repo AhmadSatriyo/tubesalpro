@@ -1,22 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package scene.ThemeScreen;
 
 import javax.swing.ImageIcon;
 import main.Global;
 import script.posisi;
 
-/**
- *
- * @author ryo
- */
 public class introScene extends javax.swing.JFrame {
-
-    /**
-     * Creates new form introScene
-     */
     
     private posisi posisiBackgroundDialog;
     private posisi posisiMC;
@@ -27,73 +16,61 @@ public class introScene extends javax.swing.JFrame {
     
     public introScene() {
         
-        // 1. Setup Ukuran & Layout Frame (Wajib paling atas)
-    this.setUndecorated(true);
-    initComponents();
-    Global.initCeritaGame(); 
-    setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
-    this.getContentPane().setLayout(null);
+        this.setUndecorated(true);
+        initComponents();
+        Global.initCeritaGame(); 
+        setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
+        this.getContentPane().setLayout(null);
+
+        boxDialog.setEditable(false);         
+        boxDialog.setHighlighter(null);       
+        boxDialog.setFocusable(false);        
+        boxDialog.setCursor(null);            
+        boxDialog.setBackground(new java.awt.Color(0, 0, 0, 0)); 
     
-    // =========================================================================
-    // SAKELAR PELINDUNG JTEXTAREA (Anti-Caret & Anti-Highlight)
-    // =========================================================================
-    boxDialog.setEditable(false);         // Teks tidak bisa diedit/dihapus
-    boxDialog.setHighlighter(null);       // Teks tidak bisa diblok/diseleksi warna biru
-    boxDialog.setFocusable(false);        // JTextArea tidak bisa menerima fokus klik mouse
-    boxDialog.setCursor(null);            // Mengubah kursor [I] jadi kursor panah biasa
-    boxDialog.setBackground(new java.awt.Color(0, 0, 0, 0)); // Transparan
+        backgroundSurat.setVisible(false);
+   
+        main.Global.indeksDialog = 0;       
+        tampilkanDialogSekarang();        
     
-    backgroundSurat.setVisible(false);
+        boxDialog.setSize(800, 250);          
     
-    // 2. Alur Inisialisasi Data Dialog
-    main.Global.indeksDialog = 0;       // Mulai dari awal dialog (indeks 0)
-    tampilkanDialogSekarang();            // Tampilkan teks pertama ke boxDialog
-    
-    // 3. Set Ukuran Komponen Secara Manual (Agar class posisi tidak salah hitung lebar)
-    boxDialog.setSize(800, 250);          // Sesuaikan lebar & tinggi kotak teks game kamu
-    
-    // 4. Render Gambar Aset Game
-    ImageIcon introSceneBackground = main.Global.backgroundIntroScene.ambilGambar(background);
-    background.setIcon(introSceneBackground);
-    
-    ImageIcon detektif = main.Global.guwe.ambilGambar(detektifSprite);
-    detektifSprite.setIcon(detektif);
-    
-    // 5. Inisialisasi & Eksekusi Class Posisi
-    posisiMC = new script.posisi(detektifSprite);
-    posisiBackgroundDialog = new script.posisi(backgroundDialog);
-    posisiBoxDialog = new script.posisi(boxDialog);
-    posisiBackgroundSurat = new posisi(backgroundSurat);
-    posisiLabelNama = new posisi(labelNama);
-    
-    posisiBackgroundSurat.posisi(0, 100);
-    posisiBackgroundSurat.tengahHorizontal(this);
-    
-    // Atur posisi posisi VN (Misal: detektif berdiri di kiri bawah)
-    posisiMC.kiriBawah(this); 
-    
-    // Jalankan method custom bawaan kamu
-    aturPosisi(); 
-    
-    // =========================================================================
-    // FILTER KEYBOARD: Jalankan Dialog via Tombol SPACE
-    // =========================================================================
-    this.addKeyListener(new java.awt.event.KeyAdapter() {
-        @Override
-        public void keyPressed(java.awt.event.KeyEvent evt) {
-            if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_SPACE) {
-                mouseClicked(null);
+        ImageIcon introSceneBackground = main.Global.backgroundIntroScene.ambilGambar(background);
+        background.setIcon(introSceneBackground);
+
+        ImageIcon detektif = main.Global.guwe.ambilGambar(detektifSprite);
+        detektifSprite.setIcon(detektif);
+
+        posisiMC = new script.posisi(detektifSprite);
+        posisiBackgroundDialog = new script.posisi(backgroundDialog);
+        posisiBoxDialog = new script.posisi(boxDialog);
+        posisiBackgroundSurat = new posisi(backgroundSurat);
+        posisiLabelNama = new posisi(labelNama);
+
+        posisiBackgroundSurat.posisi(0, 100);
+        posisiBackgroundSurat.tengahHorizontal(this);
+
+        posisiMC.kiriBawah(this); 
+
+        aturPosisi(); 
+
+        this.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_SPACE) {
+                    mouseClicked(null);
+                }
             }
-        }
-    });
-    this.setFocusable(true);
-    this.requestFocusInWindow();
-    
+        });
+        this.setFocusable(true);
+        this.requestFocusInWindow();
+
   
         
     }
     
     private void aturPosisi() {
+        
         posisiMC.posisi(0, 200);
         posisiMC.kiriBawah(this);
         
@@ -108,21 +85,19 @@ public class introScene extends javax.swing.JFrame {
     
     
     private void tampilkanDialogSekarang() {
-    // Ambil objek Dialog dari array berdasarkan indeks saat ini
+    
         backgroundSurat.setVisible(false);
         
         script.Dialog d = main.Global.listBriefing[main.Global.indeksDialog];
 
-    // Pasang nama pembicara ke JLabel nama
-    labelNama.setText(d.getNama());
+        labelNama.setText(d.getNama());
 
-    // Pasang isi teks ke JLabel/boxText kamu (Pakai HTML biar otomatis center & wrap)
-    
         if(d.getNama().equals(Global.Vesper.getNama())) {
             backgroundSurat.setVisible(true);
         }
+        
         boxDialog.setText(d.getTeks());
-}
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -189,16 +164,13 @@ public class introScene extends javax.swing.JFrame {
             background.setIcon(introSceneBackground);
         }
         
-//        if(main.Global.indeksDialog >= 16 && main.Global.indeksDialog < 20) {
-//            
-//        }
         if (main.Global.indeksDialog < main.Global.listBriefing.length - 1) {
-            main.Global.indeksDialog++; // Naikkan indeks ke data berikutnya
-            tampilkanDialogSekarang();    // Refresh teks di layar
-    } else {
-        // Jika dialog sudah habis semua, langsung pindah ke scene berikutnya
-        script.Transisi.pindahScene(this, new scene.ThemeScreen.briefingScrene2());
-    }
+            main.Global.indeksDialog++; 
+            tampilkanDialogSekarang();    
+        } 
+        else {
+            script.Transisi.pindahScene(this, new scene.ThemeScreen.briefingScrene2());
+        }
     }//GEN-LAST:event_mouseClicked
 
     /**
