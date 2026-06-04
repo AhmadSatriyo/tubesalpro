@@ -9,8 +9,6 @@ public class character {
     
     private String path;
     private String nama;
-    
-    // UKURAN FIX STANDAR VISUAL NOVEL (RESOLUSI 1920 x 1080)
     private static final int FIX_LEBAR = 500;
     private static final int FIX_TINGGI = 850;
     
@@ -26,10 +24,8 @@ public class character {
             if (imgURL != null) {
                 ImageIcon iconMentah = new ImageIcon(imgURL);
                 
-                // 1. Paksa ukuran JLabel tujuan agar pas dengan dimensi karakter VN
                 labelTujuan.setSize(FIX_LEBAR, FIX_TINGGI);
                 
-                // 2. Lakukan resize gambar menggunakan konstanta ukuran fix
                 Image imgResize = iconMentah.getImage().getScaledInstance(
                     FIX_LEBAR, 
                     FIX_TINGGI, 
@@ -46,7 +42,6 @@ public class character {
         return null;
     }
 
-    // Getter dan Setter
     public String getPath() { return path; }
     public String getNama() { return nama; }
     public void setPath(String path) { this.path = path; }

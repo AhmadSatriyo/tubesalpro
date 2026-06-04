@@ -1,18 +1,10 @@
 package scene.environment.temaCastle;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import main.Global;
 import script.posisi;
-/**
- *
- * @author ryo
- */
+
 public class perpustakaanScene extends javax.swing.JFrame {
     
     private posisi posisiBackgroundDialog;
@@ -302,7 +294,6 @@ public class perpustakaanScene extends javax.swing.JFrame {
 
         detektifSprite.setVisible(true);
 
-        // Muat halaman pertama percakapan
         script.Dialog dataPertama = antrianDialogCabang[indeksHalamanMC];
         labelNama.setText(dataPertama.getNama().equals("") ? "???" : dataPertama.getNama());
         boxDialog.setText(dataPertama.getTeks());
@@ -466,21 +457,21 @@ public class perpustakaanScene extends javax.swing.JFrame {
     }//GEN-LAST:event_formMouseClicked
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
-        main.Global.energi -= 1; // Potong energi di sini
-    this.setFocusable(true);  // Kembalikan fokus ke frame untuk Spacebar
-    mulaiDialogPercabangan(main.Global.dialogCaelanInteraksiBebas);
+        main.Global.energi -= 1;
+        this.setFocusable(true);  
+        mulaiDialogPercabangan(main.Global.dialogCaelanInteraksiBebas);
     }//GEN-LAST:event_button1ActionPerformed
 
     private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
         main.Global.energi -= 1; // Potong energi di sini
-    this.setFocusable(true);  
-    mulaiDialogPercabangan(main.Global.dialogCaelanKertas);
+        this.setFocusable(true);  
+        mulaiDialogPercabangan(main.Global.dialogCaelanKertas);
     }//GEN-LAST:event_button2ActionPerformed
 
     private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
         main.Global.energi -= 1; // Potong energi di sini
-    this.setFocusable(true);  
-    mulaiDialogPercabangan(main.Global.dialogCaelanBuku);
+        this.setFocusable(true);  
+        mulaiDialogPercabangan(main.Global.dialogCaelanBuku);
     }//GEN-LAST:event_button3ActionPerformed
 
     private void btnBukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBukuActionPerformed

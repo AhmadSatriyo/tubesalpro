@@ -3,15 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ryo/tubesalpro/testTubesOrigin/src/scene/HomeScreen/homeScreen.java</file>
-            <file>file:/C:/Users/ryo/tubesalpro/testTubesOrigin/src/script/background.java</file>
             <file>file:/C:/Users/ryo/tubesalpro/testTubesOrigin/src/main/Global.java</file>
+            <file>file:/C:/Users/ryo/tubesalpro/testTubesOrigin/src/scene/environment/temaCastle/kamarRajaScene.java</file>
+            <file>file:/C:/Users/ryo/tubesalpro/testTubesOrigin/src/scene/HomeScreen/homeScreen.java</file>
+            <file>file:/C:/Users/ryo/tubesalpro/testTubesOrigin/src/scene/environment/temaCastle/transisiChapter1.java</file>
+            <file>file:/C:/Users/ryo/tubesalpro/testTubesOrigin/src/scene/environment/temaCastle/perpustakaanScene.java</file>
+            <file>file:/C:/Users/ryo/tubesalpro/testTubesOrigin/src/scene/ThemeScreen/briefingScrene2.java</file>
+            <file>file:/C:/Users/ryo/tubesalpro/testTubesOrigin/src/script/Dialog.java</file>
+            <file>file:/C:/Users/ryo/tubesalpro/testTubesOrigin/src/script/Saksi.java</file>
+            <file>file:/C:/Users/ryo/tubesalpro/testTubesOrigin/src/script/Tersangka.java</file>
+            <file>file:/C:/Users/ryo/tubesalpro/testTubesOrigin/src/script/Transisi.java</file>
+            <file>file:/C:/Users/ryo/tubesalpro/testTubesOrigin/src/script/background.java</file>
             <file>file:/C:/Users/ryo/tubesalpro/testTubesOrigin/src/script/character.java</file>
-            <file>file:/C:/Users/ryo/tubesalpro/testTubesOrigin/src/script/detektif.java</file>
             <file>file:/C:/Users/ryo/tubesalpro/testTubesOrigin/src/script/clue.java</file>
-            <file>file:/C:/Users/ryo/tubesalpro/testTubesOrigin/src/assets/character/mutsuki_default.png</file>
+            <file>file:/C:/Users/ryo/tubesalpro/testTubesOrigin/src/script/detektif.java</file>
             <file>file:/C:/Users/ryo/tubesalpro/testTubesOrigin/src/script/posisi.java</file>
-            <file>file:/C:/Users/ryo/tubesalpro/testTubesOrigin/src/scene/ThemeScreen/theme.java</file>
         </group>
     </open-files>
 </project-private>
