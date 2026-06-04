@@ -23,7 +23,7 @@ public class kamarScene extends javax.swing.JFrame {
     private int pilihan = -1;
     private boolean modeStory = true;
     
-    String[] lokasi = {"Perpustakaan", "Kamar Aldric Jr.", "Kamar Caelan", "Kamar Erian", "Kamar Dorian"};
+    String[] lokasi = {"Perpustakaan", "Kamar Aldric Jr.", "Kamar Caelan", "Kamar Erian", "Kamar Dorian", "Ruang Pengadilan"};
     
     private int opsi;
 
@@ -111,6 +111,15 @@ public class kamarScene extends javax.swing.JFrame {
                 break;
             case 4: // Batalyon Ksatria
                 // script.Transisi.pindahScene(this, new scene.environment.temaCastle.batalyonScene());
+                break;
+            case 5 :
+                if(Global.pengadilan == true) {
+                    script.Transisi.pindahScene(this, new scene.environment.temaCastle.pengadilanScene());
+                }
+                else {
+                    JOptionPane.showMessageDialog(this, "Lanjutkan cerita terlebih dahulu", "The Crown'Shadow", JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }
                 break;
             default:
                 break;

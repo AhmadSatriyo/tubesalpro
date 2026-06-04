@@ -21,7 +21,7 @@ public class Global {
     public static int energi = 5;
     public static int poinClue = 0;
     public static boolean tuduhVesper = false;
-    
+    public static boolean pengadilan = false;
     public static boolean modeBebas = false;
     
     public static int opsiCeritaKamarVesper = 0;

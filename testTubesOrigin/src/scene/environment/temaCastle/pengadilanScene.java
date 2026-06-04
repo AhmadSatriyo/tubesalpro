@@ -1,27 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package scene.environment.temaCastle;
 
 import main.Global;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import script.posisi;
-/**
- *
- * @author ryo
- */
+
 public class pengadilanScene extends javax.swing.JFrame {
     
     private boolean salahMilih;
-    //veser
-    //milihbener
-    //waktuhabis
 
-    /**
-     * Creates new form pengadilanScene
-     */
     private posisi posisiBackgroundDialog;
     private posisi posisiMC;
     private posisi posisiCaelan;
@@ -45,23 +33,15 @@ public class pengadilanScene extends javax.swing.JFrame {
         setExtendedState(pengadilanScene.MAXIMIZED_BOTH);
         this.getContentPane().setLayout(null);
 
-        // === PASANG BACKGROUND ===
         ImageIcon bg = Global.backgroundPengadilanScene.ambilGambar(background);
         background.setIcon(bg);
 
-        // === SETTING BOX DIALOG ===
         boxDialog.setEditable(false);
         boxDialog.setHighlighter(null);
         boxDialog.setFocusable(false);
         boxDialog.setCursor(null);
         boxDialog.setBackground(new java.awt.Color(0, 0, 0, 0));
         
-//        // Menghilangkan border scroll bawaan NetBeans agar transparan
-//        jScrollPane1.setBorder(null);
-//        jScrollPane1.setOpaque(false);
-//        jScrollPane1.getViewport().setOpaque(false);
-
-        // === PASANG SPRITE (Disesuaikan dengan variabel NetBeans barumu) ===
         ImageIcon imgMC = Global.guwe.ambilGambar(detektifSprite1);
         detektifSprite1.setIcon(imgMC);
 
@@ -77,16 +57,13 @@ public class pengadilanScene extends javax.swing.JFrame {
         ImageIcon imgVesper = Global.Vesper.ambilGambar(vesperSprite);
         vesperSprite.setIcon(imgVesper);
 
-        // Sembunyikan semua sprite tersangka di awal
         sembunyikanSemuaSpriteTersangka();
 
-        // Sembunyikan semua tombol pilihan di awal
         buttonCaelan.setVisible(false);
         buttonDorian.setVisible(false);
         buttonAldric.setVisible(false);
         buttonVesper.setVisible(false); 
 
-        // === INISIALISASI POSISI (Target dipindah ke komponen baru) ===
         posisiMC              = new posisi(detektifSprite1);
         posisiCaelan          = new posisi(caelanSprite1);
         posisiDorian          = new posisi(dorianSprite1);
@@ -94,7 +71,6 @@ public class pengadilanScene extends javax.swing.JFrame {
         posisiVesper          = new posisi(vesperSprite);
         posisiBackgroundDialog = new posisi(backgroundDialog);
         
-        // PENTING: Target box dialog diubah ke JScrollPane agar kontainernya ikut bergeser
         posisiBoxDialog       = new posisi(boxDialog);
         posisiLabelNama       = new posisi(labelNama);
         posisiButtonCaelan    = new posisi(buttonCaelan);
@@ -109,12 +85,9 @@ public class pengadilanScene extends javax.swing.JFrame {
         posisiVesper.kananBawah(this);
 
         aturPosisi();
-
-        // === MULAI DIALOG ===
         main.Global.indeksDialog = 0;
         tampilkanDialogSekarang();
 
-        // === KEYBOARD SPACE ===
         this.addKeyListener(new java.awt.event.KeyAdapter() {
             @Override
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -146,12 +119,9 @@ public class pengadilanScene extends javax.swing.JFrame {
         
         posisiBoxDialog.aturSebagaiBoxDialog(this);
         posisiBackgroundDialog.aturSebagaiBackgroundDialog(this);
-        // === LANGSUNG AMBIL KOORDINAT DARI TAB DESIGN ===
 
         labelNama.setBounds(labelNama.getX(), labelNama.getY(), labelNama.getWidth(), labelNama.getHeight());
-        // ===============================================
 
-        // Posisi tombol tuduh (Tengah layar otomatis)
         posisiButtonCaelan.posisi(0, 300);
         posisiButtonCaelan.tengahHorizontal(this);
         posisiButtonDorian.posisi(0, 350);

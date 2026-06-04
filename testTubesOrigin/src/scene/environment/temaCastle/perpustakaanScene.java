@@ -608,6 +608,7 @@ public class perpustakaanScene extends javax.swing.JFrame {
     // 5. Kembalikan fokus ke Frame utama agar input Spacebar/Keyboard tidak macet
     this.setFocusable(true); 
     this.requestFocusInWindow();
+    Global.pengadilan = true;
     }//GEN-LAST:event_buttonKembaliDariDialogActionPerformed
 
     private void buttonKembaliKeKamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonKembaliKeKamarActionPerformed
