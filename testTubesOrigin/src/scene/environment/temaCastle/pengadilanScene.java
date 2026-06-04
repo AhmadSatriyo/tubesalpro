@@ -40,8 +40,7 @@ public class pengadilanScene extends javax.swing.JFrame {
     public pengadilanScene() {
         this.setUndecorated(true);
         initComponents();
-        
-<<<<<<< HEAD
+       
         Global.initCeritaGame();
         setExtendedState(pengadilanScene.MAXIMIZED_BOTH);
         this.getContentPane().setLayout(null);
@@ -332,8 +331,6 @@ public class pengadilanScene extends javax.swing.JFrame {
         boxDialog.setText(teksEnding);
         
         // Buat text area meluas ke tengah layar agar mirip dengan konsep image_96001b.png
-=======
->>>>>>> origin/satriyo
     }
     
     
@@ -407,8 +404,8 @@ public class pengadilanScene extends javax.swing.JFrame {
         getContentPane().add(detektifSprite1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 170, 130, 170));
         getContentPane().add(caelanSprite1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 390, 130, 170));
         getContentPane().add(dorianSprite1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 390, 130, 170));
-        getContentPane().add(vesperSprite, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 20, 130, 170));
-        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 1920, 1080));
+        getContentPane().add(vesperSprite, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, 130, 170));
+        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
