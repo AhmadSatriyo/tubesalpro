@@ -119,8 +119,8 @@ public class pengadilanScene extends javax.swing.JFrame {
         
         posisiBoxDialog.aturSebagaiBoxDialog(this);
         posisiBackgroundDialog.aturSebagaiBackgroundDialog(this);
+        posisiLabelNama.aturSebagaiLabelNama();
 
-        labelNama.setBounds(labelNama.getX(), labelNama.getY(), labelNama.getWidth(), labelNama.getHeight());
 
         posisiButtonCaelan.posisi(0, 300);
         posisiButtonCaelan.tengahHorizontal(this);
@@ -139,40 +139,33 @@ public class pengadilanScene extends javax.swing.JFrame {
         labelNama.setText(d.getNama());
         boxDialog.setText(d.getTeks());
 
-        // 1. Sembunyikan dulu semua sprite tersangka agar gantian munculnya
         sembunyikanSemuaSpriteTersangka();
 
-        // 2. Cek siapa yang bicara, munculkan spritenya di posisi yang benar, lalu paksa ke depan layer
         if (d.getNama().equals(Global.guwe.getNamaPlayer())) {
-            // MC bicara -> Tampilkan MC di kiri bawah
             detektifSprite1.setVisible(true);
             posisiMC.posisi(0, 200);
             posisiMC.kiriBawah(this);
             this.getContentPane().setComponentZOrder(detektifSprite1, 0);
         } 
         else if (d.getNama().equals(Global.Caelan.getNama())) {
-            // Caelan bicara -> Tampilkan Caelan di kanan bawah
             caelanSprite1.setVisible(true);
             posisiCaelan.posisi(0, 200);
             posisiCaelan.kananBawah(this);
             this.getContentPane().setComponentZOrder(caelanSprite1, 0);
         } 
         else if (d.getNama().equals(Global.Dorian.getNama())) {
-            // Dorian bicara -> Tampilkan Dorian di kanan bawah
             dorianSprite1.setVisible(true);
             posisiDorian.posisi(0, 200);
             posisiDorian.kananBawah(this);
             this.getContentPane().setComponentZOrder(dorianSprite1, 0);
         } 
         else if (d.getNama().equals(Global.AldricJr.getNama())) {
-            // Aldric bicara -> Tampilkan Aldric di kanan bawah
             aldricSprite.setVisible(true);
             posisiAldric.posisi(0, 200);
             posisiAldric.kananBawah(this);
             this.getContentPane().setComponentZOrder(aldricSprite, 0);
         } 
         else if (d.getNama().equals(Global.Vesper.getNama())) {
-            // Vesper bicara -> Tampilkan Vesper di kanan bawah
             vesperSprite.setVisible(true);
             posisiVesper.posisi(0, 200);
             posisiVesper.kananBawah(this);
@@ -314,12 +307,12 @@ public class pengadilanScene extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        labelNama = new javax.swing.JLabel();
+        boxDialog = new javax.swing.JTextArea();
         buttonCaelan = new javax.swing.JButton();
         buttonDorian = new javax.swing.JButton();
         buttonAldric = new javax.swing.JButton();
         buttonVesper = new javax.swing.JButton();
-        labelNama = new javax.swing.JLabel();
-        boxDialog = new javax.swing.JTextArea();
         backgroundDialog = new javax.swing.JLabel();
         aldricSprite = new javax.swing.JLabel();
         detektifSprite1 = new javax.swing.JLabel();
@@ -330,6 +323,11 @@ public class pengadilanScene extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(labelNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 320, 160, 30));
+
+        boxDialog.setColumns(20);
+        boxDialog.setRows(5);
+        getContentPane().add(boxDialog, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 370, 900, 150));
 
         buttonCaelan.setText("Caelan");
         buttonCaelan.addActionListener(new java.awt.event.ActionListener() {
@@ -362,11 +360,6 @@ public class pengadilanScene extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buttonVesper, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 220, 30));
-        getContentPane().add(labelNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 320, 160, 30));
-
-        boxDialog.setColumns(20);
-        boxDialog.setRows(5);
-        getContentPane().add(boxDialog, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 370, 560, 150));
 
         backgroundDialog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/ui/dialogueBox.png"))); // NOI18N
         getContentPane().add(backgroundDialog, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, 1230, 280));
