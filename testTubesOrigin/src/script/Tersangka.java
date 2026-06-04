@@ -2,6 +2,17 @@
 package script;
 
 public class Tersangka extends character {
+    
+    private String sifat;
+    private boolean pembunuh;
+
+    public Tersangka(String path, String nama, String sifat) {
+
+        super(path, nama);
+
+        this.sifat = sifat;
+        this.pembunuh = false;
+    }
 
     public String getSifat() {
         return sifat;
@@ -19,15 +30,6 @@ public class Tersangka extends character {
         this.pembunuh = pembunuh;
     }
 
-    private String sifat;
-    private boolean pembunuh;
-
-    public Tersangka(String path, String nama, String sifat) {
-
-        super(path, nama);
-
-        this.sifat = sifat;
-        this.pembunuh = false;
-    }
+    
 
 }

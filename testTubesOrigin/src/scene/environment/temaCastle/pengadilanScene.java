@@ -67,6 +67,8 @@ public class pengadilanScene extends javax.swing.JFrame {
         buttonDorian.setVisible(false);
         buttonAldric.setVisible(false);
         buttonVesper.setVisible(false); 
+        
+        labelNama.setVisible(true);
 
         posisiMC              = new posisi(detektifSprite1);
         posisiCaelan          = new posisi(caelanSprite1);
@@ -176,14 +178,14 @@ public class pengadilanScene extends javax.swing.JFrame {
             this.getContentPane().setComponentZOrder(vesperSprite, 0);
         }
 
-        // 3. Jaga agar Box UI Dialog & Tombol tetap berada di lapisan paling depan agar tidak tertimbun
-        this.getContentPane().setComponentZOrder(labelNama, 0);
-        this.getContentPane().setComponentZOrder(boxDialog, 0); // <--- TARGET DIUBAH KE BOXDIALOG
-        this.getContentPane().setComponentZOrder(backgroundDialog, 0);
-
-        // 4. Refresh tampilan UI JFrame
-        this.getContentPane().repaint();
-        this.getContentPane().revalidate();
+        this.getContentPane().setComponentZOrder(backgroundDialog, 2);
+            
+            // 2. Taruh labelNama dan boxDialog di lapisan paling depan (indeks 0 dan 1)
+            this.getContentPane().setComponentZOrder(labelNama, 0);
+    this.getContentPane().setComponentZOrder(boxDialog, 1); 
+            // 4. Refresh tampilan UI JFrame
+            this.getContentPane().repaint();
+            this.getContentPane().revalidate();
     }
 
     private void sembunyikanSemuaSpriteTersangka() {
@@ -305,11 +307,19 @@ public class pengadilanScene extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(labelNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 320, 160, 30));
+
+        labelNama.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        labelNama.setForeground(new java.awt.Color(0, 0, 0));
+        labelNama.setText("jsdnjksdf");
+        getContentPane().add(labelNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 300, 160, 50));
 
         boxDialog.setColumns(20);
+        boxDialog.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        boxDialog.setForeground(new java.awt.Color(0, 0, 0));
         boxDialog.setRows(5);
-        getContentPane().add(boxDialog, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 370, 900, 150));
+        boxDialog.setAutoscrolls(false);
+        boxDialog.setOpaque(false);
+        getContentPane().add(boxDialog, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 900, 150));
 
         buttonCaelan.setText("Caelan");
         buttonCaelan.addActionListener(new java.awt.event.ActionListener() {

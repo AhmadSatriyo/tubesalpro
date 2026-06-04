@@ -463,13 +463,13 @@ public class perpustakaanScene extends javax.swing.JFrame {
     }//GEN-LAST:event_button1ActionPerformed
 
     private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
-        main.Global.energi -= 1; // Potong energi di sini
+        main.Global.energi -= 1;
         this.setFocusable(true);  
         mulaiDialogPercabangan(main.Global.dialogCaelanKertas);
     }//GEN-LAST:event_button2ActionPerformed
 
     private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
-        main.Global.energi -= 1; // Potong energi di sini
+        main.Global.energi -= 1; 
         this.setFocusable(true);  
         mulaiDialogPercabangan(main.Global.dialogCaelanBuku);
     }//GEN-LAST:event_button3ActionPerformed
@@ -518,7 +518,7 @@ public class perpustakaanScene extends javax.swing.JFrame {
         }
         
         cekBotolRacun = true;
-        main.Global.poinClue += 5; // Bukti kunci pembunuh otomatis dapat poin lebih tinggi
+        main.Global.poinClue += 5;
         main.Global.energi -= 1;
         
         String pesan = "[BUKTI KUNCI - RACUN]\nObjek: Botol Cairan Gelap\n\nHasil Penyelidikan:\n"
@@ -537,84 +537,72 @@ public class perpustakaanScene extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRacunActionPerformed
 
     private void button4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button4ActionPerformed
-        main.Global.energi -= 1; // Potong energi di sini
-    this.setFocusable(true);  
-    mulaiDialogPercabangan(main.Global.dialogCaelanBotolRacun);
+        main.Global.energi -= 1;
+        this.setFocusable(true);  
+        mulaiDialogPercabangan(main.Global.dialogCaelanBotolRacun);
     }//GEN-LAST:event_button4ActionPerformed
 
     private void caelanSpriteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_caelanSpriteMouseClicked
         if (apakahLagiDialog || modeDialogCabang || button1.isVisible()) return;
 
-    if (main.Global.energi <= 0) {
-        JOptionPane.showMessageDialog(this, "Kamu terlalu lelah untuk berbicara dengan siapa pun saat ini.", "Energi Habis", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
+        if (main.Global.energi <= 0) {
+            JOptionPane.showMessageDialog(this, "Kamu terlalu lelah untuk berbicara dengan siapa pun saat ini.", "Energi Habis", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-    // PENTING: Pengurangan energi DIHAPUS dari sini, dipindah ke tombol aksi!
-    apakahLagiDialog = false;
-    modeDialogCabang = false;
-    
-    boxDialog.setText("");
-    boxDialog.setVisible(true);
-    backgroundDialog.setVisible(true);
-    detektifSprite.setVisible(false);
-    caelanSprite.setVisible(true);
-    labelNama.setVisible(true);
-    labelNama.setText("Pilih Topik Interogasi:");
+        apakahLagiDialog = false;
+        modeDialogCabang = false;
 
-    buttonKembaliKeKamar.setVisible(false);
+        boxDialog.setText("");
+        boxDialog.setVisible(true);
+        backgroundDialog.setVisible(true);
+        detektifSprite.setVisible(false);
+        caelanSprite.setVisible(true);
+        labelNama.setVisible(true);
+        labelNama.setText("Pilih Topik Interogasi:");
 
-    // Aktifkan tombol menu pertanyaan
-    button1.setVisible(true);
+        buttonKembaliKeKamar.setVisible(false);
+        button1.setVisible(true);
+        button2.setVisible(true);
 
-    button2.setVisible(true);
+        if (cekBuku) {
+            button3.setVisible(true);
+        } else {
+            button3.setVisible(false);
+        }
 
-    if (cekBuku) {
-        button3.setVisible(true);
-    } else {
-        button3.setVisible(false);
-    }
+        if (cekBotolRacun) {
+            button4.setVisible(true);
+        } else {
+            button4.setVisible(false);
+        }
 
-    if (cekBotolRacun) {
-        button4.setVisible(true);
-    } else {
-        button4.setVisible(false);
-    }
-    
-    buttonKembaliDariDialog.setVisible(true); 
-    
-    // Memastikan frame tidak mencuri fokus mouse dari tombol
-    this.setFocusable(false);
+        buttonKembaliDariDialog.setVisible(true); 
+
+        this.setFocusable(false);
     }//GEN-LAST:event_caelanSpriteMouseClicked
 
     private void buttonKembaliDariDialogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonKembaliDariDialogActionPerformed
         button1.setVisible(false);
-    button2.setVisible(false);
-    button3.setVisible(false);
-    button4.setVisible(false);
-    
-    // 2. Sembunyikan tombol 'Kembali' ini sendiri
-    buttonKembaliDariDialog.setVisible(false);
-    
-    // 3. Bersihkan dan sembunyikan komponen GUI dialog
-    boxDialog.setText("");
-    boxDialog.setVisible(false);
-    backgroundDialog.setVisible(false);
-    labelNama.setVisible(false);
-    
-    // 4. Munculkan kembali tombol navigasi utama map untuk kembali ke kamar induk
-    buttonKembaliKeKamar.setVisible(true); 
-    
-    // 5. Kembalikan fokus ke Frame utama agar input Spacebar/Keyboard tidak macet
-    this.setFocusable(true); 
-    this.requestFocusInWindow();
-    Global.pengadilan = true;
+        button2.setVisible(false);
+        button3.setVisible(false);
+        button4.setVisible(false);
+
+        buttonKembaliDariDialog.setVisible(false);
+
+        boxDialog.setText("");
+        boxDialog.setVisible(false);
+        backgroundDialog.setVisible(false);
+        labelNama.setVisible(false);
+        buttonKembaliKeKamar.setVisible(true); 
+
+        this.setFocusable(true); 
+        this.requestFocusInWindow();
+        Global.pengadilan = true;
     }//GEN-LAST:event_buttonKembaliDariDialogActionPerformed
 
     private void buttonKembaliKeKamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonKembaliKeKamarActionPerformed
         if (apakahLagiDialog || modeDialogCabang) return;
-        
-        // Pindah scene kembali ke kamar induk peta tanpa pengurangan energi
         script.Transisi.pindahScene(this, new scene.environment.temaCastle.kamarScene());
     }//GEN-LAST:event_buttonKembaliKeKamarActionPerformed
 
