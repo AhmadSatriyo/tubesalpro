@@ -11,17 +11,15 @@ public class background {
     private String path;
     private String nama;
     
-    // Constructor untuk menyimpan data path dan nama latar
     public background(String path, String nama) {
         this.path = path;
         this.nama = nama;
     }
     
-    // KUNCI PERBAIKAN: Buang kata 'static'. 
-    // Sekarang method ini tidak perlu minta parameter String path lagi dari luar!
+
     public ImageIcon ambilGambar(JLabel labelTujuan) {
+        
         try {
-            // Menggunakan 'this.path' yang didapat dari constructor saat bikin object
             URL imgURL = getClass().getResource(this.path);
             
             if (imgURL != null) {
@@ -44,7 +42,6 @@ public class background {
         return null;
     }
 
-    // Getter dan Setter
     public String getPath() { return path; }
     public String getNama() { return nama; }
     public void setPath(String path) { this.path = path; }

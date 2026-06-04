@@ -122,7 +122,6 @@ public class Global {
                 bgmClip = AudioSystem.getClip();
                 bgmClip.open(audioInput);
                 
-                // Mengatur agar musik loop terus-menerus sampai game ditutup
                 bgmClip.loop(Clip.LOOP_CONTINUOUSLY); 
                 bgmClip.start();
             } else {
@@ -143,11 +142,11 @@ public class Global {
         
         guwe = new detektif("/assets/character/detektifKael.png", "detektif", namaPlayer);
         NyonyaSera = new Saksi("/assets/character/dummyNyonysSera.png", "Nyonya Sera");
-        Erian = new Saksi("/assets/character/dummyErian.png", "Eran");
+        Erian = new Saksi("/assets/character/eran.png", "Eran");
         Matthias = new Saksi("/assets/character/matthias.png", "Matthias");
-        Dorian = new Tersangka("/assets/character/dummyDorian.png", "Dorian", "Selalu bohong");
-        Caelan = new Tersangka("/assets/character/dummyCaelan.png", "Caelan", "Selalu jujur");
-        AldricJr = new Tersangka("/assets/character/dummyAldricJr", "Aldric Jr.", "Kadang jujur");
+        Dorian = new Tersangka("/assets/character/dorian.png", "Dorian", "Selalu bohong");
+        Caelan = new Tersangka("/assets/character/caelan.png", "Caelan", "Selalu jujur");
+        AldricJr = new Tersangka("/assets/character/aldric.png", "Aldric Jr.", "Kadang jujur");
         Vesper = new Tersangka("/assets/character/vesper.png", "Tuan Vesper", "Kadang jujur");
         
         acakTersangka();
